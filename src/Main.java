@@ -22,11 +22,11 @@ public class Main extends JFrame implements ActionListener{
     public Main(){ // runs initially
 
         this.setTitle("Snake!"); // sets title of Window to "Snake!"
-        this.getContentPane().setBackground(BACKGROUND_COLOR);
-        this.getContentPane().setPreferredSize(new Dimension(windWidth,windHeight));
+        this.getContentPane().setBackground(BACKGROUND_COLOR); // sets the background colour of the window
+        this.getContentPane().setPreferredSize(new Dimension(windWidth,windHeight)); // sets the size of the window
+        this.setResizable(false); // stops the user from resizing the window
         this.panel.setPreferredSize(new Dimension(windWidth,windHeight));
         Snake s = new Snake(); // initialises Snake
-        s.hello();
 
         this.menuBar = new JMenuBar(); // makes a new menubar
         this.setJMenuBar(menuBar); // sets the menubar to the window
@@ -46,7 +46,6 @@ public class Main extends JFrame implements ActionListener{
 
     }
     private void createMenu(String[] menuOptions, int numMenus) { // creates menus in window
-        System.out.println("createMenu");
         JMenu menu = new JMenu(MENU_NAMES[numMenus]); // creates a new menu
         menuBar.add(menu); // adds the menu to the menubar
 
@@ -60,6 +59,29 @@ public class Main extends JFrame implements ActionListener{
             menu.add(menuItem); // adds the menu item to the menu
         }
     }
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) { // when a menu item is clicked
+        String command = e.getActionCommand(); // gets the command of the menu item
+        switch (command){ // does something based on the command
+            case "Instructions" -> {
+                JOptionPane.showMessageDialog(this, "Use the arrow keys to move the snake. Eat the food to grow. Don't hit the walls or yourself.");
+            }
+            case "Pause" -> {
+                JOptionPane.showMessageDialog(this, "Game is paused. Press 'p' to unpause.");
+                pause(); // pauses the game
+            }
+        }
+    }
+
+    private void pause() { // pauses the game
+        while (true){ // infinite loop
+            if (kb.nextLine().equals("p")){ // if the user types 'p'
+                break; // breaks the loop
+            }
+        }
+    }
+
+    public void paint(Graphics g) { //paints the window
+        System.out.println("paint");
+        super.paint(g);
     }
 }
