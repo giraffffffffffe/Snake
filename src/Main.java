@@ -15,12 +15,12 @@ public class Main extends JFrame implements ActionListener{
     Canvas myGraphic; // canvas that is used for the graphics
     JPanel panel = new JPanel(); // initialises JPanel
     Scanner kb = new Scanner(System.in); // initialises keyboard
+    Fruit f = new Fruit(randomNumber(0,3), 100, 100); // initialises fruit
     public static void main(String[] args) { // starts program
         new Main();
     }
 
     public Main(){ // runs initially
-
         this.setTitle("Snake!"); // sets title of Window to "Snake!"
         this.getContentPane().setBackground(BACKGROUND_COLOR); // sets the background colour of the window
         this.getContentPane().setPreferredSize(new Dimension(windWidth,windHeight)); // sets the size of the window
@@ -80,8 +80,35 @@ public class Main extends JFrame implements ActionListener{
         }
     }
 
+    private void fruitEaten(Snake s) { // when the snake eats a fruit
+        s.setLength(s.getLength() + 1); // increases the length of the snake
+        f.eaten(); // sets the fruit to 'eaten';
+        f = new Fruit(randomNumber(0, 3), randomNumber(0, windWidth), randomNumber(0, windHeight)); // makes a new fruit
+    }
+
+    public int randomNumber(int min, int max) { // generates a random number between min and max
+        return (int) (Math.random() * (max - min + 1) + min);
+    }
     public void paint(Graphics g) { //paints the window
         System.out.println("paint");
         super.paint(g);
+        String fruit = f.getType(); // gets the type of fruit
+        switch (fruit){ // draws the fruit based on the type
+            case "Apple" -> {
+                g.setColor(Color.RED);
+            }
+            case "Orange" -> {
+                g.setColor(Color.ORANGE);
+            }
+            case "Tomato" -> {
+                g.setColor(Color.GREEN);
+            }
+            case "Plum" -> {
+                g.setColor(Color.MAGENTA);
+            }
+            default -> {
+                System.out.println("Something went wrong");
+            }
+        }
     }
 }
