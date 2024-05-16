@@ -1,14 +1,14 @@
 import java.awt.*;
 
 public class Fruit {
-    public String[] fruits = {"Apple", "Orange", "Tomato", "Plum",}; // possible types of fruit
-    private int x; // x coordinates of the fruit
+    public String[] fruits = {"Apple", "Orange", "Kiwifruit", "Plum",}; // possible types of fruit
+    private int x; // x coordinate of the fruit
     private String fruitType; // type of fruit
-    private int y; // y coordinates of the fruit
+    private int y; // y coordinate of the fruit
     private boolean eaten = false; // if the fruit has been eaten
-    public Fruit(int f, int fx, int fy){ // constructor
+    public Fruit(int n, int fx, int fy){ // constructor
         System.out.println("Fruit created!");
-        String fT = fruits[f]; // sets the type of fruit
+        String fT = fruits[n]; // sets the type of fruit
         this.fruitType = fT;
         this.x = fx;
         this.y = fy;

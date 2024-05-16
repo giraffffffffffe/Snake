@@ -2,14 +2,17 @@ import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.*;
 public class Main extends JFrame implements ActionListener{
     public Color BACKGROUND_COLOR = new Color(84,170,89); //colour that the background is
     private final String[] MENU_NAMES = {"Help", "Configure", "Actions"};
     private final String[] MENU0_OPTIONS = {"Instructions"}; // options in Help menu
     private final String[] MENU1_OPTIONS = {"Keys", "Snake Speed"}; // options in configure menu
     private final String[] MENU2_OPTIONS = {"Pause"}; // options in actions menu
+    private box[][] board = new box[50][50]; // creates a 2D array of boxes
     private int windWidth = 500; // initial width of window
     private int windHeight = 500; // initial height of window
+
     JMenuBar menuBar; // creates a menubar
     JMenuItem menuItem; // creates a menu item
     Canvas myGraphic; // canvas that is used for the graphics
@@ -93,6 +96,20 @@ public class Main extends JFrame implements ActionListener{
         System.out.println("paint");
         super.paint(g);
         String fruit = f.getType(); // gets the type of fruit
+//        for (int dotX = 0; dotX < windHeight+100; dotX += 10) { // draws the grid
+//            for (int dotY = 0; dotY < windHeight+100; dotY += 10) {
+//                g.setColor(Color.GREEN);
+//                g.fillOval(dotX, dotY, 10, 2);
+//                g.fillOval(dotX, dotY, 2, 10);
+//            }
+//        }
+        for (int x = 0; x < windWidth; x += 10) { // draws the grid
+            for (int y = 0; y < windHeight; y += 10) {
+                g.setColor(new Color (1,150,100));
+                Line2D line = new Line2D.Float(x, y, windWidth, windHeight);
+                System.out.println("line");
+            }
+        }
         switch (fruit){ // draws the fruit based on the type
             case "Apple" -> {
                 g.setColor(Color.RED);
@@ -100,7 +117,7 @@ public class Main extends JFrame implements ActionListener{
             case "Orange" -> {
                 g.setColor(Color.ORANGE);
             }
-            case "Tomato" -> {
+            case "Kiwifruit" -> {
                 g.setColor(Color.GREEN);
             }
             case "Plum" -> {
