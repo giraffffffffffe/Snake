@@ -2,17 +2,28 @@ import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.*;
+
 public class Main extends JFrame implements ActionListener{
     public Color BACKGROUND_COLOR = new Color(84,170,89); //colour that the background is
+    public Color WALL_COLOR = new Color(48, 13, 1); //colour that the walls are
+    public Color DOT_COLOR = new Color(6, 89, 55); //colour that the snake is
     private final String[] MENU_NAMES = {"Help", "Configure", "Actions"};
     private final String[] MENU0_OPTIONS = {"Instructions"}; // options in Help menu
     private final String[] MENU1_OPTIONS = {"Keys", "Snake Speed"}; // options in configure menu
     private final String[] MENU2_OPTIONS = {"Pause"}; // options in actions menu
-    private box[][] board = new box[50][50]; // creates a 2D array of boxes
+    private Box[][] board = new Box[50][50]; // creates a 2D array of boxes
     private int windWidth = 500; // initial width of window
     private int windHeight = 500; // initial height of window
-
+    private final int X_OFFSET = 8; // x offset of the board
+    private final int Y_OFFSET = 54; // y offset of the board
+    private final String APPLE_FILE = "apple.png";
+    private final String ORANGE_FILE = "orange.png";
+    private final String KIWIFRUIT_FILE = "kiwifruit.png";
+    private final String PLUM_FILE = "plum.png";
+    private final ImageIcon APPLE = new ImageIcon(APPLE_FILE);
+    private final ImageIcon ORANGE = new ImageIcon(ORANGE_FILE);
+    private final ImageIcon KIWIFRUIT = new ImageIcon(KIWIFRUIT_FILE);
+    private final ImageIcon PLUM = new ImageIcon(PLUM_FILE);
     JMenuBar menuBar; // creates a menubar
     JMenuItem menuItem; // creates a menu item
     Canvas myGraphic; // canvas that is used for the graphics
@@ -24,6 +35,16 @@ public class Main extends JFrame implements ActionListener{
     }
 
     public Main(){ // runs initially
+        for(int i = 0; i < 50; i++){ // for each box in the board
+            for(int j = 0; j < 50; j++){
+                if (i == 0 || i == 49 || j == 0 || j == 49){ // if the box is on the edge
+                    board[i][j] = new Box(); // creates a new box
+                    board[i][j].setWall(true); // sets the box to be a wall
+                }else{
+                    board[i][j] = new Box(); // creates a new box
+                }
+            }
+        }
         this.setTitle("Snake!"); // sets title of Window to "Snake!"
         this.getContentPane().setBackground(BACKGROUND_COLOR); // sets the background colour of the window
         this.getContentPane().setPreferredSize(new Dimension(windWidth,windHeight)); // sets the size of the window
@@ -95,37 +116,40 @@ public class Main extends JFrame implements ActionListener{
     public void paint(Graphics g) { //paints the window
         System.out.println("paint");
         super.paint(g);
-        String fruit = f.getType(); // gets the type of fruit
-//        for (int dotX = 0; dotX < windHeight+100; dotX += 10) { // draws the grid
-//            for (int dotY = 0; dotY < windHeight+100; dotY += 10) {
-//                g.setColor(Color.GREEN);
-//                g.fillOval(dotX, dotY, 10, 2);
-//                g.fillOval(dotX, dotY, 2, 10);
-//            }
-//        }
-        for (int x = 0; x < windWidth; x += 10) { // draws the grid
-            for (int y = 0; y < windHeight; y += 10) {
-                g.setColor(new Color (1,150,100));
-                Line2D line = new Line2D.Float(x, y, windWidth, windHeight);
-                System.out.println("line");
+        for(int i = 0; i < 50; i++){ // for each box in the board
+            System.out.println("First for loop");
+            for(int j = 0; j < 50; j++){
+                System.out.println(board[i][j].isWall());
+                if (board[i][j].isWall()){ // if the box is a wall
+                    g.setColor(WALL_COLOR); // sets the colour to dark green
+                    g.fillRect(i*10+X_OFFSET, j*10+Y_OFFSET, 10, 10); // draws the box
+                    System.out.println("wall");
+                }
+                else if (board[i][j].isFruit()){ // if the box is the fruit
+                    switch (f.getType()){ // draws the fruit based on the type
+                        case "Apple" -> {
+                            APPLE.paintIcon(this, g,0,53);
+                        }
+                        case "Orange" -> {
+                            g.setColor(Color.ORANGE);
+                        }
+                        case "Kiwifruit" -> {
+                            g.setColor(Color.GREEN);
+                        }
+                        case "Plum" -> {
+                            g.setColor(Color.MAGENTA);
+                        }
+                        default -> {
+                            System.out.println("Something went wrong");
+                        }
+                    }
+                }
+                else{
+
+                }
+                //g.fillRect(i*10, j*10, 10, 10); // draws the box
             }
         }
-        switch (fruit){ // draws the fruit based on the type
-            case "Apple" -> {
-                g.setColor(Color.RED);
-            }
-            case "Orange" -> {
-                g.setColor(Color.ORANGE);
-            }
-            case "Kiwifruit" -> {
-                g.setColor(Color.GREEN);
-            }
-            case "Plum" -> {
-                g.setColor(Color.MAGENTA);
-            }
-            default -> {
-                System.out.println("Something went wrong");
-            }
-        }
+//
     }
 }
