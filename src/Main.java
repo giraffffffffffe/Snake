@@ -14,8 +14,8 @@ public class Main extends JFrame implements ActionListener{
     private Box[][] board = new Box[50][50]; // creates a 2D array of boxes
     private int windWidth = 500; // initial width of window
     private int windHeight = 500; // initial height of window
-    private final int X_OFFSET = 8; // x offset of the board
-    private final int Y_OFFSET = 54; // y offset of the board
+    private final int X_OFFSET = 0; // x offset of the board (for school, 8) (for home, 0)
+    private final int Y_OFFSET = 49; // y offset of the board (for school, 54) (for home, 49)
     private final String APPLE_FILE = "apple.png";
     private final String ORANGE_FILE = "orange.png";
     private final String KIWIFRUIT_FILE = "kiwifruit.png";
