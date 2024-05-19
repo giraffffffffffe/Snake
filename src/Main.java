@@ -12,12 +12,16 @@ public class Main extends JFrame implements ActionListener{
     private final String[] MENU1_OPTIONS = {"Keys", "Snake Speed"}; // options in configure menu
     private final String[] MENU2_OPTIONS = {"Pause"}; // options in actions menu
     private Box[][] board = new Box[50][50]; // creates a 2D array of boxes
-    private int windWidth = 500; // initial width of window
-    private int windHeight = 500; // initial height of window
     private int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width; // width of the screen
     private int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height; // height of the screen
-    private final int X_OFFSET = screenWidth/320; // x offset of the board (for school, 8) (for home, 0)
-    private final int Y_OFFSET = screenHeight/20; // y offset of the board (for school, 54) (for home, 49)
+    private final int X_OFFSET = 8; // x offset of the board (for school, 8) (for home, 0)
+    private final int Y_OFFSET = 54; // y offset of the board (for school, 54) (for home, 49)
+    private double dscreenWidth = Toolkit.getDefaultToolkit().getScreenSize().width; // width of the screen
+    private double dscreenHeight = Toolkit.getDefaultToolkit().getScreenSize().height; // height of the screen
+    private final double DX_OFFSET = 8; // x offset of the board (for school, 8) (for home, 0)
+    private final double DY_OFFSET = 54; // y offset of the board (for school, 54) (for home, 49)
+    private int windWidth = 500; // initial width of window
+    private int windHeight = 500; // initial height of window
     private final String APPLE_FILE = "apple.png";
     private final String ORANGE_FILE = "orange.png";
     private final String KIWIFRUIT_FILE = "kiwifruit.png";
@@ -48,7 +52,7 @@ public class Main extends JFrame implements ActionListener{
             }
         }
         this.setTitle("Snake!"); // sets title of Window to "Snake!"
-        System.out.println(screenWidth/320+" "+screenHeight/20);
+        System.out.println(dscreenWidth/dscreenHeight+" "+DX_OFFSET/DY_OFFSET+" "+(dscreenWidth/dscreenHeight)/(DX_OFFSET/DY_OFFSET));
         this.getContentPane().setBackground(BACKGROUND_COLOR); // sets the background colour of the window
         this.getContentPane().setPreferredSize(new Dimension(windWidth,windHeight)); // sets the size of the window
         this.setResizable(false); // stops the user from resizing the window
