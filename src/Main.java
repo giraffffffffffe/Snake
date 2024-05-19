@@ -14,8 +14,10 @@ public class Main extends JFrame implements ActionListener{
     private Box[][] board = new Box[50][50]; // creates a 2D array of boxes
     private int windWidth = 500; // initial width of window
     private int windHeight = 500; // initial height of window
-    private final int X_OFFSET = 0; // x offset of the board (for school, 8) (for home, 0)
-    private final int Y_OFFSET = 49; // y offset of the board (for school, 54) (for home, 49)
+    private int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width; // width of the screen
+    private int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height; // height of the screen
+    private final int X_OFFSET = screenWidth/320; // x offset of the board (for school, 8) (for home, 0)
+    private final int Y_OFFSET = screenHeight/20; // y offset of the board (for school, 54) (for home, 49)
     private final String APPLE_FILE = "apple.png";
     private final String ORANGE_FILE = "orange.png";
     private final String KIWIFRUIT_FILE = "kiwifruit.png";
@@ -46,6 +48,7 @@ public class Main extends JFrame implements ActionListener{
             }
         }
         this.setTitle("Snake!"); // sets title of Window to "Snake!"
+        System.out.println(screenWidth/320+" "+screenHeight/20);
         this.getContentPane().setBackground(BACKGROUND_COLOR); // sets the background colour of the window
         this.getContentPane().setPreferredSize(new Dimension(windWidth,windHeight)); // sets the size of the window
         this.setResizable(false); // stops the user from resizing the window
@@ -117,27 +120,24 @@ public class Main extends JFrame implements ActionListener{
         System.out.println("paint");
         super.paint(g);
         for(int i = 0; i < 50; i++){ // for each box in the board
-            System.out.println("First for loop");
             for(int j = 0; j < 50; j++){
-                System.out.println(board[i][j].isWall());
                 if (board[i][j].isWall()){ // if the box is a wall
                     g.setColor(WALL_COLOR); // sets the colour to dark green
                     g.fillRect(i*10+X_OFFSET, j*10+Y_OFFSET, 10, 10); // draws the box
-                    System.out.println("wall");
                 }
                 else if (board[i][j].isFruit()){ // if the box is the fruit
                     switch (f.getType()){ // draws the fruit based on the type
                         case "Apple" -> {
-                            APPLE.paintIcon(this, g,0,53);
+                            APPLE.paintIcon(this, g,f.getX(),f.getY());
                         }
                         case "Orange" -> {
-                            g.setColor(Color.ORANGE);
+                            ORANGE.paintIcon(this, g,0,53);
                         }
                         case "Kiwifruit" -> {
-                            g.setColor(Color.GREEN);
+                            KIWIFRUIT.paintIcon(this, g,0,53);
                         }
                         case "Plum" -> {
-                            g.setColor(Color.MAGENTA);
+                            PLUM.paintIcon(this, g,0,53);
                         }
                         default -> {
                             System.out.println("Something went wrong");
@@ -147,7 +147,6 @@ public class Main extends JFrame implements ActionListener{
                 else{
 
                 }
-                //g.fillRect(i*10, j*10, 10, 10); // draws the box
             }
         }
 //
