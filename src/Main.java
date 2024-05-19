@@ -52,7 +52,7 @@ public class Main extends JFrame implements ActionListener{
             }
         }
         this.setTitle("Snake!"); // sets title of Window to "Snake!"
-        System.out.println(dscreenWidth/dscreenHeight+" "+DX_OFFSET/DY_OFFSET+" "+(dscreenWidth/dscreenHeight)/(DX_OFFSET/DY_OFFSET));
+        System.out.println(dscreenHeight/DY_OFFSET+" "+dscreenWidth/DX_OFFSET);
         this.getContentPane().setBackground(BACKGROUND_COLOR); // sets the background colour of the window
         this.getContentPane().setPreferredSize(new Dimension(windWidth,windHeight)); // sets the size of the window
         this.setResizable(false); // stops the user from resizing the window
@@ -74,6 +74,7 @@ public class Main extends JFrame implements ActionListener{
         this.toFront(); // puts this window on top of other windows the user might have open.
         this.setLocationRelativeTo(null); // opens the window in the middle of the screen
         this.setVisible(true); // makes the window visible
+        System.out.println(this.getHeight());
 
     }
     private void createMenu(String[] menuOptions, int numMenus) { // creates menus in window
@@ -123,6 +124,7 @@ public class Main extends JFrame implements ActionListener{
     public void paint(Graphics g) { //paints the window
         System.out.println("paint");
         super.paint(g);
+
         for(int i = 0; i < 50; i++){ // for each box in the board
             for(int j = 0; j < 50; j++){
                 if (board[i][j].isWall()){ // if the box is a wall
