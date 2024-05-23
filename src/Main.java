@@ -14,8 +14,8 @@ public class Main extends JFrame implements ActionListener{
     private Box[][] board = new Box[50][50]; // creates a 2D array of boxes
     private int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width; // width of the screen
     private int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height; // height of the screen
-    private int xOffset = 0; // x offset of the board (for school, 8) (for home, 0)
-    private int yOffset = 0; // y offset of the board (for school, 54) (for home, 49)
+    private int xOffset; // x offset of the board (for school, 8) (for home, 0)
+    private int yOffset; // y offset of the board (for school, 54) (for home, 49)
     private int paneWidth = 500; // initial width of window
     private int paneHeight = 500; // initial height of window
     private final String APPLE_FILE = "apple.png";
@@ -46,11 +46,13 @@ public class Main extends JFrame implements ActionListener{
             }
         }
         this.setTitle("Snake!"); // sets title of Window to "Snake!"
-
+        this.setPreferredSize(new Dimension(paneWidth,paneHeight)); //24+8 = 32, 8+8=16
         this.getContentPane().setBackground(BACKGROUND_COLOR); // sets the background colour of the window
         this.getContentPane().setPreferredSize(new Dimension(paneWidth,paneHeight)); // sets the size of the window
         this.setResizable(false); // stops the user from resizing the window
         this.panel.setPreferredSize(new Dimension(paneWidth,paneHeight));
+
+
         Snake s = new Snake(); // initialises Snake
 
         this.menuBar = new JMenuBar(); // makes a new menu bar
@@ -64,13 +66,27 @@ public class Main extends JFrame implements ActionListener{
         this.setLayout(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE); // stops program when window is closed
         this.pack(); // makes the window
+
+        System.out.println(this.getHeight()+" "+this.getWidth());
+        System.out.println(this.getContentPane().getHeight()+" "+this.getContentPane().getWidth());
+        System.out.println(paneWidth+" "+paneHeight);
+
+        int xNum = 500-this.getContentPane().getWidth();
+        int yNum = 500-this.getContentPane().getHeight();
+        this.paneHeight=yNum+500;
+        this.paneWidth=xNum+500;
+        this.setPreferredSize(new Dimension(paneWidth,paneHeight));
+
+        this.pack();
         this.toFront(); // puts this window on top of other windows the user might have open.
         this.setLocationRelativeTo(null); // opens the window in the middle of the screen
         this.setVisible(true); // makes the window visible
         System.out.println(this.getHeight()+" "+this.getWidth());
         System.out.println(this.getContentPane().getHeight()+" "+this.getContentPane().getWidth());
-        this.xOffset = this.getWidth() - paneWidth;
-        this.yOffset = this.getHeight() - paneHeight;
+        System.out.println(paneWidth+" "+paneHeight);
+
+        this.xOffset = xNum/2;
+        this.yOffset = yNum/2 + this.menuBar.getHeight();
     }
     private void createMenu(String[] menuOptions, int numMenus) { // creates menus in window
         JMenu menu = new JMenu(MENU_NAMES[numMenus]); // creates a new menu
@@ -124,6 +140,7 @@ public class Main extends JFrame implements ActionListener{
                 if (board[i][j].isWall()){ // if the box is a wall
                     g.setColor(WALL_COLOR); // sets the colour to dark green
                     g.fillRect(i*10+xOffset, j*10+yOffset, 10, 10); // draws the box
+                    System.out.println((i*10+xOffset)+" "+(j*10+yOffset));
                 }
                 else if (board[i][j].isFruit()){ // if the box is the fruit
                     switch (f.getType()){ // draws the fruit based on the type
