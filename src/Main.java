@@ -45,8 +45,9 @@ public class Main extends JFrame implements ActionListener{
                 }
             }
         }
+        this.setContentPane(panel); // sets the content pane to the panel
         this.setTitle("Snake!"); // sets title of Window to "Snake!"
-        this.setPreferredSize(new Dimension(paneWidth,paneHeight)); //24+8 = 32, 8+8=16
+        //this.setPreferredSize(new Dimension(paneWidth,paneHeight)); //24+8 = 32, 8+8=16
         this.getContentPane().setBackground(BACKGROUND_COLOR); // sets the background colour of the window
         this.getContentPane().setPreferredSize(new Dimension(paneWidth,paneHeight)); // sets the size of the window
         this.setResizable(false); // stops the user from resizing the window
@@ -66,18 +67,11 @@ public class Main extends JFrame implements ActionListener{
         this.setLayout(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE); // stops program when window is closed
         this.pack(); // makes the window
-
         System.out.println(this.getHeight()+" "+this.getWidth());
-        System.out.println(this.getContentPane().getHeight()+" "+this.getContentPane().getWidth());
-        System.out.println(paneWidth+" "+paneHeight);
 
-        int xNum = 500-this.getContentPane().getWidth();
-        int yNum = 500-this.getContentPane().getHeight();
-        this.paneHeight=yNum+500;
-        this.paneWidth=xNum+500;
-        this.setPreferredSize(new Dimension(paneWidth,paneHeight));
+        int xNum = this.getWidth()-500;
+        int yNum = this.getHeight()-500;
 
-        this.pack();
         this.toFront(); // puts this window on top of other windows the user might have open.
         this.setLocationRelativeTo(null); // opens the window in the middle of the screen
         this.setVisible(true); // makes the window visible
