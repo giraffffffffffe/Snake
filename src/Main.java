@@ -14,14 +14,10 @@ public class Main extends JFrame implements ActionListener{
     private Box[][] board = new Box[50][50]; // creates a 2D array of boxes
     private int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width; // width of the screen
     private int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height; // height of the screen
-    private final int X_OFFSET = 8; // x offset of the board (for school, 8) (for home, 0)
-    private final int Y_OFFSET = 54; // y offset of the board (for school, 54) (for home, 49)
-    private double dscreenWidth = Toolkit.getDefaultToolkit().getScreenSize().width; // width of the screen
-    private double dscreenHeight = Toolkit.getDefaultToolkit().getScreenSize().height; // height of the screen
-    private final double DX_OFFSET = 8; // x offset of the board (for school, 8) (for home, 0)
-    private final double DY_OFFSET = 54; // y offset of the board (for school, 54) (for home, 49)
-    private int windWidth = 500; // initial width of window
-    private int windHeight = 500; // initial height of window
+    private int xOffset = 0; // x offset of the board (for school, 8) (for home, 0)
+    private int yOffset = 0; // y offset of the board (for school, 54) (for home, 49)
+    private int paneWidth = 500; // initial width of window
+    private int paneHeight = 500; // initial height of window
     private final String APPLE_FILE = "apple.png";
     private final String ORANGE_FILE = "orange.png";
     private final String KIWIFRUIT_FILE = "kiwifruit.png";
@@ -43,28 +39,25 @@ public class Main extends JFrame implements ActionListener{
     public Main(){ // runs initially
         for(int i = 0; i < 50; i++){ // for each box in the board
             for(int j = 0; j < 50; j++){
+                board[i][j] = new Box(); // creates a new box
                 if (i == 0 || i == 49 || j == 0 || j == 49){ // if the box is on the edge
-                    board[i][j] = new Box(); // creates a new box
                     board[i][j].setWall(true); // sets the box to be a wall
-                }else{
-                    board[i][j] = new Box(); // creates a new box
                 }
             }
         }
         this.setTitle("Snake!"); // sets title of Window to "Snake!"
-        System.out.println(dscreenHeight/DY_OFFSET+" "+dscreenWidth/DX_OFFSET);
+
         this.getContentPane().setBackground(BACKGROUND_COLOR); // sets the background colour of the window
-        this.getContentPane().setPreferredSize(new Dimension(windWidth,windHeight)); // sets the size of the window
+        this.getContentPane().setPreferredSize(new Dimension(paneWidth,paneHeight)); // sets the size of the window
         this.setResizable(false); // stops the user from resizing the window
-        this.panel.setPreferredSize(new Dimension(windWidth,windHeight));
+        this.panel.setPreferredSize(new Dimension(paneWidth,paneHeight));
         Snake s = new Snake(); // initialises Snake
 
-        this.menuBar = new JMenuBar(); // makes a new menubar
-        this.setJMenuBar(menuBar); // sets the menubar to the window
+        this.menuBar = new JMenuBar(); // makes a new menu bar
+        this.setJMenuBar(menuBar); // sets the menu bar to the window
         createMenu(MENU0_OPTIONS, 0); // creates the menus
         createMenu(MENU1_OPTIONS, 1);
         createMenu(MENU2_OPTIONS, 2);
-
         this.myGraphic = new Canvas(); // initialises graphic
         this.panel.add(myGraphic); // adds canvas to panel
 
@@ -74,8 +67,10 @@ public class Main extends JFrame implements ActionListener{
         this.toFront(); // puts this window on top of other windows the user might have open.
         this.setLocationRelativeTo(null); // opens the window in the middle of the screen
         this.setVisible(true); // makes the window visible
-        System.out.println(this.getHeight());
-
+        System.out.println(this.getHeight()+" "+this.getWidth());
+        System.out.println(this.getContentPane().getHeight()+" "+this.getContentPane().getWidth());
+        this.xOffset = this.getWidth() - paneWidth;
+        this.yOffset = this.getHeight() - paneHeight;
     }
     private void createMenu(String[] menuOptions, int numMenus) { // creates menus in window
         JMenu menu = new JMenu(MENU_NAMES[numMenus]); // creates a new menu
@@ -115,7 +110,7 @@ public class Main extends JFrame implements ActionListener{
     private void fruitEaten(Snake s) { // when the snake eats a fruit
         s.setLength(s.getLength() + 1); // increases the length of the snake
         f.eaten(); // sets the fruit to 'eaten';
-        f = new Fruit(randomNumber(0, 3), randomNumber(0, windWidth), randomNumber(0, windHeight)); // makes a new fruit
+        f = new Fruit(randomNumber(0, 3), randomNumber(0, paneWidth), randomNumber(0, paneHeight)); // makes a new fruit
     }
 
     public int randomNumber(int min, int max) { // generates a random number between min and max
@@ -124,12 +119,11 @@ public class Main extends JFrame implements ActionListener{
     public void paint(Graphics g) { //paints the window
         System.out.println("paint");
         super.paint(g);
-
         for(int i = 0; i < 50; i++){ // for each box in the board
             for(int j = 0; j < 50; j++){
                 if (board[i][j].isWall()){ // if the box is a wall
                     g.setColor(WALL_COLOR); // sets the colour to dark green
-                    g.fillRect(i*10+X_OFFSET, j*10+Y_OFFSET, 10, 10); // draws the box
+                    g.fillRect(i*10+xOffset, j*10+yOffset, 10, 10); // draws the box
                 }
                 else if (board[i][j].isFruit()){ // if the box is the fruit
                     switch (f.getType()){ // draws the fruit based on the type
@@ -150,7 +144,7 @@ public class Main extends JFrame implements ActionListener{
                         }
                     }
                 }
-                else{
+                if (board[i][j].isSnake()){ // if the box is a snake
 
                 }
             }
