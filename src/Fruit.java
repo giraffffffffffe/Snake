@@ -3,8 +3,8 @@ import java.awt.*;
 public class Fruit {
     public String[] fruits = {"Apple", "Orange", "Kiwifruit", "Plum",}; // possible types of fruit
     private int x; // x coordinate of the fruit
-    private String fruitType; // type of fruit
     private int y; // y coordinate of the fruit
+    private String fruitType; // type of fruit
     private boolean eaten = false; // if the fruit has been eaten
     public Fruit(int n, int fx, int fy){ // constructor
         System.out.println("Fruit created!");

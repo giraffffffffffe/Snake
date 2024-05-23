@@ -2,7 +2,6 @@ public class Box {
     private boolean fruit = false; // if the box has a fruit
     private boolean snake = false; // if the box has a snake
     private boolean wall = false; // if the box is a wall
-
     public Box(){
     }
     public void setFruit(boolean fruit) { // sets the box to have a fruit
