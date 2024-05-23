@@ -6,6 +6,7 @@ public class SnakePart {
     private int direction; // -1 = Left; -2 = Down; 1 = Right; 2 = Up
     private SnakePart follower = null;
     public SnakePart(int x, int y, boolean tail, int d){
+        System.out.println("new SnakePart");
         this.boardX = x;
         this.boardY = y;
         this.tail = tail;

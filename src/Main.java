@@ -6,7 +6,7 @@ import java.awt.event.*;
 public class Main extends JFrame implements ActionListener{
     public Color BACKGROUND_COLOR = new Color(84,170,89); //colour that the background is
     public Color WALL_COLOR = new Color(48, 13, 1); //colour that the walls are
-    public Color DOT_COLOR = new Color(6, 89, 55); //colour that the snake is
+    public Color DOT_COLOR = new Color(6, 89, 55); //colour that the dots are
     private final String[] MENU_NAMES = {"Help", "Configure", "Actions"};
     private final String[] MENU0_OPTIONS = {"Instructions"}; // options in Help menu
     private final String[] MENU1_OPTIONS = {"Keys", "Snake Speed"}; // options in configure menu
@@ -17,7 +17,7 @@ public class Main extends JFrame implements ActionListener{
     private int yOffset; // y offset of the board (for school, 54) (for home, 49)
     private int paneWidth = 500; // initial width of window
     private int paneHeight = 500; // initial height of window
-    private final int INITIAL_SNAKE_LENGTH = 5;
+    private final int INITIAL_SNAKE_LENGTH = 4;
     private final int INITIAL_SNAKE_X = 20;
     private final int INITIAL_SNAKE_Y = 25;
     private final String APPLE_FILE = "apple.png";
@@ -56,8 +56,6 @@ public class Main extends JFrame implements ActionListener{
     private final ImageIcon DR = new ImageIcon(DR_FILE);
     private final ImageIcon DL = new ImageIcon(DL_FILE);
     private final ImageIcon RL = new ImageIcon(RL_FILE);
-
-
     private JMenuBar menuBar; // creates a menu bar
     private JMenuItem menuItem; // creates a menu item
     private Canvas myGraphic; // canvas that is used for the graphics
@@ -80,6 +78,12 @@ public class Main extends JFrame implements ActionListener{
             s.addToSnake(x, INITIAL_SNAKE_Y, false, 1);
             x++;
         }
+        SnakePart sp = s.getTail();
+        while (sp != null){
+            System.out.println(sp);
+            sp = sp.getFollower();
+        }
+
         for(int i = 0; i < 50; i++){ // for each box in the board
             for(int j = 0; j < 50; j++){
                 BOARD[i][j] = new Box(); // creates a new box
@@ -117,16 +121,18 @@ public class Main extends JFrame implements ActionListener{
 
         int xNum = this.getWidth()-500;
         int yNum = this.getHeight()-500;
-        System.out.println("xn Yn         "+xNum+"  "+yNum);
-        System.out.println("this.g W H    "+this.getWidth()+" "+this.getHeight());
-        System.out.println("this.g cp W H "+this.getContentPane().getWidth()+" "+this.getContentPane().getHeight());
-        System.out.println("pane W H      "+paneWidth+" "+paneHeight);
-        System.out.println("menu bar W H  "+this.menuBar.getWidth()+" "+this.menuBar.getHeight());
-        System.out.println("panel x y     "+this.panel.getX()+"   "+this.panel.getY());
         this.xOffset = 0;
         this.yOffset = yNum-2;
         this.panel.repaint();
-        System.out.println("xoffst Yoffst "+this.xOffset+"   "+this.yOffset);
+
+        /* debug for offset*/
+//        System.out.println("xn Yn         "+xNum+"  "+yNum);
+//        System.out.println("this.g W H    "+this.getWidth()+" "+this.getHeight());
+//        System.out.println("this.g cp W H "+this.getContentPane().getWidth()+" "+this.getContentPane().getHeight());
+//        System.out.println("pane W H      "+paneWidth+" "+paneHeight);
+//        System.out.println("menu bar W H  "+this.menuBar.getWidth()+" "+this.menuBar.getHeight());
+//        System.out.println("panel x y     "+this.panel.getX()+"   "+this.panel.getY());
+//        System.out.println("xoffst Yoffst "+this.xOffset+"   "+this.yOffset);
 
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
@@ -199,13 +205,11 @@ public class Main extends JFrame implements ActionListener{
         super.paint(g);
         for(int i = 0; i < 50; i++){ // for each box in the board
             for(int j = 0; j < 50; j++){
-                System.out.println("dot");
                 g.setColor(DOT_COLOR); // sets the colour to dark green
                 g.fillRect(i*PIXELS_PER_BOX+xOffset+3, j*PIXELS_PER_BOX+yOffset+3, 4, 4); // draws a dot
                 if (BOARD[i][j].isWall()){ // if the box is a wall
                     g.setColor(WALL_COLOR); // sets the colour to brown
                     g.fillRect(i*PIXELS_PER_BOX+xOffset, j*PIXELS_PER_BOX+yOffset, PIXELS_PER_BOX, PIXELS_PER_BOX); // draws the box
-                    //System.out.println((i*10+xOffset)+" "+(j*10+yOffset));
                 }
                 else if (BOARD[i][j].isFruit()){ // if the box is the fruit
                     System.out.println("fruit");
@@ -237,6 +241,7 @@ public class Main extends JFrame implements ActionListener{
         SnakePart sp = this.s.getTail();
         int lastDirection = sp.getDirection();
         for (int i = 0; i < s.getLength(); i++) {
+            System.out.println("length: "+s.getLength()+"; head: "+sp.isHead()+"; tail: "+sp.isTail());
             int x = sp.getBoardX() * PIXELS_PER_BOX + xOffset;
             int y = sp.getBoardX() * PIXELS_PER_BOX + xOffset;
 

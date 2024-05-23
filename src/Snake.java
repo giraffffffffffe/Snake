@@ -15,6 +15,7 @@ public class Snake {
         this.currentDirection = d;
     }
     public void setHead(SnakePart s){
+        System.out.println("setHead");
         this.head = s;
     }
     public void setTail(SnakePart t){
@@ -45,9 +46,14 @@ public class Snake {
     }
     public void addToSnake(int x, int y, boolean tail, int d){
         SnakePart s = new SnakePart(x,y,tail,d);
+        System.out.println("s: "+s);
         this.getHead().setFollower(s);
+        System.out.println(this.getHead());
         this.getHead().isHead(false);
         this.setHead(s);
+        System.out.println(this.getHead());
         this.length++;
+        System.out.println("snake length: "+this.length);
+        System.out.println();
     }
 }
