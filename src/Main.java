@@ -6,7 +6,7 @@ import java.awt.event.*;
 public class Main extends JFrame implements ActionListener{
     public Color BACKGROUND_COLOR = new Color(84,170,89); //colour that the background is
     public Color WALL_COLOR = new Color(48, 13, 1); //colour that the walls are
-    public Color DOT_COLOR = new Color(6, 89, 55); //colour that the dots are
+    public Color DOT_COLOR = new Color(26, 109, 75); //colour that the dots are
     private final String[] MENU_NAMES = {"Help", "Configure", "Actions"};
     private final String[] MENU0_OPTIONS = {"Instructions"}; // options in Help menu
     private final String[] MENU1_OPTIONS = {"Keys", "Snake Speed"}; // options in configure menu
@@ -121,8 +121,8 @@ public class Main extends JFrame implements ActionListener{
 
         int xNum = this.getWidth()-500;
         int yNum = this.getHeight()-500;
-        this.xOffset = 0;
-        this.yOffset = yNum-2;
+        this.xOffset = xNum-8;
+        this.yOffset = yNum-8;
         this.panel.repaint();
 
         /* debug for offset*/

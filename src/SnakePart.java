@@ -1,4 +1,5 @@
-public class SnakePart {
+
+ class SnakePart {
     private int boardX;
     private int boardY;
     private boolean head = true;

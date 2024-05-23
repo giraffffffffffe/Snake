@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="X and Y offset still need to be manually changed depending on what machine you're on. &#10;I've added SnakePart class and have started coding the snake. &#10;The snake paint section can probably be improved and simplified.&#10;I've turned the snake into a queue of snake classes. the tail says the same, pieces are added to from the front.&#10;I have also added key events">
+    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="I think i fixed x and y offset">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2024__15_10__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2024__15_10__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2024__15_19__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2024__15_19__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Snake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Snake.java" afterDir="false" />
@@ -39,9 +42,6 @@
       </UrlAndAccount>
     </option>
   </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -59,7 +59,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/anne/IdeaProjects/openWindow&quot;,
+    &quot;last_opened_file_path&quot;: &quot;H:/CSC335/finalProject/Snake&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -158,13 +158,13 @@
       <option name="project" value="LOCAL" />
       <updated>1716156636327</updated>
     </task>
-    <task id="LOCAL-00009" summary="X and Y offset still need to be manually changed depending on what machine you're on. &#10;I've added SnakePart class and have started coding the snake. &#10;The snake paint section can probably be improved and simplified.&#10;I've turned the snake into a queue of snake classes. the tail says the same, pieces are added to from the front.&#10;I have also added key events">
+    <task id="LOCAL-00009" summary="I think i fixed x and y offset">
       <option name="closed" value="true" />
-      <created>1716451009328</created>
+      <created>1716433793448</created>
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1716451009328</updated>
+      <updated>1716433793448</updated>
     </task>
     <option name="localTasksCounter" value="10" />
     <servers />
@@ -192,7 +192,7 @@
     <MESSAGE value="added fruit files and continued working on the board. added outer walls to the board" />
     <MESSAGE value="Tried to fix x and y offset" />
     <MESSAGE value="Tried to fix x and y offset again" />
-    <MESSAGE value="X and Y offset still need to be manually changed depending on what machine you're on. &#10;I've added SnakePart class and have started coding the snake. &#10;The snake paint section can probably be improved and simplified.&#10;I've turned the snake into a queue of snake classes. the tail says the same, pieces are added to from the front.&#10;I have also added key events" />
-    <option name="LAST_COMMIT_MESSAGE" value="X and Y offset still need to be manually changed depending on what machine you're on. &#10;I've added SnakePart class and have started coding the snake. &#10;The snake paint section can probably be improved and simplified.&#10;I've turned the snake into a queue of snake classes. the tail says the same, pieces are added to from the front.&#10;I have also added key events" />
+    <MESSAGE value="I think i fixed x and y offset" />
+    <option name="LAST_COMMIT_MESSAGE" value="I think i fixed x and y offset" />
   </component>
 </project>
