@@ -1,7 +1,7 @@
 import java.awt.*;
 
 public class Fruit {
-    public String[] fruits = {"Apple", "Orange", "Kiwifruit", "Plum",}; // possible types of fruit
+    public String[] fruits = {"Apple", "Orange", "Plum",}; // possible types of fruit
     private int x; // x coordinate of the fruit
     private int y; // y coordinate of the fruit
     private String fruitType; // type of fruit

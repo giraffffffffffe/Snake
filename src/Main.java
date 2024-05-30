@@ -6,7 +6,7 @@ import java.awt.event.*;
 public class Main extends JFrame implements ActionListener{
     public Color BACKGROUND_COLOR = new Color(84,170,89); //colour that the background is
     public Color WALL_COLOR = new Color(48, 13, 1); //colour that the walls are
-    public Color DOT_COLOR = new Color(26, 109, 75); //colour that the dots are
+    public Color DOT_COLOR = new Color(26, 109, 85); //colour that the dots are
     private final String[] MENU_NAMES = {"Help", "Configure", "Actions"};
     private final String[] MENU0_OPTIONS = {"Instructions"}; // options in Help menu
     private final String[] MENU1_OPTIONS = {"Keys", "Snake Speed"}; // options in configure menu
@@ -61,7 +61,7 @@ public class Main extends JFrame implements ActionListener{
     private Canvas myGraphic; // canvas that is used for the graphics
     private JPanel panel = new JPanel(); // initialises JPanel
     private Scanner kb = new Scanner(System.in); // initialises keyboard
-    private Fruit f = new Fruit(randomNumber(0,3), 25, 25); // initialises fruit
+    private Fruit f = new Fruit(randomNumber(0,2), 25, 25); // initialises fruit
     public Snake s; // initialises Snake
     private int points = 0;
     public static void main(String[] args) { // starts program
@@ -69,19 +69,19 @@ public class Main extends JFrame implements ActionListener{
     }
 
     public Main(){ // runs initially
-        SnakePart snakeStart = new SnakePart(INITIAL_SNAKE_X-INITIAL_SNAKE_LENGTH,INITIAL_SNAKE_Y,true, 1);
-        s = new Snake(snakeStart);
-        s.setHead(snakeStart);
-        s.setTail(snakeStart);
-        int x = INITIAL_SNAKE_X-INITIAL_SNAKE_LENGTH+1;
-        for (int i = 0; i<INITIAL_SNAKE_LENGTH; i++){
-            s.addToSnake(x, INITIAL_SNAKE_Y, false, 1);
+        SnakePart snakeStart = new SnakePart(INITIAL_SNAKE_X-INITIAL_SNAKE_LENGTH,INITIAL_SNAKE_Y,true, 1); // creates a new SnakePart
+        s = new Snake(snakeStart); // creates a new Snake
+        s.setHead(snakeStart); // sets the head of the snake
+        s.setTail(snakeStart); // sets the tail of the snake
+        int x = INITIAL_SNAKE_X-INITIAL_SNAKE_LENGTH+1; // x coordinate of the next SnakePart
+        for (int i = 0; i<INITIAL_SNAKE_LENGTH; i++){ // for each SnakePart in the snake
+            s.addToSnake(x, INITIAL_SNAKE_Y, false, 1); // adds a SnakePart to the snake
             x++;
         }
-        SnakePart sp = s.getTail();
-        while (sp != null){
-            System.out.println(sp);
-            sp = sp.getFollower();
+        SnakePart sp = s.getTail(); // gets the tail of the snake
+        while (sp != null){ // while there are more SnakeParts
+            System.out.println(sp); // print the SnakePart
+            sp = sp.getFollower(); // move to the next SnakePart
         }
 
         for(int i = 0; i < 50; i++){ // for each box in the board
@@ -193,7 +193,7 @@ public class Main extends JFrame implements ActionListener{
     private void fruitEaten(Snake s) { // when the snake eats a fruit
         s.addToSnake(f.getX()*PIXELS_PER_BOX,f.getY()*PIXELS_PER_BOX, false, s.getCurrentDirection());
         f.eaten(); // sets the fruit to 'eaten';
-        f = new Fruit(randomNumber(0, 3), randomNumber(0, paneWidth), randomNumber(0, paneHeight)); // makes a new fruit
+        f = new Fruit(randomNumber(0, 2), randomNumber(0, paneWidth), randomNumber(0, paneHeight)); // makes a new fruit
         points = points+10;
     }
 
@@ -222,10 +222,10 @@ public class Main extends JFrame implements ActionListener{
                             System.out.println("orange");
                             ORANGE.paintIcon(this, g,fruitX(),fruitY());
                         }
-                        case "Kiwifruit" -> {
-                            System.out.println("kiwifruit");
-                            KIWIFRUIT.paintIcon(this, g,fruitX(),fruitY());
-                        }
+//                        case "Kiwifruit" -> {
+//                            System.out.println("kiwifruit");
+//                            KIWIFRUIT.paintIcon(this, g,fruitX(),fruitY());
+//                        }
                         case "Plum" -> {
                             System.out.println("plum");
                             PLUM.paintIcon(this, g,fruitX(),fruitY());
@@ -244,7 +244,7 @@ public class Main extends JFrame implements ActionListener{
             System.out.println("length: "+s.getLength()+"; head: "+sp.isHead()+"; tail: "+sp.isTail());
             int x = sp.getBoardX() * PIXELS_PER_BOX + xOffset;
             int y = sp.getBoardX() * PIXELS_PER_BOX + xOffset;
-
+            // figures out which icon to use based on the direction of the SnakePart
             if (sp.isTail()) {
                 switch (sp.getDirection()) {
                     case 2 -> U_SNAKE_TAIL.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
@@ -266,6 +266,7 @@ public class Main extends JFrame implements ActionListener{
                 // D [XX][XX][DL][DR]
                 // L [XX][XX][XX][LR]
                 // R [XX][XX][XX][XX]
+
                 switch (sp.getDirection()) {
                     case 2 -> {
                         switch (-1 * lastDirection) { // where the snake came from (if it was going left it means it's coming from the right)
@@ -297,14 +298,14 @@ public class Main extends JFrame implements ActionListener{
                     }
                 }
             }
-            lastDirection = sp.getDirection();
-            sp = sp.getFollower();
+            lastDirection = sp.getDirection(); // set the last direction to the current direction
+            sp = sp.getFollower(); // move to the next SnakePart
         }
     }
     public int fruitX(){
         return f.getX()*PIXELS_PER_BOX+xOffset;
-    }
+    } // returns the x coordinate of the fruit
     public int fruitY(){
         return f.getY()*PIXELS_PER_BOX+yOffset-1;
-    }
+    } // returns the y coordinate of the fruit
 }
