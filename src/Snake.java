@@ -15,7 +15,6 @@ public class Snake {
         this.currentDirection = d;
     }
     public void setHead(SnakePart s){ // sets the head of the snake
-        System.out.println("setHead");
         s.isHead(true);
         this.head = s;
     }
@@ -47,15 +46,9 @@ public class Snake {
     }
     public void addToSnake(int x, int y, boolean tail, int d){ // adds a SnakePart to the snake
         SnakePart s = new SnakePart(x,y,tail,d); // create a new SnakePart
-        System.out.println();
-        System.out.println("s: "+s);
         this.getHead().setFollower(s); // set the new SnakePart as the follower of the current head
-        System.out.println("this.getHead: "+this.getHead());
         this.getHead().isHead(false); // set the current head to not be the head
         this.setHead(s); // set the new SnakePart as the head
-        System.out.println("this.getHead: "+this.getHead()+" s.isHead: "+s.isHead());
         this.length++; // increase the length of the snake
-        System.out.println("snake length: "+this.length);
-        System.out.println();
     }
 }

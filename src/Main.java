@@ -80,7 +80,6 @@ public class Main extends JFrame implements ActionListener{
         }
         SnakePart sp = s.getTail(); // gets the tail of the snake
         while (sp != null){ // while there are more SnakeParts
-            System.out.println(sp); // print the SnakePart
             sp = sp.getFollower(); // move to the next SnakePart
         }
 
