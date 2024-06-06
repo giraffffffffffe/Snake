@@ -32,12 +32,12 @@ public class Main extends JFrame implements ActionListener{
     private final String D_SNAKE_TAIL_FILE= "dSnakeTail.png";
     private final String L_SNAKE_TAIL_FILE= "lSnakeTail.png";
     private final String R_SNAKE_TAIL_FILE= "rSnakeTail.png";
+    private final String RL_FILE = "rl.png";
     private final String UD_FILE = "ud.png";
     private final String UR_FILE = "ur.png";
     private final String UL_FILE = "ul.png";
     private final String DR_FILE = "dr.png";
     private final String DL_FILE = "dl.png";
-    private final String RL_FILE = "rl.png";
     private final ImageIcon APPLE = new ImageIcon(APPLE_FILE);
     private final ImageIcon ORANGE = new ImageIcon(ORANGE_FILE);
     private final ImageIcon KIWIFRUIT = new ImageIcon(KIWIFRUIT_FILE);
@@ -56,6 +56,14 @@ public class Main extends JFrame implements ActionListener{
     private final ImageIcon DR = new ImageIcon(DR_FILE);
     private final ImageIcon DL = new ImageIcon(DL_FILE);
     private final ImageIcon RL = new ImageIcon(RL_FILE);
+    private final String SNAKE_HEAD_FILE = "uSnakeHead.png"; //u
+    private final String SNAKE_TAIL_FILE = "dSnakeTail.png"; //d
+    private final String STRAIGHT_FILE = "ud.png"; //ud
+    private final String CORNER_FILE = "ur.png"; //ur
+    private final ImageIcon SNAKE_HEAD = new ImageIcon(SNAKE_HEAD_FILE);
+    private final ImageIcon SNAKE_TAIL = new ImageIcon(SNAKE_TAIL_FILE);
+    private final ImageIcon STRAIGHT = new ImageIcon(STRAIGHT_FILE);
+    private final ImageIcon CORNER = new ImageIcon(CORNER_FILE);
     private JMenuBar menuBar; // creates a menu bar
     private JMenuItem menuItem; // creates a menu item
     private Canvas myGraphic; // canvas that is used for the graphics
@@ -237,28 +245,35 @@ public class Main extends JFrame implements ActionListener{
             }
         }
         //draw Snake
+        // -1 = Left; -2 = Down; 1 = Right; 2 = Up
         SnakePart sp = this.s.getTail();
         int lastDirection = sp.getDirection();
         for (int i = 0; i < s.getLength(); i++) {
-            System.out.println("length: "+s.getLength()+"; head: "+sp.isHead()+"; tail: "+sp.isTail());
             int x = sp.getBoardX() * PIXELS_PER_BOX + xOffset;
-            int y = sp.getBoardX() * PIXELS_PER_BOX + xOffset;
+            int y = sp.getBoardX() * PIXELS_PER_BOX + yOffset;
+            System.out.println("length: "+s.getLength()+"; head: "+sp.isHead()+"; tail: "+sp.isTail() + "; Board x: "+sp.getBoardX() + "; Board y: "+sp.getBoardY() +"; x coord: "+x+"; y coord: "+y);
             // figures out which icon to use based on the direction of the SnakePart
             if (sp.isTail()) {
+                System.out.println("tail");
                 switch (sp.getDirection()) {
-                    case 2 -> U_SNAKE_TAIL.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
-                    case -2 -> D_SNAKE_TAIL.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
-                    case 1 -> R_SNAKE_TAIL.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
-                    case -1 -> L_SNAKE_TAIL.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
+                    case 2 -> SNAKE_TAIL.paintIcon(this, g, x, y); // U
+                    case -2 -> SNAKE_TAIL.paintIcon(this, g, x, y); // D
+                    case 1 -> SNAKE_TAIL.paintIcon(this, g, x, y); // R
+                    case -1 -> SNAKE_TAIL.paintIcon(this, g, x, y); // L
+                    default -> System.out.println("tail direction error. Tail direction: " + sp.getDirection());
                 }
             } else if (sp.isHead()) {
+                System.out.println("head");
                 switch (sp.getDirection()) {
-                    case 2 -> U_SNAKE_HEAD.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
-                    case -2 -> D_SNAKE_HEAD.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
-                    case 1 -> R_SNAKE_HEAD.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
-                    case -1 -> L_SNAKE_HEAD.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
+                    case 2 -> SNAKE_HEAD.paintIcon(this, g, x, y); // U
+                    case -2 -> SNAKE_HEAD.paintIcon(this, g, x, y); // D
+                    case 1 -> SNAKE_HEAD.paintIcon(this, g, x, y); // R
+                    case -1 -> SNAKE_HEAD.paintIcon(this, g, x, y); // L
+                    default -> System.out.println("head direction error. Head direction: " + sp.getDirection());
                 }
             } else {
+                System.out.println("body");
+                // -1 = Left; -2 = Down; 1 = Right; 2 = Up
                 // possible outcomes: UD, UL, UR, DL, DR, LR
                 //    U   D   L   R
                 // U [XX][UD][UL][UR]
@@ -269,38 +284,43 @@ public class Main extends JFrame implements ActionListener{
                 switch (sp.getDirection()) {
                     case 2 -> {
                         switch (-1 * lastDirection) { // where the snake came from (if it was going left it means it's coming from the right)
-                            case -2 -> UD.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
-                            case 1 -> UR.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
-                            case -1 -> UL.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
+                            case -2 -> STRAIGHT.paintIcon(this, g, x, y); // UD
+                            case 1 -> CORNER.paintIcon(this, g, x, y); // UR
+                            case -1 -> CORNER.paintIcon(this, g, x, y); // UL
+                            default -> System.out.println("up body. Last direction: " + lastDirection);
                         }
                     }
                     case -2 -> {
                         switch (-1 * lastDirection) {
-                            case 2 -> UD.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
-                            case 1 -> DR.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
-                            case -1 -> DL.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
+                            case 2 -> STRAIGHT.paintIcon(this, g, x, y); // UD
+                            case 1 -> CORNER.paintIcon(this, g, x, y); // DR
+                            case -1 -> CORNER.paintIcon(this, g, x, y); // DL
+                            default -> System.out.println("down body. Last direction: " + lastDirection);
                         }
                     }
                     case 1 -> {
                         switch (-1 * lastDirection) {
-                            case 2 -> UR.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
-                            case -2 -> DR.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
-                            case -1 -> RL.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
+                            case 2 -> CORNER.paintIcon(this, g, x, y); // UR
+                            case -2 -> CORNER.paintIcon(this, g, x, y); // DR
+                            case -1 -> STRAIGHT.paintIcon(this, g, x, y); // RL
+                            default -> System.out.println("right body. Last direction: " + lastDirection);
                         }
                     }
                     case -1 -> {
                         switch (-1 * lastDirection) {
-                            case 2 -> UL.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
-                            case -2 -> DL.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
-                            case 1 -> RL.paintIcon(this, g, sp.getBoardX(), sp.getBoardY());
-                        }
-                    }
-                }
-            }
+                            case 2 -> CORNER.paintIcon(this, g, x, y); // UL
+                            case -2 -> CORNER.paintIcon(this, g, x, y); // DL
+                            case 1 -> STRAIGHT.paintIcon(this, g, x, y); // RL
+                            default -> System.out.println("left body. Last direction: " + lastDirection);
+                        } //  switch (-1 * lastDirection) {
+                    } // case -1 -> {
+                    default -> System.out.println("body direction error. Body direction: " + sp.getDirection());
+                } // switch (sp.getDirection()) {
+            } // else {
             lastDirection = sp.getDirection(); // set the last direction to the current direction
             sp = sp.getFollower(); // move to the next SnakePart
-        }
-    }
+        } // for (int i = 0; i < s.getLength(); i++) {
+    } // public void paint(Graphics g) {
     public int fruitX(){
         return f.getX()*PIXELS_PER_BOX+xOffset;
     } // returns the x coordinate of the fruit

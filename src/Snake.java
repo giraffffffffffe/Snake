@@ -33,17 +33,17 @@ public class Snake {
     public int getLength() { // gets the length of the snake
         return this.length;
     } // gets the length of the snake
-    public SnakePart getSnakePart(int x,int y){ // gets the SnakePart at the given coordinates
-        SnakePart s = this.tail; // start at the tail
-        while (s!=null){ // while there are more SnakeParts
-            if(s.getBoardX() == x && s.getBoardY() == y){ // if the SnakePart is at the given coordinates
-                return s; // return the SnakePart
-            } else{ // if the SnakePart is not at the given coordinates
-                s = s.getFollower(); // move to the next SnakePart
-            }
-        }
-        return s; // this shouldn't happen
-    }
+//    public SnakePart getSnakePart(int x,int y){ // gets the SnakePart at the given coordinates
+//        SnakePart s = this.tail; // start at the tail
+//        while (s!=null){ // while there are more SnakeParts
+//            if(s.getBoardX() == x && s.getBoardY() == y){ // if the SnakePart is at the given coordinates
+//                return s; // return the SnakePart
+//            } else{ // if the SnakePart is not at the given coordinates
+//                s = s.getFollower(); // move to the next SnakePart
+//            }
+//        }
+//        return s; // this shouldn't happen
+//    }
     public void addToSnake(int x, int y, boolean tail, int d){ // adds a SnakePart to the snake
         SnakePart s = new SnakePart(x,y,tail,d); // create a new SnakePart
         this.getHead().setFollower(s); // set the new SnakePart as the follower of the current head
