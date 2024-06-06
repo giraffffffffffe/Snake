@@ -250,7 +250,7 @@ public class Main extends JFrame implements ActionListener{
         int lastDirection = sp.getDirection();
         for (int i = 0; i < s.getLength(); i++) {
             int x = sp.getBoardX() * PIXELS_PER_BOX + xOffset;
-            int y = sp.getBoardX() * PIXELS_PER_BOX + yOffset;
+            int y = sp.getBoardY() * PIXELS_PER_BOX + yOffset;
             System.out.println("length: "+s.getLength()+"; head: "+sp.isHead()+"; tail: "+sp.isTail() + "; Board x: "+sp.getBoardX() + "; Board y: "+sp.getBoardY() +"; x coord: "+x+"; y coord: "+y);
             // figures out which icon to use based on the direction of the SnakePart
             if (sp.isTail()) {
