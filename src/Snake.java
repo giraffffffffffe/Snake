@@ -1,6 +1,7 @@
 public class Snake {
     private SnakePart head;
     private SnakePart tail;
+    private boolean alive = true; // if the snake is alive
     private int currentDirection; // -1 = Left; -2 = Down; 1 = Right; 2 = Up
     private int length = 0; // starting length of the snake
     public Snake(SnakePart s){
@@ -21,6 +22,12 @@ public class Snake {
     public void setTail(SnakePart t){
         this.tail = t;
     } // sets the tail of the snake
+    public void setAlive(boolean a){
+        this.alive = a;
+    } // sets the snake to be alive or dead
+    public boolean getAlive(){
+        return this.alive;
+    } // returns if the snake is alive
     public SnakePart getTail() {
         return tail;
     } // gets the tail of the snake
