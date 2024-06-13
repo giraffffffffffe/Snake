@@ -80,6 +80,7 @@ public class Main extends JFrame implements ActionListener{
         for(int i = 0; i <boardWidth; i++){ // for each box in the board
             for(int j = 0; j < boardHeight; j++){
                 BOARD[i][j] = new Box(); // creates a new box
+                BOARD[i][j].setRedraw(true); // sets the box to be redrawn
                 if (i == 0 || i == boardWidth-1 || j == 0 || j == boardHeight-1){ // if the box is on the edge
                     BOARD[i][j].setWall(true); // sets the box to be a wall
                 }
@@ -107,7 +108,7 @@ public class Main extends JFrame implements ActionListener{
         this.setContentPane(panel); // sets the content pane to the panel
         this.setTitle("Snake!"); // sets title of Window to "Snake!"
         //this.setPreferredSize(new Dimension(paneWidth,paneHeight)); //24+8 = 32, 8+8=16
-        this.getContentPane().setBackground(BACKGROUND_COLOR); // sets the background colour of the window
+        this.getContentPane().setBackground(new Color(0,0,0,0)); // sets the background colour of the window
         this.getContentPane().setPreferredSize(new Dimension(paneWidth,paneHeight)); // sets the size of the window
         this.setResizable(false); // stops the user from resizing the window
         this.panel.setPreferredSize(new Dimension(paneWidth,paneHeight));
@@ -228,6 +229,7 @@ public class Main extends JFrame implements ActionListener{
             case LEFT -> nextX--; // left
         }
         pt("; next x: "+nextX+"; next y: "+nextY);
+        BOARD[nextX][nextY].setRedraw(true); // sets the box to be redrawn
 
         if (BOARD[nextX][nextY].isFruit()) { // if the snake head will be on a fruit
             fruitEaten(s); // eats the fruit
@@ -246,6 +248,7 @@ public class Main extends JFrame implements ActionListener{
             while (sp != null) { // while there are more SnakeParts
                 x = sp.getBoardX(); // gets the x coordinate of the SnakePart
                 y = sp.getBoardY(); // gets the y coordinate of the SnakePart
+                BOARD[x][y].setRedraw(true); // sets the box to be redrawn
                 int currentD = sp.getDirection(); // gets the direction of the tail
 
                 switch (currentD) { // moves the SnakePart
@@ -285,36 +288,40 @@ public class Main extends JFrame implements ActionListener{
         super.paint(g);
         for(int i = 0; i < boardWidth; i++){ // for each box in the board
             for(int j = 0; j < boardHeight; j++){
-                g.setColor(DOT_COLOR); // sets the colour to dark green
-                g.fillRect(i*PIXELS_PER_BOX+xOffset+3, j*PIXELS_PER_BOX+yOffset+3, 4, 4); // draws a dot
-                if (BOARD[i][j].isWall()){ // if the box is a wall
-                    g.setColor(WALL_COLOR); // sets the colour to brown
-                    g.fillRect(i*PIXELS_PER_BOX+xOffset, j*PIXELS_PER_BOX+yOffset, PIXELS_PER_BOX, PIXELS_PER_BOX); // draws the box
-                }
-                else if (BOARD[i][j].isFruit()){ // if the box is the fruit
-                    pt("fruit");
-                    switch (f.getType()){ // draws the fruit based on the type
-                        case "Apple" -> {
-                            pt("apple");
-                            APPLE.paintIcon(this, g,fruitX(),fruitY());
-                        }
-                        case "Orange" -> {
-                            pt("orange");
-                            ORANGE.paintIcon(this, g,fruitX(),fruitY());
-                        }
+                if (BOARD[i][j].getRedraw()){ // if the box does need to be redrawn
+                    pt("redraw: "+i+" "+j);
+                    BOARD[i][j].setRedraw(false); // sets the box to not be redrawn
+                    g.setColor(DOT_COLOR); // sets the colour to dark green
+                    g.fillRect(i*PIXELS_PER_BOX+xOffset+3, j*PIXELS_PER_BOX+yOffset+3, 4, 4); // draws a dot
+                    if (BOARD[i][j].isWall()){ // if the box is a wall
+                        g.setColor(WALL_COLOR); // sets the colour to brown
+                        g.fillRect(i*PIXELS_PER_BOX+xOffset, j*PIXELS_PER_BOX+yOffset, PIXELS_PER_BOX, PIXELS_PER_BOX); // draws the box
+                    }
+                    else if (BOARD[i][j].isFruit()){ // if the box is the fruit
+                        pt("fruit");
+                        switch (f.getType()){ // draws the fruit based on the type
+                            case "Apple" -> {
+                                pt("apple");
+                                APPLE.paintIcon(this, g,fruitX(),fruitY());
+                            }
+                            case "Orange" -> {
+                                pt("orange");
+                                ORANGE.paintIcon(this, g,fruitX(),fruitY());
+                            }
 //                        case "Kiwifruit" -> {
 //                            pt("kiwifruit");
 //                            KIWIFRUIT.paintIcon(this, g,fruitX(),fruitY());
 //                        }
-                        case "Plum" -> {
-                            pt("plum");
-                            PLUM.paintIcon(this, g,fruitX(),fruitY());
+                            case "Plum" -> {
+                                pt("plum");
+                                PLUM.paintIcon(this, g,fruitX(),fruitY());
+                            }
+                            default -> pt("Something went wrong");
                         }
-                        default -> pt("Something went wrong");
+                    } else if (BOARD[i][j].isSnake()){ // if the box is a snake
+                        //pt("snake: "+i+" "+j);
                     }
-                } else if (BOARD[i][j].isSnake()){ // if the box is a snake
-                    //pt("snake: "+i+" "+j);
-                }
+                } //if (redraw) {
             }
         }
         //draw Snake
