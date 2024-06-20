@@ -52,10 +52,13 @@ public class Snake {
 //        return s; // this shouldn't happen
 //    }
     public void addToSnake(int x, int y, boolean tail, int d){ // adds a SnakePart to the snake
+        System.out.println("Adding to snake");
+        System.out.println(this.getHead());
         SnakePart s = new SnakePart(x,y,tail,d); // create a new SnakePart
         this.getHead().setFollower(s); // set the new SnakePart as the follower of the current head
         this.getHead().isHead(false); // set the current head to not be the head
         this.setHead(s); // set the new SnakePart as the head
+        System.out.println(this.getHead());
         this.length++; // increase the length of the snake
     }
 }

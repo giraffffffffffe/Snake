@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="tried to change redraw method to remove flickering. Didn't work">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2024,_16_12_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_06_2024__16_12__Changes_.xml" beforeDir="false" />
+    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="removed redaw method as it wasn't going to work.&#10;implemented buffered image. It only flickers some of the time now">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Box.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Box.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Snake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Snake.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +91,9 @@
       <workItem from="1716155111498" duration="2897000" />
       <workItem from="1718238409357" duration="5092000" />
       <workItem from="1718245282514" duration="2542000" />
-      <workItem from="1718315486149" duration="2568000" />
+      <workItem from="1718315486149" duration="2939000" />
+      <workItem from="1718853540487" duration="79000" />
+      <workItem from="1718920232644" duration="1968000" />
     </task>
     <task id="LOCAL-00001" summary="Started working on GUI and make a Snake class">
       <option name="closed" value="true" />
@@ -191,7 +191,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718248686339</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="removed redaw method as it wasn't going to work.&#10;implemented buffered image. It only flickers some of the time now">
+      <option name="closed" value="true" />
+      <created>1718318269915</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1718318269915</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,6 +229,7 @@
     <MESSAGE value="added rotated images for the snake.&#10;added print method&#10;added turn method" />
     <MESSAGE value="worked on turn method" />
     <MESSAGE value="tried to change redraw method to remove flickering. Didn't work" />
-    <option name="LAST_COMMIT_MESSAGE" value="tried to change redraw method to remove flickering. Didn't work" />
+    <MESSAGE value="removed redaw method as it wasn't going to work.&#10;implemented buffered image. It only flickers some of the time now" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed redaw method as it wasn't going to work.&#10;implemented buffered image. It only flickers some of the time now" />
   </component>
 </project>
