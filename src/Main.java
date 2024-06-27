@@ -151,6 +151,7 @@ public class Main extends JFrame implements ActionListener{
 
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
+                pt("key key key key key ");
                 key(e);
             }
         });
@@ -160,10 +161,10 @@ public class Main extends JFrame implements ActionListener{
         System.out.println(s);
     }
     public void key(KeyEvent e){
-        if(firstKeyPressed == true){
-            firstKeyPressed = false;
-            turn();
-        }
+        //if(firstKeyPressed){
+        //    firstKeyPressed = false;
+        //    turn();
+        //}
         if (e.getKeyCode() == 38){ // key was 'up arrow' key
             s.setCurrentDirection(UP);
         }
