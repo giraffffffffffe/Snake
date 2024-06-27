@@ -166,16 +166,16 @@ public class Main extends JFrame implements ActionListener{
         //    turn();
         //}
         if (e.getKeyCode() == 38){ // key was 'up arrow' key
-            s.setCurrentDirection(UP);
+            s.setNextDirection(UP);
         }
         if (e.getKeyCode() == 40){ // key was 'down arrow' key
-            s.setCurrentDirection(DOWN);
+            s.setNextDirection(DOWN);
         }
         if (e.getKeyCode() == 39){ // key was 'right arrow' key
-            s.setCurrentDirection(RIGHT);
+            s.setNextDirection(RIGHT);
         }
         if (e.getKeyCode() == 37){ // key was 'left arrow' key
-            s.setCurrentDirection(LEFT);
+            s.setNextDirection(LEFT);
         }
     }
     private void createMenu(String[] menuOptions, int numMenus) { // creates menus in window
@@ -223,7 +223,7 @@ public class Main extends JFrame implements ActionListener{
         turnNumber ++;
         int nextX  = s.getHead().getBoardX(); // gets the x coordinate of the head
         int nextY = s.getHead().getBoardY(); // gets the y coordinate of the head
-        int headD = s.getCurrentDirection(); // gets the direction of the head
+        int headD = s.getNextDirection(); // gets the direction of the head
         pt("head direction: "+headD+"; current x: "+nextX+"; current y: "+nextY);
         switch (headD) { // sets next y and next x based on the direction of the head
             case UP -> nextY--; // up
@@ -238,13 +238,15 @@ public class Main extends JFrame implements ActionListener{
             justAte = true;
             fruitEaten(s); // eats the fruit
         } else if (BOARD[nextX][nextY].isWall()){ // if the Snake head is on a wall
+            pt("wall");
             lost(); // ends the game
-        } else if (BOARD[nextX][nextY].isSnake()){ // if the Snake head will be on another SnakePart
-            if (s.getTail().getBoardX() == nextX && s.getTail().getBoardY() == nextY){
-            } else {
-                lost(); // ends the game
-            }
-        }
+        }// else if (BOARD[nextX][nextY].isSnake()){ // if the Snake head will be on another SnakePart
+            //if (s.getTail().getBoardX() == nextX && s.getTail().getBoardY() == nextY){
+            //} else {
+           //     pt("snake");
+           //     lost(); // ends the game
+            //}
+        //}
         if (s.getAlive()) { // if the snake is alive
             SnakePart sp = s.getTail(); // gets the tail of the snake
             int x;
@@ -274,6 +276,7 @@ public class Main extends JFrame implements ActionListener{
             }
             pt("moved");
             justAte = false;
+
         }
         repaint();
         try {

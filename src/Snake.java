@@ -3,7 +3,9 @@ public class Snake {
     private SnakePart tail;
     private boolean alive = true; // if the snake is alive
     private int currentDirection; // -1 = Left; -2 = Down; 1 = Right; 2 = Up
+    private int nextDirection; // -1 = Left; -2 = Down; 1 = Right; 2 = Up
     private int length = 0; // starting length of the snake
+    private boolean justChanged = false; // if the snake just changed direction
     public Snake(SnakePart s){
         this.tail = s; // set the tail of the snake
         this.head = s; // set the head of the snake
@@ -25,6 +27,10 @@ public class Snake {
     public void setAlive(boolean a){
         this.alive = a;
     } // sets the snake to be alive or dead
+    public void setNextDirection(int d) { // sets the next direction of the snake
+        this.nextDirection = d;
+        justChanged = true;
+    }
     public boolean getAlive(){
         return this.alive;
     } // returns if the snake is alive
@@ -51,6 +57,10 @@ public class Snake {
 //        }
 //        return s; // this shouldn't happen
 //    }
+    public int getNextDirection() { // gets the next direction of the snake
+        justChanged = false;
+        return nextDirection;
+    }
     public void addToSnake(int x, int y, boolean tail, int d){ // adds a SnakePart to the snake
         System.out.println("Adding to snake");
         System.out.println(this.getHead());
