@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="snake can move. I need a new snake head turning piece">
+    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="I broke everything.&#10;(I tried to make the head nt change direction until it had turned but now you can't control it or eat the fruit. &#10;Also I had to comment out the lines about crashing into yourself because they were making you automatically lose)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dl.png" beforeDir="false" afterPath="$PROJECT_DIR$/dl.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dr.png" beforeDir="false" afterPath="$PROJECT_DIR$/dr.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Snake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Snake.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ul.png" beforeDir="false" afterPath="$PROJECT_DIR$/ul.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ur.png" beforeDir="false" afterPath="$PROJECT_DIR$/ur.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +98,8 @@
       <workItem from="1718315486149" duration="2939000" />
       <workItem from="1718853540487" duration="79000" />
       <workItem from="1718920232644" duration="3054000" />
-      <workItem from="1719447917569" duration="4533000" />
+      <workItem from="1719447917569" duration="4688000" />
+      <workItem from="1720052931218" duration="6037000" />
     </task>
     <task id="LOCAL-00001" summary="Started working on GUI and make a Snake class">
       <option name="closed" value="true" />
@@ -224,7 +229,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719448931033</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="I broke everything.&#10;(I tried to make the head nt change direction until it had turned but now you can't control it or eat the fruit. &#10;Also I had to comment out the lines about crashing into yourself because they were making you automatically lose)">
+      <option name="closed" value="true" />
+      <created>1719458306256</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1719458306256</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -258,6 +271,7 @@
     <MESSAGE value="It no longer crashes when the fruit is eaten. It doesn't make a new fruit though" />
     <MESSAGE value="started points" />
     <MESSAGE value="snake can move. I need a new snake head turning piece" />
-    <option name="LAST_COMMIT_MESSAGE" value="snake can move. I need a new snake head turning piece" />
+    <MESSAGE value="I broke everything.&#10;(I tried to make the head nt change direction until it had turned but now you can't control it or eat the fruit. &#10;Also I had to comment out the lines about crashing into yourself because they were making you automatically lose)" />
+    <option name="LAST_COMMIT_MESSAGE" value="I broke everything.&#10;(I tried to make the head nt change direction until it had turned but now you can't control it or eat the fruit. &#10;Also I had to comment out the lines about crashing into yourself because they were making you automatically lose)" />
   </component>
 </project>

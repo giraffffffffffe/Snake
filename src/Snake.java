@@ -2,8 +2,8 @@ public class Snake {
     private SnakePart head;
     private SnakePart tail;
     private boolean alive = true; // if the snake is alive
-    private int currentDirection; // -1 = Left; -2 = Down; 1 = Right; 2 = Up
-    private int nextDirection; // -1 = Left; -2 = Down; 1 = Right; 2 = Up
+    private int currentDirection = 1; // -1 = Left; -2 = Down; 1 = Right; 2 = Up
+    private int nextDirection = 1; // -1 = Left; -2 = Down; 1 = Right; 2 = Up
     private int length = 0; // starting length of the snake
     private boolean justChanged = false; // if the snake just changed direction
     public Snake(SnakePart s){

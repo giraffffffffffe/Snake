@@ -29,6 +29,7 @@ public class Main extends JFrame implements ActionListener{
     private boolean justAte = false;
     private int xOffset; // x offset of the board (for school, 8) (for home, 0)
     private int yOffset; // y offset of the board (for school, 54) (for home, 49)
+    private boolean justTurned = false;
     private final int INITIAL_SNAKE_LENGTH = 4;
     private final int INITIAL_SNAKE_X = boardWidth/2-5;
     private final int INITIAL_SNAKE_Y = boardHeight/2;
@@ -167,15 +168,19 @@ public class Main extends JFrame implements ActionListener{
         //}
         if (e.getKeyCode() == 38){ // key was 'up arrow' key
             s.setNextDirection(UP);
+            justTurned = true;
         }
         if (e.getKeyCode() == 40){ // key was 'down arrow' key
             s.setNextDirection(DOWN);
+            justTurned = true;
         }
         if (e.getKeyCode() == 39){ // key was 'right arrow' key
             s.setNextDirection(RIGHT);
+            justTurned = true;
         }
         if (e.getKeyCode() == 37){ // key was 'left arrow' key
             s.setNextDirection(LEFT);
+            justTurned = true;
         }
     }
     private void createMenu(String[] menuOptions, int numMenus) { // creates menus in window
@@ -219,49 +224,68 @@ public class Main extends JFrame implements ActionListener{
         return (int) (Math.random() * (max - min + 1) + min);
     }
     public void turn(){
+        pt(" ");
         pt("turn "+turnNumber);
         turnNumber ++;
-        int nextX  = s.getHead().getBoardX(); // gets the x coordinate of the head
-        int nextY = s.getHead().getBoardY(); // gets the y coordinate of the head
+        int nextHeadX  = s.getHead().getBoardX(); // gets the x coordinate of the head
+        int nextHeadY = s.getHead().getBoardY(); // gets the y coordinate of the head
         int headD = s.getNextDirection(); // gets the direction of the head
-        pt("head direction: "+headD+"; current x: "+nextX+"; current y: "+nextY);
+        pt("head direction: "+headD+"; current x: "+nextHeadX+"; current y: "+nextHeadY);
         switch (headD) { // sets next y and next x based on the direction of the head
-            case UP -> nextY--; // up
-            case DOWN -> nextY++; // down
-            case RIGHT -> nextX++; // right
-            case LEFT -> nextX--; // left
+            case UP -> nextHeadY--; // up
+            case DOWN -> nextHeadY++; // down
+            case RIGHT -> nextHeadX++; // right
+            case LEFT -> nextHeadX--; // left
         }
-        pt("next x: "+nextX+"; next y: "+nextY);
+        pt("head direction: "+headD+"; current x: "+nextHeadX+"; current y: "+nextHeadY);
 
-        if (BOARD[nextX][nextY].isFruit()) { // if the snake head will be on a fruit
+        pt("next x: "+nextHeadX+"; next y: "+nextHeadY);
+
+        if (BOARD[nextHeadX][nextHeadY].isFruit()) { // if the snake head will be on a fruit
             pt("fruitEaten(s)");
             justAte = true;
             fruitEaten(s); // eats the fruit
-        } else if (BOARD[nextX][nextY].isWall()){ // if the Snake head is on a wall
+        } else if (BOARD[nextHeadX][nextHeadY].isWall()){ // if the Snake head is on a wall
             pt("wall");
             lost(); // ends the game
-        }// else if (BOARD[nextX][nextY].isSnake()){ // if the Snake head will be on another SnakePart
-            //if (s.getTail().getBoardX() == nextX && s.getTail().getBoardY() == nextY){
-            //} else {
-           //     pt("snake");
-           //     lost(); // ends the game
-            //}
-        //}
+        }else if (BOARD[nextHeadX][nextHeadY].isSnake()){ // if the Snake head will be on another SnakePart
+            if (s.getTail().getBoardX() == nextHeadX && s.getTail().getBoardY() == nextHeadY){ // this is because when the tail moves it will no longer be in the way of the head
+            } else {
+
+                pt("snake hit snake, "+nextHeadX+" "+nextHeadY);
+                lost(); // ends the game
+            }
+        }
+
         if (s.getAlive()) { // if the snake is alive
             SnakePart sp = s.getTail(); // gets the tail of the snake
-            int x;
-            int y;
-            while (sp != null) { // while there are more SnakeParts
-                x = sp.getBoardX(); // gets the x coordinate of the SnakePart
-                y = sp.getBoardY(); // gets the y coordinate of the SnakePart
-                int currentD = sp.getDirection(); // gets the direction of the tail
 
-                switch (currentD) { // moves the SnakePart
-                    case UP -> y--; // up
-                    case DOWN -> y++; // down
-                    case RIGHT -> x++; // right
-                    case LEFT -> x--; // left
+            while (sp != null) { // while there are more SnakePart
+                int x=sp.getBoardX();
+                int y=sp.getBoardY();
+                if(sp.isTail()){
+                    BOARD[sp.getBoardX()][sp.getBoardY()].setSnake(false); // sets the box to not have a snake
                 }
+                int currentD = sp.getDirection(); // gets the direction of the tail
+                switch (currentD) { // moves the SnakePart
+                    case UP -> {
+                        y--;
+                        pt("up "+y);
+                    }
+                    case DOWN -> {
+                        y++;
+                        pt("down "+y);
+                    }
+                    case RIGHT -> {
+                        x++;
+                        pt("right "+x);
+                    }
+                    case LEFT -> {
+                        x--;
+                        pt("left "+x);
+                    }
+                }
+
                 if (!justAte) {
                     if (sp.getFollower() != null){
                         int nextD = sp.getFollower().getDirection(); // gets the direction of the SnakePart that follows
@@ -272,12 +296,14 @@ public class Main extends JFrame implements ActionListener{
                     sp.setBoardX(x); // sets the x coordinate of the SnakePart
                     sp.setBoardY(y); // sets the y coordinate of the SnakePart
                 }
+                BOARD[sp.getBoardX()][sp.getBoardY()].setSnake(true); // sets the box to have a snake
                 sp = sp.getFollower(); // moves to the next SnakePart
             }
-            pt("moved");
+            pt("moved head to x: "+s.getHead().getBoardX()+" y: "+s.getHead().getBoardY());
             justAte = false;
 
         }
+        pt("turn end");
         repaint();
         try {
             Thread.sleep((long) (frameRate));
