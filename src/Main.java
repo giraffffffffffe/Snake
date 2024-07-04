@@ -25,7 +25,7 @@ public class Main extends JFrame implements ActionListener{
     private int paneWidth = boardWidth*PIXELS_PER_BOX; // initial width of window
     private int paneHeight = boardWidth*PIXELS_PER_BOX; // initial height of window
     private final Box[][] BOARD = new Box[boardWidth][boardHeight]; // creates a 2D array of boxes
-    private int frameRate = 1000; // 1 frames per second
+    private int frameRate = 250; // speed of the game
     private boolean justAte = false;
     private int xOffset; // x offset of the board (for school, 8) (for home, 0)
     private int yOffset; // y offset of the board (for school, 54) (for home, 49)
@@ -167,20 +167,28 @@ public class Main extends JFrame implements ActionListener{
         //    turn();
         //}
         if (e.getKeyCode() == 38){ // key was 'up arrow' key
-            s.setNextDirection(UP);
-            justTurned = true;
+            if (s.getCurrentDirection() != DOWN) {
+                s.setNextDirection(UP);
+                justTurned = true;
+            }
         }
         if (e.getKeyCode() == 40){ // key was 'down arrow' key
-            s.setNextDirection(DOWN);
-            justTurned = true;
+            if(s.getCurrentDirection() != UP) {
+                s.setNextDirection(DOWN);
+                justTurned = true;
+            }
         }
         if (e.getKeyCode() == 39){ // key was 'right arrow' key
-            s.setNextDirection(RIGHT);
-            justTurned = true;
+            if(s.getCurrentDirection()!=LEFT) {
+                s.setNextDirection(RIGHT);
+                justTurned = true;
+            }
         }
         if (e.getKeyCode() == 37){ // key was 'left arrow' key
-            s.setNextDirection(LEFT);
-            justTurned = true;
+            if(s.getCurrentDirection()!=RIGHT) {
+                s.setNextDirection(LEFT);
+                justTurned = true;
+            }
         }
     }
     private void createMenu(String[] menuOptions, int numMenus) { // creates menus in window
@@ -251,7 +259,6 @@ public class Main extends JFrame implements ActionListener{
         }else if (BOARD[nextHeadX][nextHeadY].isSnake()){ // if the Snake head will be on another SnakePart
             if (s.getTail().getBoardX() == nextHeadX && s.getTail().getBoardY() == nextHeadY){ // this is because when the tail moves it will no longer be in the way of the head
             } else {
-
                 pt("snake hit snake, "+nextHeadX+" "+nextHeadY);
                 lost(); // ends the game
             }
@@ -321,7 +328,9 @@ public class Main extends JFrame implements ActionListener{
     private BufferedImage offScreenImage;
     public void paint(Graphics g) { //paints the window
         pt("paint");
-        super.paint(g);
+        if(turnNumber == 1){
+            super.paint(g);
+        }
 
         if (offScreenImage == null) {
             offScreenImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -391,6 +400,11 @@ public class Main extends JFrame implements ActionListener{
                     case RIGHT -> R_SNAKE_HEAD.paintIcon(this, g2, x, y); // R
                     case LEFT -> L_SNAKE_HEAD.paintIcon(this, g2, x, y); // L
                     default -> pt("head direction error. Head direction: " + sp.getDirection());
+                }
+                if(justTurned){
+                    sp.setDirection(s.getNextDirection());
+                    s.setCurrentDirection(s.getNextDirection());
+                    justTurned = false;
                 }
             } else {
                 //pt("body");
