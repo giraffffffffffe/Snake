@@ -25,7 +25,7 @@ public class Main extends JFrame implements ActionListener{
     private int paneWidth = boardWidth*PIXELS_PER_BOX; // initial width of window
     private int paneHeight = boardWidth*PIXELS_PER_BOX; // initial height of window
     private final Box[][] BOARD = new Box[boardWidth][boardHeight]; // creates a 2D array of boxes
-    private int frameRate = 1000; // 1 frames per second
+    private int frameRate = 250; // 1 frames per second
     private boolean justAte = false;
     private int xOffset; // x offset of the board (for school, 8) (for home, 0)
     private int yOffset; // y offset of the board (for school, 54) (for home, 49)
@@ -167,15 +167,19 @@ public class Main extends JFrame implements ActionListener{
         //}
         if (e.getKeyCode() == 38){ // key was 'up arrow' key
             s.setCurrentDirection(UP);
+            s.justTurned(true);
         }
         if (e.getKeyCode() == 40){ // key was 'down arrow' key
             s.setCurrentDirection(DOWN);
+            s.justTurned(true);
         }
         if (e.getKeyCode() == 39){ // key was 'right arrow' key
             s.setCurrentDirection(RIGHT);
+            s.justTurned(true);
         }
         if (e.getKeyCode() == 37){ // key was 'left arrow' key
             s.setCurrentDirection(LEFT);
+            s.justTurned(true);
         }
     }
     private void createMenu(String[] menuOptions, int numMenus) { // creates menus in window
@@ -210,15 +214,32 @@ public class Main extends JFrame implements ActionListener{
         }
     }
     private void fruitEaten(Snake s) { // when the snake eats a fruit
+        //s.addToSnake(-1, -1, false, s.getCurrentDirection()); // adds a SnakePart to the snake outside the game board
+        //BOARD[s.getHead().getBoardX()][s.getHead().getBoardY()].setSnake(true); // sets the box to have a snake
         s.addToSnake(f.getX(),f.getY(), false, s.getCurrentDirection());
         f.eaten(); // sets the fruit to 'eaten';
-        f = new Fruit(randomNumber(0, 2), randomNumber(0, paneWidth), randomNumber(0, paneHeight)); // makes a new fruit
+        s.justAte(true); // sets the snake to have just eaten
+        int x=randomNumber(0, boardWidth);
+        int y=randomNumber(0, boardHeight);
+        boolean good  = false;
+        while (!good){
+            if (BOARD[x][y].isSnake() || BOARD[x][y].isWall()){
+                x=randomNumber(0, boardWidth);
+                y=randomNumber(0, boardHeight);
+            } else {
+                good = true;
+            }
+        }
+        f = new Fruit(randomNumber(0, 2), x, y); // makes a new fruit
+        BOARD[x][y].setFruit(true); // sets the box to have a fruit
+        pt("new fruit x: "+f.getX()+"; y: "+f.getY()); // makes a new fruit
         points = points+10;
     }
     public int randomNumber(int min, int max) { // generates a random number between min and max
         return (int) (Math.random() * (max - min + 1) + min);
     }
     public void turn(){
+        pt("");
         pt("turn "+turnNumber);
         turnNumber ++;
         int nextX  = s.getHead().getBoardX(); // gets the x coordinate of the head
@@ -235,15 +256,11 @@ public class Main extends JFrame implements ActionListener{
 
         if (BOARD[nextX][nextY].isFruit()) { // if the snake head will be on a fruit
             pt("fruitEaten(s)");
-            justAte = true;
             fruitEaten(s); // eats the fruit
         } else if (BOARD[nextX][nextY].isWall()){ // if the Snake head is on a wall
             lost(); // ends the game
-        } else if (BOARD[nextX][nextY].isSnake()){ // if the Snake head will be on another SnakePart
-            if (s.getTail().getBoardX() == nextX && s.getTail().getBoardY() == nextY){
-            } else {
-                lost(); // ends the game
-            }
+        } else if ((BOARD[nextX][nextY].isSnake() && !s.justAte()) && (s.getTail().getBoardX() == nextX && s.getTail().getBoardY() == nextY)){ // if the Snake head will be on another SnakePar
+            lost(); // ends the game
         }
         if (s.getAlive()) { // if the snake is alive
             SnakePart sp = s.getTail(); // gets the tail of the snake
@@ -252,15 +269,16 @@ public class Main extends JFrame implements ActionListener{
             while (sp != null) { // while there are more SnakeParts
                 x = sp.getBoardX(); // gets the x coordinate of the SnakePart
                 y = sp.getBoardY(); // gets the y coordinate of the SnakePart
-                int currentD = sp.getDirection(); // gets the direction of the tail
+                BOARD[x][y].setSnake(false); // sets the box to not have a snake
 
-                switch (currentD) { // moves the SnakePart
+                switch (sp.getDirection()) { // moves the SnakePart
                     case UP -> y--; // up
                     case DOWN -> y++; // down
                     case RIGHT -> x++; // right
                     case LEFT -> x--; // left
                 }
-                if (!justAte) {
+                BOARD[x][y].setSnake(true); // sets the box to have a snake
+                if (!s.justAte()) {
                     if (sp.getFollower() != null){
                         int nextD = sp.getFollower().getDirection(); // gets the direction of the SnakePart that follows
                         sp.setDirection(nextD); // sets the direction of the SnakePart
@@ -273,7 +291,7 @@ public class Main extends JFrame implements ActionListener{
                 sp = sp.getFollower(); // moves to the next SnakePart
             }
             pt("moved");
-            justAte = false;
+            s.justAte(false);
         }
         repaint();
         try {
@@ -292,7 +310,9 @@ public class Main extends JFrame implements ActionListener{
     private BufferedImage offScreenImage;
     public void paint(Graphics g) { //paints the window
         pt("paint");
-        super.paint(g);
+        if(turnNumber == 1) {
+            super.paint(g);
+        }
 
         if (offScreenImage == null) {
             offScreenImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);

@@ -2,8 +2,8 @@ import java.awt.*;
 
 public class Fruit {
     public String[] fruits = {"Apple", "Orange", "Plum",}; // possible types of fruit
-    private int x; // x coordinate of the fruit
-    private int y; // y coordinate of the fruit
+    private int x; // x coordinate of the fruit on the board
+    private int y; // y coordinate of the fruit on the board
     private String fruitType; // type of fruit
     private boolean eaten = false; // if the fruit has been eaten
     public Fruit(int n, int fx, int fy){ // constructor

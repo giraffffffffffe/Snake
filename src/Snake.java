@@ -1,9 +1,11 @@
 public class Snake {
     private SnakePart head;
     private SnakePart tail;
+    private boolean justAte = false; // if the snake has just eaten
     private boolean alive = true; // if the snake is alive
     private int currentDirection; // -1 = Left; -2 = Down; 1 = Right; 2 = Up
     private int length = 0; // starting length of the snake
+    private boolean justTurned = false; // if the snake has just turned
     public Snake(SnakePart s){
         this.tail = s; // set the tail of the snake
         this.head = s; // set the head of the snake
@@ -25,6 +27,18 @@ public class Snake {
     public void setAlive(boolean a){
         this.alive = a;
     } // sets the snake to be alive or dead
+    public void justTurned(boolean j){
+        this.justTurned = j;
+    } // sets if the snake has just turned
+    public void justAte(boolean j){
+        this.justAte = j;
+    } // sets if the snake has just eaten
+    public boolean justAte(){
+        return(this.justAte);
+    } // sets if the snake has just eaten
+    public boolean justTurned(){
+        return(this.justTurned);
+    } // sets if the snake has just turned
     public boolean getAlive(){
         return this.alive;
     } // returns if the snake is alive
