@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="started points">
+    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="Snake can be controlled. fixed flickering, menus are now broken">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Fruit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Fruit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
@@ -96,7 +96,9 @@
       <workItem from="1718315486149" duration="2939000" />
       <workItem from="1718853540487" duration="79000" />
       <workItem from="1718920232644" duration="3054000" />
-      <workItem from="1719447917569" duration="675000" />
+      <workItem from="1719447917569" duration="4688000" />
+      <workItem from="1720052931218" duration="6237000" />
+      <workItem from="1720129587368" duration="2323000" />
     </task>
     <task id="LOCAL-00001" summary="Started working on GUI and make a Snake class">
       <option name="closed" value="true" />
@@ -218,7 +220,39 @@
       <option name="project" value="LOCAL" />
       <updated>1718923260507</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="snake can move. I need a new snake head turning piece">
+      <option name="closed" value="true" />
+      <created>1719448931033</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1719448931033</updated>
+    </task>
+    <task id="LOCAL-00017" summary="I broke everything.&#10;(I tried to make the head nt change direction until it had turned but now you can't control it or eat the fruit. &#10;Also I had to comment out the lines about crashing into yourself because they were making you automatically lose)">
+      <option name="closed" value="true" />
+      <created>1719458306256</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1719458306256</updated>
+    </task>
+    <task id="LOCAL-00018" summary="worked on turn method. Snake can move and eat 1 fruit. cannot be controlled">
+      <option name="closed" value="true" />
+      <created>1720063291602</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1720063291602</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Snake can be controlled. fixed flickering, menus are now broken">
+      <option name="closed" value="true" />
+      <created>1720130475590</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1720130475590</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -251,6 +285,10 @@
     <MESSAGE value="removed redaw method as it wasn't going to work.&#10;implemented buffered image. It only flickers some of the time now" />
     <MESSAGE value="It no longer crashes when the fruit is eaten. It doesn't make a new fruit though" />
     <MESSAGE value="started points" />
-    <option name="LAST_COMMIT_MESSAGE" value="started points" />
+    <MESSAGE value="snake can move. I need a new snake head turning piece" />
+    <MESSAGE value="I broke everything.&#10;(I tried to make the head nt change direction until it had turned but now you can't control it or eat the fruit. &#10;Also I had to comment out the lines about crashing into yourself because they were making you automatically lose)" />
+    <MESSAGE value="worked on turn method. Snake can move and eat 1 fruit. cannot be controlled" />
+    <MESSAGE value="Snake can be controlled. fixed flickering, menus are now broken" />
+    <option name="LAST_COMMIT_MESSAGE" value="Snake can be controlled. fixed flickering, menus are now broken" />
   </component>
 </project>
