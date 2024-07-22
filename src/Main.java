@@ -136,8 +136,10 @@ public class Main extends JFrame implements ActionListener{
 
         int xNum = this.getWidth()-paneWidth;
         int yNum = this.getHeight()-paneHeight;
-        this.xOffset = xNum-8;
-        this.yOffset = yNum-8;
+        this.xOffset = 0;
+        this.yOffset = 49;
+        //this.xOffset = xNum-8;
+        //this.yOffset = yNum-8;
         this.panel.repaint();
 
         /* debug for offset*/
@@ -166,20 +168,28 @@ public class Main extends JFrame implements ActionListener{
         //    turn();
         //}
         if (e.getKeyCode() == 38){ // key was 'up arrow' key
-            s.setCurrentDirection(UP);
-            s.justTurned(true);
+            if (s.getCurrentDirection() != DOWN){
+                s.setCurrentDirection(UP);
+                s.justTurned(true);
+            }
         }
         if (e.getKeyCode() == 40){ // key was 'down arrow' key
-            s.setCurrentDirection(DOWN);
-            s.justTurned(true);
+            if (s.getCurrentDirection() != UP) {
+                s.setCurrentDirection(DOWN);
+                s.justTurned(true);
+            }
         }
         if (e.getKeyCode() == 39){ // key was 'right arrow' key
-            s.setCurrentDirection(RIGHT);
-            s.justTurned(true);
+            if (s.getCurrentDirection() != LEFT) {
+                s.setCurrentDirection(RIGHT);
+                s.justTurned(true);
+            }
         }
         if (e.getKeyCode() == 37){ // key was 'left arrow' key
-            s.setCurrentDirection(LEFT);
-            s.justTurned(true);
+            if(s.getCurrentDirection() != RIGHT) {
+                s.setCurrentDirection(LEFT);
+                s.justTurned(true);
+            }
         }
     }
     private void createMenu(String[] menuOptions, int numMenus) { // creates menus in window
