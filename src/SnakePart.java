@@ -5,12 +5,15 @@ class SnakePart {
     private boolean head = true; // if the SnakePart is the head
     private boolean tail = false; // if the SnakePart is the tail
     private int direction; // -1 = Left; -2 = Down; 1 = Right; 2 = Up
-    private SnakePart follower = null; // the SnakePart that follows this one
-    public SnakePart(int x, int y, boolean tail, int d){ // constructor
-        System.out.println("new SnakePart");
+    private SnakePart leader = null; // head is null
+    private SnakePart follower = null; // tail is null
+    private  int lifeSpan;
+    public SnakePart(int x, int y, boolean tail, boolean head, int d){ // constructor
+        System.out.println("new SnakePart " + this);
         this.boardX = x;
         this.boardY = y;
         this.tail = tail;
+        this.head = head;
         this.direction = d;
     }
     public boolean isHead(){ // returns if the SnakePart is the head
@@ -18,6 +21,9 @@ class SnakePart {
     }
     public boolean isTail(){ // returns if the SnakePart is the tail
         return tail;
+    }
+    public void decrementLifeSpan(){
+        this.lifeSpan--;
     }
     public int getDirection(){ // returns the direction of the SnakePart
         return direction;
@@ -30,6 +36,18 @@ class SnakePart {
     }
     public SnakePart getFollower(){ // returns the SnakePart that follows this one
         return follower;
+    }
+    public int getLifeSpan(){
+        return lifeSpan;
+    }
+    public SnakePart getLeader(){
+        return leader;
+    }
+    public void setLeader(SnakePart l){
+        this.leader = l;
+    }
+    public void setLifeSpan(int l){
+        this.lifeSpan = l;
     }
     public void isHead(boolean head) { // sets the SnakePart to be the head
         this.head = head;

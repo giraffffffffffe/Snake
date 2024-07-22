@@ -6,20 +6,15 @@ public class Snake {
     private int currentDirection; // -1 = Left; -2 = Down; 1 = Right; 2 = Up
     private int length = 0; // starting length of the snake
     private boolean justTurned = false; // if the snake has just turned
-    public Snake(SnakePart s){
-        this.tail = s; // set the tail of the snake
-        this.head = s; // set the head of the snake
-        length++; // increase the length of the snake
-        s.isHead(true); // set the SnakePart to be the head
-        s.isTail(true); // set the SnakePart to be the tail
+    public Snake(){
         System.out.println("Snake created!");
     }
     public void setCurrentDirection(int d) { // sets the length of the snake
         this.currentDirection = d;
     }
-    public void setHead(SnakePart s){ // sets the head of the snake
-        s.isHead(true);
-        this.head = s;
+    public void setHead(SnakePart sp){ // sets the head of the snake
+        sp.isHead(true);
+        this.head = sp;
     }
     public void setTail(SnakePart t){
         this.tail = t;
@@ -27,6 +22,9 @@ public class Snake {
     public void setAlive(boolean a){
         this.alive = a;
     } // sets the snake to be alive or dead
+    public void decrementLength(){
+        this.length--;
+    }
     public void justTurned(boolean j){
         this.justTurned = j;
     } // sets if the snake has just turned
@@ -65,14 +63,23 @@ public class Snake {
 //        }
 //        return s; // this shouldn't happen
 //    }
-    public void addToSnake(int x, int y, boolean tail, int d){ // adds a SnakePart to the snake
-        System.out.println("Adding to snake");
-        System.out.println(this.getHead());
-        SnakePart s = new SnakePart(x,y,tail,d); // create a new SnakePart
-        this.getHead().setFollower(s); // set the new SnakePart as the follower of the current head
-        this.getHead().isHead(false); // set the current head to not be the head
-        this.setHead(s); // set the new SnakePart as the head
-        System.out.println(this.getHead());
-        this.length++; // increase the length of the snake
+    // public void addToSnake(int x, int y, boolean tail, boolean head, int d){ // adds a SnakePart to the snake
+    //    System.out.println("Adding to snake");
+    //    System.out.println(this.getHead());
+    //    SnakePart s = new SnakePart(x,y,tail,d); // create a new SnakePart
+    //    this.getHead().setFollower(s); // set the new SnakePart as the follower of the current head
+    //    this.getHead().isHead(false); // set the current head to not be the head
+    //    this.setHead(s); // set the new SnakePart as the head
+    //    System.out.println(this.getHead());
+    //    this.length++; // increase the length of the snake
+    // }
+    public void addToSnake(SnakePart sp){
+        if (sp.isHead()){
+            this.setHead(sp);
+        }
+        if(sp.isTail()){
+            this.setTail(sp);
+        }
+        this.length++;
     }
 }
