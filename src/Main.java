@@ -323,34 +323,6 @@ public class Main extends JFrame implements ActionListener{
                 }
                 sp = sp.getFollower();
             }
-
-            //sp = s.getTail(); // gets the tail of the snake
-            //int x;
-            //int y;
-            /*while (sp != null) { // while there are more SnakeParts
-                x = sp.getBoardX(); // gets the x coordinate of the SnakePart
-                y = sp.getBoardY(); // gets the y coordinate of the SnakePart
-                BOARD[x][y].setSnake(false); // sets the box to not have a snake
-
-                switch (sp.getDirection()) { // moves the SnakePart
-                    case UP -> y--; // up
-                    case DOWN -> y++; // down
-                    case RIGHT -> x++; // right
-                    case LEFT -> x--; // left
-                }
-                BOARD[x][y].setSnake(true); // sets the box to have a snake
-                if (!s.justAte()) {
-                    if (sp.getFollower() != null){
-                        int nextD = sp.getFollower().getDirection(); // gets the direction of the SnakePart that follows
-                        sp.setDirection(nextD); // sets the direction of the SnakePart
-                    }else if (sp.isHead()){
-                        sp.setDirection(s.getCurrentDirection());
-                    }
-                    sp.setBoardX(x); // sets the x coordinate of the SnakePart
-                    sp.setBoardY(y); // sets the y coordinate of the SnakePart
-                }
-                sp = sp.getFollower(); // moves to the next SnakePart
-            }*/
             pt("moved");
             s.justAte(false);
         }
@@ -428,7 +400,7 @@ public class Main extends JFrame implements ActionListener{
             // figures out which icon to use based on the direction of the SnakePart
             if (sp.isTail()) {
                 //pt("tail");
-                switch (sp.getDirection()) {
+                switch (sp.getLeader().getDirection()) {
                     case UP -> U_SNAKE_TAIL.paintIcon(this, g2, x, y); // U
                     case DOWN -> D_SNAKE_TAIL.paintIcon(this, g2, x, y); // D
                     case RIGHT -> R_SNAKE_TAIL.paintIcon(this, g2, x, y); // R
