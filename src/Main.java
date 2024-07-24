@@ -25,11 +25,11 @@ public class Main extends JFrame implements ActionListener{
     private int paneWidth = boardWidth*PIXELS_PER_BOX; // initial width of window
     private int paneHeight = boardWidth*PIXELS_PER_BOX; // initial height of window
     private final Box[][] BOARD = new Box[boardWidth][boardHeight]; // creates a 2D array of boxes
-    private int frameRate = 250; // 1 frames per second
+    private int frameRate = 1000; // 1 frames per second
     private boolean justAte = false;
     private int xOffset; // x offset of the board (for school, 8) (for home, 0)
     private int yOffset; // y offset of the board (for school, 54) (for home, 49)
-    private final int INITIAL_SNAKE_LENGTH = 4;
+    private final int INITIAL_SNAKE_LENGTH = 10;
     private final int INITIAL_HEAD_X = boardWidth/2-5;
     private final int INITIAL_HEAD_Y = boardHeight/2;
     private boolean firstKeyPressed = true;
@@ -92,13 +92,11 @@ public class Main extends JFrame implements ActionListener{
                 }
             }
         }
-
-        // SnakePart snakeStart = new SnakePart(INITIAL_SNAKE_X-INITIAL_SNAKE_LENGTH,INITIAL_SNAKE_Y,true, RIGHT); // creates a new SnakePart
-        // BOARD[INITIAL_SNAKE_X][INITIAL_SNAKE_Y].setSnake(true); // sets the box to have a snake
         s = new Snake(); // creates a new Snake
         s.setCurrentDirection(RIGHT);
+        s.setNextDirection(RIGHT);
+
         SnakePart leader = null;
-        SnakePart follower = null;
         for(int i = 0; i <= INITIAL_SNAKE_LENGTH; i++) {
             boolean t = false;
             boolean h = false;
@@ -108,6 +106,7 @@ public class Main extends JFrame implements ActionListener{
                 h = true;
             }
             SnakePart sp = new SnakePart(INITIAL_HEAD_X-i, INITIAL_HEAD_Y, t, h, RIGHT);
+            BOARD[INITIAL_HEAD_X-i][INITIAL_HEAD_Y].setSnake(true); // sets the box to have a snake
             s.addToSnake(sp);
             sp.setLifeSpan(INITIAL_SNAKE_LENGTH-i+1);
             pt(""+sp.getLifeSpan());
@@ -119,16 +118,6 @@ public class Main extends JFrame implements ActionListener{
             }
             leader = sp;
         }
-        //int x = INITIAL_SNAKE_X-INITIAL_SNAKE_LENGTH+1; // x coordinate of the next SnakePart
-        //for (int i = 0; i<INITIAL_SNAKE_LENGTH; i++){ // for each SnakePart in the snake
-        //    s.addToSnake(x, INITIAL_SNAKE_Y, false, RIGHT); // adds a SnakePart to the snake
-        //    BOARD[x][INITIAL_SNAKE_Y].setSnake(true); // sets the box to have a snake
-        //    x++;
-        //}
-        //SnakePart sp = s.getTail(); // gets the tail of the snake
-        //while (sp != null){ // while there are more SnakeParts
-        //    sp = sp.getFollower(); // move to the next SnakePart
-        //}
         this.setContentPane(panel); // sets the content pane to the panel
         this.setTitle("Snake!"); // sets title of Window to "Snake!"
         //this.setPreferredSize(new Dimension(paneWidth,paneHeight)); //24+8 = 32, 8+8=16
@@ -189,28 +178,16 @@ public class Main extends JFrame implements ActionListener{
         //    turn();
         //}
         if (e.getKeyCode() == 38){ // key was 'up arrow' key
-            if (s.getCurrentDirection() != DOWN){
-                s.setCurrentDirection(UP);
-                s.justTurned(true);
-            }
+            s.setNextDirection(UP);
         }
         if (e.getKeyCode() == 40){ // key was 'down arrow' key
-            if (s.getCurrentDirection() != UP) {
-                s.setCurrentDirection(DOWN);
-                s.justTurned(true);
-            }
+            s.setNextDirection(DOWN);
         }
         if (e.getKeyCode() == 39){ // key was 'right arrow' key
-            if (s.getCurrentDirection() != LEFT) {
-                s.setCurrentDirection(RIGHT);
-                s.justTurned(true);
-            }
+            s.setNextDirection(RIGHT);
         }
         if (e.getKeyCode() == 37){ // key was 'left arrow' key
-            if(s.getCurrentDirection() != RIGHT) {
-                s.setCurrentDirection(LEFT);
-                s.justTurned(true);
-            }
+            s.setNextDirection(LEFT);
         }
     }
     private void createMenu(String[] menuOptions, int numMenus) { // creates menus in window
@@ -245,17 +222,13 @@ public class Main extends JFrame implements ActionListener{
         }
     }
     private void fruitEaten(Snake s) { // when the snake eats a fruit
-        //s.addToSnake(-1, -1, false, s.getCurrentDirection()); // adds a SnakePart to the snake outside the game board
-        //BOARD[s.getHead().getBoardX()][s.getHead().getBoardY()].setSnake(true); // sets the box to have a snake
-        SnakePart sp = new SnakePart(f.getX(),f.getY(), false, true, s.getCurrentDirection());
-        s.addToSnake(sp);
-        f.eaten(); // sets the fruit to 'eaten';
-        s.justAte(true); // sets the snake to have just eaten
+        f.setEaten(); // sets the fruit to 'eaten';
+        s.setJustAte(true); // sets the snake to have just eaten
         int x=randomNumber(0, boardWidth);
         int y=randomNumber(0, boardHeight);
         boolean good  = false;
         while (!good){
-            if (BOARD[x][y].isSnake() || BOARD[x][y].isWall()){
+            if (BOARD[x][y].getSnake() || BOARD[x][y].getWall()){
                 x=randomNumber(0, boardWidth);
                 y=randomNumber(0, boardHeight);
             } else {
@@ -276,6 +249,11 @@ public class Main extends JFrame implements ActionListener{
         turnNumber ++;
         int nextX  = s.getHead().getBoardX(); // gets the x coordinate of the head
         int nextY = s.getHead().getBoardY(); // gets the y coordinate of the head
+
+        if(s.getNextDirection() != s.getHead().getDirection()){
+            s.setCurrentDirection(s.getNextDirection());
+        }
+
         int headD = s.getCurrentDirection(); // gets the direction of the head
         pt("head direction: "+headD+"; current x: "+nextX+"; current y: "+nextY);
         switch (headD) { // sets next y and next x based on the direction of the head
@@ -286,18 +264,20 @@ public class Main extends JFrame implements ActionListener{
         }
         pt("next x: "+nextX+"; next y: "+nextY);
 
-        if (BOARD[nextX][nextY].isFruit()) { // if the snake head will be on a fruit
+        if (BOARD[nextX][nextY].getFruit()) { // if the snake head will be on a fruit
             pt("fruitEaten(s)");
             fruitEaten(s); // eats the fruit
-        } else if (BOARD[nextX][nextY].isWall()){ // if the Snake head is on a wall
+        } else if (BOARD[nextX][nextY].getWall()){ // if the Snake head is on a wall
             lost(); // ends the game
-        } else if ((BOARD[nextX][nextY].isSnake() && !s.justAte()) && (s.getTail().getBoardX() == nextX && s.getTail().getBoardY() == nextY)){ // if the Snake head will be on another SnakePar
+        } else if ((BOARD[nextX][nextY].getSnake() && !s.getJustAte()) && (s.getTail().getBoardX() == nextX && s.getTail().getBoardY() == nextY)){ // if the Snake head will be on another SnakePart
+            pt("touching Snake");
             lost(); // ends the game
         }
 
         if (s.getAlive()) { // if the snake is alive
             pt("");
-            SnakePart sp = new SnakePart(nextX, nextY, false, true, s.getCurrentDirection());
+            SnakePart sp = new SnakePart(nextX, nextY, false, true, headD);
+            BOARD[nextX][nextY].setSnake(true);
             sp.setLifeSpan(s.getLength()+1); // added 1 because I'm about to decrement all snakeparts
 
             SnakePart oldHead = s.getHead();
@@ -306,25 +286,29 @@ public class Main extends JFrame implements ActionListener{
             sp.setFollower(oldHead);
             oldHead.setLeader(sp);
 
-            oldHead.isHead(false);
+            oldHead.setHead(false);
             s.addToSnake(sp);
 
             for(int i = s.getLength(); i>0; i--){
                 pt("sp: "+sp);
-                sp.decrementLifeSpan();
-                pt(""+sp.getLifeSpan());
-                if (sp.getLifeSpan() == 0){
-                    SnakePart newTail = sp.getLeader();
-                    pt("newTail: "+newTail);
-                    newTail.isTail(true);
-                    s.setTail(newTail);
-                    sp.setLeader(null);
-                    s.decrementLength();
+                if(!justAte) {
+                    sp.decrementLifeSpan();
+                    pt("" + sp.getLifeSpan());
+                    if (sp.getLifeSpan() == 0) {
+                        BOARD[sp.getBoardX()][sp.getBoardY()].setSnake(false);
+                        pt("removed sp "+sp+" from board.");
+                        SnakePart newTail = sp.getLeader();
+                        pt("newTail: " + newTail);
+                        newTail.setTail(true);
+                        s.setTail(newTail);
+                        sp.setLeader(null);
+                        s.decrementLength();
+                    }
                 }
                 sp = sp.getFollower();
             }
             pt("moved");
-            s.justAte(false);
+            s.setJustAte(false);
         }
         repaint();
         try {
@@ -358,12 +342,12 @@ public class Main extends JFrame implements ActionListener{
             for(int j = 0; j < boardHeight; j++){
                 g2.setColor(DOT_COLOR); // sets the colour to dark green
                 g2.fillRect(i*PIXELS_PER_BOX+xOffset+3, j*PIXELS_PER_BOX+yOffset+3, 4, 4); // draws a dot
-                if (BOARD[i][j].isWall()){ // if the box is a wall
+                if (BOARD[i][j].getWall()){ // if the box is a wall
                     g2.setColor(WALL_COLOR); // sets the colour to brown
                     g2.fillRect(i*PIXELS_PER_BOX+xOffset, j*PIXELS_PER_BOX+yOffset, PIXELS_PER_BOX, PIXELS_PER_BOX); // draws the box
                     //pt("wall");
                 }
-                else if (BOARD[i][j].isFruit()){ // if the box is the fruit
+                else if (BOARD[i][j].getFruit()){ // if the box is the fruit
                     //pt("fruit");
                     switch (f.getType()){ // draws the fruit based on the type
                         case "Apple" -> {
@@ -384,8 +368,8 @@ public class Main extends JFrame implements ActionListener{
                         }
                         default -> pt("Something went wrong");
                     }
-                } else if (BOARD[i][j].isSnake()){ // if the box is a snake
-                    pt("snake: "+i+" "+j);
+                } else if (BOARD[i][j].getSnake()){ // if the box is a snake
+                    pt("snake: "+i+" "+j+" BOARD[i][j].getSnake(): "+BOARD[i][j].getSnake());
                 }
             }
         }
@@ -398,7 +382,7 @@ public class Main extends JFrame implements ActionListener{
             int y = sp.getBoardY() * PIXELS_PER_BOX + yOffset;
             //pt("length: "+s.getLength()+"; head: "+sp.isHead()+"; tail: "+sp.isTail() + "; Board x: "+sp.getBoardX() + "; Board y: "+sp.getBoardY() +"; x coord: "+x+"; y coord: "+y);
             // figures out which icon to use based on the direction of the SnakePart
-            if (sp.isTail()) {
+            if (sp.getTail()) {
                 //pt("tail");
                 switch (sp.getLeader().getDirection()) {
                     case UP -> U_SNAKE_TAIL.paintIcon(this, g2, x, y); // U
@@ -407,7 +391,7 @@ public class Main extends JFrame implements ActionListener{
                     case LEFT -> L_SNAKE_TAIL.paintIcon(this, g2, x, y); // L
                     default -> pt("tail direction error. Tail direction: " + sp.getDirection());
                 }
-            } else if (sp.isHead()) {
+            } else if (sp.getHead()) {
                 pt("head");
                 switch (sp.getDirection()) {
                     case UP -> U_SNAKE_HEAD.paintIcon(this, g2, x, y); // U
@@ -464,10 +448,6 @@ public class Main extends JFrame implements ActionListener{
             lastDirection = sp.getDirection(); // set the last direction to the current direction
             sp = sp.getFollower(); // move to the next SnakePart
         } // for (int i = 0; i < s.getLength(); i++) {
-
-        //for (int i=0; i<10; i++) {
-        //    imageLibrary[iteration%3][pipes[i].getFull].paintIcon(this, g2, pipes[i].getX(), pipes[i].getY());
-        //}
 
         g.drawImage(offScreenImage, 0, 0, null);
     } // public void paint(Graphics g) {

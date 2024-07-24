@@ -13,7 +13,7 @@ public class Fruit {
         this.x = fx;
         this.y = fy;
     }
-    public void eaten() { // sets the fruit to eaten
+    public void setEaten() { // sets the fruit to eaten
         this.eaten = true;
     }
     public int getX() { // gets the x coordinates of the fruit

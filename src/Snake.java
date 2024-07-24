@@ -4,16 +4,19 @@ public class Snake {
     private boolean justAte = false; // if the snake has just eaten
     private boolean alive = true; // if the snake is alive
     private int currentDirection; // -1 = Left; -2 = Down; 1 = Right; 2 = Up
+    private int nextDirection; // -1 = Left; -2 = Down; 1 = Right; 2 = Up
     private int length = 0; // starting length of the snake
-    private boolean justTurned = false; // if the snake has just turned
     public Snake(){
         System.out.println("Snake created!");
     }
     public void setCurrentDirection(int d) { // sets the length of the snake
         this.currentDirection = d;
     }
+    public void setNextDirection(int d) { // sets the length of the snake
+        this.nextDirection = d;
+    }
     public void setHead(SnakePart sp){ // sets the head of the snake
-        sp.isHead(true);
+        sp.setHead(true);
         this.head = sp;
     }
     public void setTail(SnakePart t){
@@ -25,18 +28,12 @@ public class Snake {
     public void decrementLength(){
         this.length--;
     }
-    public void justTurned(boolean j){
-        this.justTurned = j;
-    } // sets if the snake has just turned
-    public void justAte(boolean j){
+    public void setJustAte(boolean j){
         this.justAte = j;
     } // sets if the snake has just eaten
-    public boolean justAte(){
+    public boolean getJustAte(){
         return(this.justAte);
-    } // sets if the snake has just eaten
-    public boolean justTurned(){
-        return(this.justTurned);
-    } // sets if the snake has just turned
+    } // gets if the snake has just eaten
     public boolean getAlive(){
         return this.alive;
     } // returns if the snake is alive
@@ -49,6 +46,10 @@ public class Snake {
     public int getCurrentDirection() { // sets the length of the snake
         return currentDirection;
     } // gets the current direction of the snake
+    public int getNextDirection() { // sets the length of the snake
+        return nextDirection;
+    } // gets the current direction of the snake
+
     public int getLength() { // gets the length of the snake
         return this.length;
     } // gets the length of the snake
@@ -74,10 +75,10 @@ public class Snake {
     //    this.length++; // increase the length of the snake
     // }
     public void addToSnake(SnakePart sp){
-        if (sp.isHead()){
+        if (sp.getHead()){
             this.setHead(sp);
         }
-        if(sp.isTail()){
+        if(sp.getTail()){
             this.setTail(sp);
         }
         this.length++;

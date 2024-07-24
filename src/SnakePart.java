@@ -16,10 +16,10 @@ class SnakePart {
         this.head = head;
         this.direction = d;
     }
-    public boolean isHead(){ // returns if the SnakePart is the head
+    public boolean getHead(){ // returns if the SnakePart is the head
         return head;
     }
-    public boolean isTail(){ // returns if the SnakePart is the tail
+    public boolean getTail(){ // returns if the SnakePart is the tail
         return tail;
     }
     public void decrementLifeSpan(){
@@ -49,7 +49,7 @@ class SnakePart {
     public void setLifeSpan(int l){
         this.lifeSpan = l;
     }
-    public void isHead(boolean head) { // sets the SnakePart to be the head
+    public void setHead(boolean head) { // sets the SnakePart to be the head
         this.head = head;
     }
     public void setDirection(int d) { // sets the direction of the SnakePart
@@ -58,7 +58,7 @@ class SnakePart {
     public void setFollower(SnakePart follower) { // sets the SnakePart that follows this one
         this.follower = follower;
     }
-    public void isTail(boolean tail) { // sets whether the SnakePart is the tail
+    public void setTail(boolean tail) { // sets whether the SnakePart is the tail
         this.tail = tail;
     }
     public void setBoardX(int x) { // sets the x coordinate of the SnakePart on the board

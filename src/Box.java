@@ -13,13 +13,13 @@ public class Box {
     public void setWall(boolean wall) { // sets the box to be a wall
         this.wall = wall;
     }
-    public boolean isFruit() { // returns if the box has a fruit
+    public boolean getFruit() { // returns if the box has a fruit
         return fruit;
     } // returns if the box has a fruit
-    public boolean isSnake() { // returns if the box has a snake
+    public boolean getSnake() { // returns if the box has a snake
         return snake;
     } // returns if the box has a snake
-    public boolean isWall() { // returns if the box is a wall
+    public boolean getWall() { // returns if the box is a wall
         return wall;
     } // returns if the box is a wall
 

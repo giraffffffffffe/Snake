@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="Snake moves, tail is not lined up when it turns, cannot eat, you can go backwards through yourself. Aside from that it's fine">
+    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="Tail is fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Box.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Box.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Fruit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Fruit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Snake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Snake.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SnakePart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SnakePart.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +195,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721644667564</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Tail is fixed">
+      <option name="closed" value="true" />
+      <created>1721799011373</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1721799011373</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,6 +233,7 @@
     <MESSAGE value="snake can't go backwards" />
     <MESSAGE value="About to change the way snake works. come back to here if it all breaks" />
     <MESSAGE value="Snake moves, tail is not lined up when it turns, cannot eat, you can go backwards through yourself. Aside from that it's fine" />
-    <option name="LAST_COMMIT_MESSAGE" value="Snake moves, tail is not lined up when it turns, cannot eat, you can go backwards through yourself. Aside from that it's fine" />
+    <MESSAGE value="Tail is fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tail is fixed" />
   </component>
 </project>
