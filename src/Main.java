@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Main extends JFrame implements ActionListener{
+public class Main extends JFrame { //implements ActionListener
     public Color BACKGROUND_COLOR = new Color(84,170,89); //colour that the background is
     public Color WALL_COLOR = new Color(48, 13, 1); //colour that the walls are
     public Color DOT_COLOR = new Color(26, 109, 85); //colour that the dots are
@@ -13,26 +13,28 @@ public class Main extends JFrame implements ActionListener{
     private final int RIGHT = 1; // direction of the snake
     private final int LEFT = -1; // direction of the snake
     private int points = 0; // points the player has
-    private final String[] MENU_NAMES = {"Help", "Configure", "Actions","points "+points};
-    private final String[] MENU0_OPTIONS = {"Instructions"}; // options in Help menu
-    private final String[] MENU1_OPTIONS = {"Keys", "Snake Speed"}; // options in configure menu
-    private final String[] MENU2_OPTIONS = {"Pause"}; // options in actions menu
-    private final String[] MENU3_OPTIONS = {}; // options in actions menu
+    //private final String[] MENU_NAMES = {"Help", "Configure", "Actions","points "+points};
+    //private final String[] MENU0_OPTIONS = {"Instructions"}; // options in Help menu
+    //private final String[] MENU1_OPTIONS = {"Keys", "Snake Speed"}; // options in configure menu
+    //private final String[] MENU2_OPTIONS = {"Pause"}; // options in actions menu
+    //private final String[] MENU3_OPTIONS = {}; // options in actions menu
     private final int PIXELS_PER_BOX = 10;
+    private boolean paused = false;
     private int turnNumber = 0;
     private int boardWidth = 50; // length of the board (in boxes)
     private int boardHeight = 50; // height of the board (in boxes)
     private int paneWidth = boardWidth*PIXELS_PER_BOX; // initial width of window
     private int paneHeight = boardWidth*PIXELS_PER_BOX; // initial height of window
     private final Box[][] BOARD = new Box[boardWidth][boardHeight]; // creates a 2D array of boxes
+    private boolean gameRunning = false; // if the game is running
     private int frameRate = 250; // 1 frames per second
     private boolean justAte = false;
     private int xOffset = 8; // x offset of the board (for school, 8) (for home, 0)
-    private int yOffset = 54; // y offset of the board (for school, 54) (for home, 49)
+    private int yOffset = 31; // y offset of the board (for school, 54) (for home, 49)
     private final int INITIAL_SNAKE_LENGTH = 7;
     private final int INITIAL_HEAD_X = boardWidth/2-5;
     private final int INITIAL_HEAD_Y = boardHeight/2;
-    private boolean firstKeyPressed = true;
+    private boolean firstKeyPressed = false;
     private final String APPLE_FILE = "apple.png";
     private final String ORANGE_FILE = "orange.png";
     private final String KIWIFRUIT_FILE = "kiwifruit.png";
@@ -69,8 +71,8 @@ public class Main extends JFrame implements ActionListener{
     private final ImageIcon DR = new ImageIcon(DR_FILE);
     private final ImageIcon DL = new ImageIcon(DL_FILE);
     private final ImageIcon RL = new ImageIcon(RL_FILE);;
-    private JMenuBar menuBar; // creates a menu bar
-    private JMenuItem menuItem; // creates a menu item
+    //private JMenuBar menuBar; // creates a menu bar
+    //private JMenuItem menuItem; // creates a menu item
     private Canvas myGraphic; // canvas that is used for the graphics
     private JPanel panel = new JPanel(); // initialises JPanel
     private Scanner kb = new Scanner(System.in); // initialises keyboard
@@ -128,12 +130,12 @@ public class Main extends JFrame implements ActionListener{
         this.panel.setOpaque(false);
         this.setUndecorated(false);
 
-        this.menuBar = new JMenuBar(); // makes a new menu bar
-        this.setJMenuBar(menuBar); // sets the menu bar to the window
-        createMenu(MENU0_OPTIONS, 0); // creates the menus
-        createMenu(MENU1_OPTIONS, 1);
-        createMenu(MENU2_OPTIONS, 2);
-        createMenu(MENU3_OPTIONS, 3);
+        //this.menuBar = new JMenuBar(); // makes a new menu bar
+        //this.setJMenuBar(menuBar); // sets the menu bar to the window
+        //createMenu(MENU0_OPTIONS, 0); // creates the menus
+        //createMenu(MENU1_OPTIONS, 1);
+        //createMenu(MENU2_OPTIONS, 2);
+        //createMenu(MENU3_OPTIONS, 3);
         this.myGraphic = new Canvas(); // initialises graphic
         this.panel.add(myGraphic); // adds canvas to panel
 
@@ -167,31 +169,54 @@ public class Main extends JFrame implements ActionListener{
                 key(e);
             }
         });
-        turn();
+        while(s.getAlive()) {
+            turn();
+        }
     }
+
+    public void run() {
+        if(!firstKeyPressed){
+            repaint();
+            return;
+
+        }
+        if(paused){
+            repaint();
+            return;
+        }
+        if (gameRunning) {
+            turn();
+        }
+    }
+
     public void pt(String s){
         System.out.println(s);
     }
     public void key(KeyEvent e){
-        //if(firstKeyPressed){
-        //    firstKeyPressed = false;
-        //    turn();
-        //}
         pt(""+ e.getKeyCode());
-        if (e.getKeyCode() == 38 || e.getKeyCode() == 87){ // key was 'up arrow' or 'w' key
+        if (gameRunning && (e.getKeyCode() == 38 || e.getKeyCode() == 87)){ // key was 'up arrow' or 'w' key
             s.setNextDirection(UP);
         }
-        if (e.getKeyCode() == 40 || e.getKeyCode() == 83){ // key was 'down arrow' or 's' key
+        if (gameRunning && (e.getKeyCode() == 40 || e.getKeyCode() == 83)){ // key was 'down arrow' or 's' key
             s.setNextDirection(DOWN);
         }
-        if (e.getKeyCode() == 39 || e.getKeyCode() == 68){ // key was 'right arrow' or 'd' key
+        if (gameRunning && (e.getKeyCode() == 39 || e.getKeyCode() == 68)){ // key was 'right arrow' or 'd' key
             s.setNextDirection(RIGHT);
         }
-        if (e.getKeyCode() == 37 || e.getKeyCode() == 65){ // key was 'left arrow' or 'a' key
+        if (gameRunning && (e.getKeyCode() == 37 || e.getKeyCode() == 65)){ // key was 'left arrow' or 'a' key
             s.setNextDirection(LEFT);
         }
+        if (e.getKeyCode() == 80 && firstKeyPressed){
+            paused = !paused;
+            gameRunning = !gameRunning; // sets the game to be running or not
+        }
+        if(!firstKeyPressed){
+            firstKeyPressed = true;
+            gameRunning = true;
+            run();
+        }
     }
-    private void createMenu(String[] menuOptions, int numMenus) { // creates menus in window
+    /*private void createMenu(String[] menuOptions, int numMenus) { // creates menus in window
         JMenu menu = new JMenu(MENU_NAMES[numMenus]); // creates a new menu
         menuBar.add(menu); // adds the menu to the menu bar
 
@@ -204,24 +229,7 @@ public class Main extends JFrame implements ActionListener{
             menuItem.addActionListener(this); // adds an action listener to the menu item
             menu.add(menuItem); // adds the menu item to the menu
         }
-    }
-    public void actionPerformed(ActionEvent e) { // when a menu item is clicked
-        String command = e.getActionCommand(); // gets the command of the menu item
-        switch (command){ // does something based on the command
-            case "Instructions" -> JOptionPane.showMessageDialog(this, "Use the arrow keys to move the snake. Eat the food to grow. Don't hit the walls or yourself.");
-            case "Pause" -> {
-                JOptionPane.showMessageDialog(this, "Game is paused. Press 'p' to unpause.");
-                pause(); // pauses the game
-            }
-        }
-    }
-    private void pause() { // pauses the game
-        while (true){ // infinite loop
-            if (kb.nextLine().equals("p")){ // if the user types 'p'
-                break; // breaks the loop
-            }
-        }
-    }
+    }*/
     private void fruitEaten() { // when the snake eats a fruit
         f.setEaten(); // sets the fruit to 'eaten';
         s.setJustAte(true); // sets the snake to have just eaten
@@ -277,7 +285,7 @@ public class Main extends JFrame implements ActionListener{
             lost(); // ends the game
         }
 
-        if (s.getAlive()) { // if the snake is alive
+        if (s.getAlive() && gameRunning) { // if the snake is alive
             pt("");
             SnakePart sp = new SnakePart(nextX, nextY, false, true, headD);
             BOARD[nextX][nextY].setSnake(true);
@@ -320,7 +328,6 @@ public class Main extends JFrame implements ActionListener{
         } catch (InterruptedException ie) {
             Thread.currentThread().interrupt();
         }
-        turn();
     }
     public void lost(){
         s.setAlive(false);
@@ -341,118 +348,141 @@ public class Main extends JFrame implements ActionListener{
         Graphics2D g2 = (Graphics2D) offScreenImage.getGraphics();
         g2.setColor(BACKGROUND_COLOR);
         g2.fillRect(xOffset, yOffset, getWidth(), getHeight());
-
-        for(int i = 0; i < boardWidth; i++){ // for each box in the board
-            for(int j = 0; j < boardHeight; j++){
-                g2.setColor(DOT_COLOR); // sets the colour to dark green
-                g2.fillRect(i*PIXELS_PER_BOX+xOffset+3, j*PIXELS_PER_BOX+yOffset+3, 4, 4); // draws a dot
-                if (BOARD[i][j].getWall()){ // if the box is a wall
-                    g2.setColor(WALL_COLOR); // sets the colour to brown
-                    g2.fillRect(i*PIXELS_PER_BOX+xOffset, j*PIXELS_PER_BOX+yOffset, PIXELS_PER_BOX, PIXELS_PER_BOX); // draws the box
-                    //pt("wall");
-                }
-                else if (BOARD[i][j].getFruit()){ // if the box is the fruit
-                    //pt("fruit");
-                    switch (f.getType()){ // draws the fruit based on the type
-                        case "Apple" -> {
-                            //pt("apple");
-                            APPLE.paintIcon(this, g2,fruitX(),fruitY());
-                        }
-                        case "Orange" -> {
-                            //pt("orange");
-                            ORANGE.paintIcon(this, g2,fruitX(),fruitY());
-                        }
+        //if(gameRunning) {
+            for (int i = 0; i < boardWidth; i++) { // for each box in the board
+                for (int j = 0; j < boardHeight; j++) {
+                    g2.setColor(DOT_COLOR); // sets the colour to dark green
+                    g2.fillRect(i * PIXELS_PER_BOX + xOffset + 3, j * PIXELS_PER_BOX + yOffset + 3, 4, 4); // draws a dot
+                    if (BOARD[i][j].getWall()) { // if the box is a wall
+                        g2.setColor(WALL_COLOR); // sets the colour to brown
+                        g2.fillRect(i * PIXELS_PER_BOX + xOffset, j * PIXELS_PER_BOX + yOffset, PIXELS_PER_BOX, PIXELS_PER_BOX); // draws the box
+                        //pt("wall");
+                    } else if (BOARD[i][j].getFruit()) { // if the box is the fruit
+                        //pt("fruit");
+                        switch (f.getType()) { // draws the fruit based on the type
+                            case "Apple" -> {
+                                //pt("apple");
+                                APPLE.paintIcon(this, g2, fruitX(), fruitY());
+                            }
+                            case "Orange" -> {
+                                //pt("orange");
+                                ORANGE.paintIcon(this, g2, fruitX(), fruitY());
+                            }
 //                       case "Kiwifruit" -> {
 //                           //pt("kiwifruit");
 //                           KIWIFRUIT.paintIcon(this, g2,fruitX(),fruitY());
 //                       }
-                        case "Plum" -> {
-                            //pt("plum");
-                            PLUM.paintIcon(this, g2,fruitX(),fruitY());
+                            case "Plum" -> {
+                                //pt("plum");
+                                PLUM.paintIcon(this, g2, fruitX(), fruitY());
+                            }
+                            default -> pt("Something went wrong");
                         }
-                        default -> pt("Something went wrong");
+                    } else if (BOARD[i][j].getSnake()) { // if the box is a snake
+                        //pt("snake: "+i+" "+j+" BOARD[i][j].getSnake(): "+BOARD[i][j].getSnake());
                     }
-                } else if (BOARD[i][j].getSnake()){ // if the box is a snake
-                    //pt("snake: "+i+" "+j+" BOARD[i][j].getSnake(): "+BOARD[i][j].getSnake());
                 }
             }
+
+            //draw Snake
+
+            SnakePart sp = this.s.getHead();
+            int lastDirection = sp.getDirection();
+            for (int i = 0; i < s.getLength(); i++) {
+                int x = sp.getBoardX() * PIXELS_PER_BOX + xOffset;
+                int y = sp.getBoardY() * PIXELS_PER_BOX + yOffset;
+                //pt("length: "+s.getLength()+"; head: "+sp.isHead()+"; tail: "+sp.isTail() + "; Board x: "+sp.getBoardX() + "; Board y: "+sp.getBoardY() +"; x coord: "+x+"; y coord: "+y);
+                // figures out which icon to use based on the direction of the SnakePart
+                if (sp.getTail()) {
+                    //pt("tail");
+                    switch (sp.getLeader().getDirection()) {
+                        case UP -> U_SNAKE_TAIL.paintIcon(this, g2, x, y); // U
+                        case DOWN -> D_SNAKE_TAIL.paintIcon(this, g2, x, y); // D
+                        case RIGHT -> R_SNAKE_TAIL.paintIcon(this, g2, x, y); // R
+                        case LEFT -> L_SNAKE_TAIL.paintIcon(this, g2, x, y); // L
+                        default -> pt("tail direction error. Tail direction: " + sp.getDirection());
+                    }
+                } else if (sp.getHead()) {
+                    pt("head");
+                    switch (sp.getDirection()) {
+                        case UP -> U_SNAKE_HEAD.paintIcon(this, g2, x, y); // U
+                        case DOWN -> D_SNAKE_HEAD.paintIcon(this, g2, x, y); // D
+                        case RIGHT -> R_SNAKE_HEAD.paintIcon(this, g2, x, y); // R
+                        case LEFT -> L_SNAKE_HEAD.paintIcon(this, g2, x, y); // L
+                        default -> pt("head direction error. Head direction: " + sp.getDirection());
+                    }
+                } else {
+                    //pt("body");
+                    // possible outcomes: UD, UL, UR, DL, DR, LR
+                    //    U   D   L   R
+                    // U [XX][UD][UL][UR]
+                    // D [XX][XX][DL][DR]
+                    // L [XX][XX][XX][LR]
+                    // R [XX][XX][XX][XX]
+
+                    switch (-1 * sp.getDirection()) {
+                        case UP -> {
+                            switch (lastDirection) { // where the snake came from (if it was going left it means it's coming from the right)
+                                case DOWN -> UD.paintIcon(this, g2, x, y); // UD
+                                case RIGHT -> UR.paintIcon(this, g2, x, y); // UR
+                                case LEFT -> UL.paintIcon(this, g2, x, y); // UL
+                                default -> pt("up body. Last direction: " + lastDirection);
+                            }
+                        }
+                        case DOWN -> {
+                            switch (lastDirection) {
+                                case UP -> UD.paintIcon(this, g2, x, y); // UD
+                                case RIGHT -> DR.paintIcon(this, g2, x, y); // DR
+                                case LEFT -> DL.paintIcon(this, g2, x, y); // DL
+                                default -> pt("down body. Last direction: " + lastDirection);
+                            }
+                        }
+                        case RIGHT -> {
+                            switch (lastDirection) {
+                                case UP -> UR.paintIcon(this, g2, x, y); // UR
+                                case DOWN -> DR.paintIcon(this, g2, x, y); // DR
+                                case LEFT -> RL.paintIcon(this, g2, x, y); // RL
+                                default -> pt("right body. Last direction: " + lastDirection);
+                            }
+                        }
+                        case LEFT -> {
+                            switch (lastDirection) {
+                                case UP -> UL.paintIcon(this, g2, x, y); // UL
+                                case DOWN -> DL.paintIcon(this, g2, x, y); // DL
+                                case RIGHT -> RL.paintIcon(this, g2, x, y); // RL
+                                default -> pt("left body. Last direction: " + lastDirection);
+                            } //  switch (-1 * lastDirection) {
+                        } // case -1 -> {
+                        default -> pt("body direction error. Body direction: " + sp.getDirection());
+                    } // switch (sp.getDirection()) {
+                } // else {
+                lastDirection = sp.getDirection(); // set the last direction to the current direction
+                sp = sp.getFollower(); // move to the next SnakePart
+            } // for (int i = 0; i < s.getLength(); i++) {
+        //} // if(gameRunning)
+        g2.setColor(Color.WHITE);
+        g2.setFont(new Font("Arial", Font.PLAIN, 10));
+        g2.drawString("Points: "+points, 18, 40);
+        if(paused){
+            g2.setColor(new Color(0,0,0,100));
+            g2.fillRect(0,0,getWidth(),getHeight());
+            g2.setColor(Color.WHITE);
+            g2.setFont(new Font("Arial", Font.PLAIN, 50));
+            g2.drawString("Paused", getWidth()/2-100, getHeight()/2);
+            g2.drawString("press 'p' to unpause", getWidth()/2-224, getHeight()/2+50);
         }
-        //draw Snake
-
-        SnakePart sp = this.s.getHead();
-        int lastDirection = sp.getDirection();
-        for (int i = 0; i < s.getLength(); i++) {
-            int x = sp.getBoardX() * PIXELS_PER_BOX + xOffset;
-            int y = sp.getBoardY() * PIXELS_PER_BOX + yOffset;
-            //pt("length: "+s.getLength()+"; head: "+sp.isHead()+"; tail: "+sp.isTail() + "; Board x: "+sp.getBoardX() + "; Board y: "+sp.getBoardY() +"; x coord: "+x+"; y coord: "+y);
-            // figures out which icon to use based on the direction of the SnakePart
-            if (sp.getTail()) {
-                //pt("tail");
-                switch (sp.getLeader().getDirection()) {
-                    case UP -> U_SNAKE_TAIL.paintIcon(this, g2, x, y); // U
-                    case DOWN -> D_SNAKE_TAIL.paintIcon(this, g2, x, y); // D
-                    case RIGHT -> R_SNAKE_TAIL.paintIcon(this, g2, x, y); // R
-                    case LEFT -> L_SNAKE_TAIL.paintIcon(this, g2, x, y); // L
-                    default -> pt("tail direction error. Tail direction: " + sp.getDirection());
-                }
-            } else if (sp.getHead()) {
-                pt("head");
-                switch (sp.getDirection()) {
-                    case UP -> U_SNAKE_HEAD.paintIcon(this, g2, x, y); // U
-                    case DOWN -> D_SNAKE_HEAD.paintIcon(this, g2, x, y); // D
-                    case RIGHT -> R_SNAKE_HEAD.paintIcon(this, g2, x, y); // R
-                    case LEFT -> L_SNAKE_HEAD.paintIcon(this, g2, x, y); // L
-                    default -> pt("head direction error. Head direction: " + sp.getDirection());
-                }
-            } else {
-                //pt("body");
-                // possible outcomes: UD, UL, UR, DL, DR, LR
-                //    U   D   L   R
-                // U [XX][UD][UL][UR]
-                // D [XX][XX][DL][DR]
-                // L [XX][XX][XX][LR]
-                // R [XX][XX][XX][XX]
-
-                switch (-1 * sp.getDirection()) {
-                    case UP -> {
-                        switch (lastDirection) { // where the snake came from (if it was going left it means it's coming from the right)
-                            case DOWN -> UD.paintIcon(this, g2, x, y); // UD
-                            case RIGHT -> UR.paintIcon(this, g2, x, y); // UR
-                            case LEFT -> UL.paintIcon(this, g2, x, y); // UL
-                            default -> pt("up body. Last direction: " + lastDirection);
-                        }
-                    }
-                    case DOWN -> {
-                        switch (lastDirection) {
-                            case UP -> UD.paintIcon(this, g2, x, y); // UD
-                            case RIGHT -> DR.paintIcon(this, g2, x, y); // DR
-                            case LEFT -> DL.paintIcon(this, g2, x, y); // DL
-                            default -> pt("down body. Last direction: " + lastDirection);
-                        }
-                    }
-                    case RIGHT -> {
-                        switch (lastDirection) {
-                            case UP -> UR.paintIcon(this, g2, x, y); // UR
-                            case DOWN -> DR.paintIcon(this, g2, x, y); // DR
-                            case LEFT -> RL.paintIcon(this, g2, x, y); // RL
-                            default -> pt("right body. Last direction: " + lastDirection);
-                        }
-                    }
-                    case LEFT -> {
-                        switch (lastDirection) {
-                            case UP -> UL.paintIcon(this, g2, x, y); // UL
-                            case DOWN -> DL.paintIcon(this, g2, x, y); // DL
-                            case RIGHT -> RL.paintIcon(this, g2, x, y); // RL
-                            default -> pt("left body. Last direction: " + lastDirection);
-                        } //  switch (-1 * lastDirection) {
-                    } // case -1 -> {
-                    default -> pt("body direction error. Body direction: " + sp.getDirection());
-                } // switch (sp.getDirection()) {
-            } // else {
-            lastDirection = sp.getDirection(); // set the last direction to the current direction
-            sp = sp.getFollower(); // move to the next SnakePart
-        } // for (int i = 0; i < s.getLength(); i++) {
-
+        if(!firstKeyPressed){
+            g2.setColor(new Color(0,0,0,100));
+            g2.fillRect(0,0,getWidth(),getHeight());
+            g2.setColor(Color.WHITE);
+            g2.setFont(new Font("Arial", Font.PLAIN, 50));
+            g2.drawString("Welcome to Snake!", getWidth()/2-217, getHeight()/4);
+            g2.setFont(new Font("Arial", Font.PLAIN, 25));
+            g2.drawString("Press any key to start.", getWidth()/2-122, getHeight()/2);
+            g2.drawString("Use WASD or arrow keys to move.", getWidth()/2-193, getHeight()/2+50);
+            g2.drawString("Press 'p' to pause.", getWidth()/2-96, getHeight()/2+100);
+            g2.drawString("Have Fun!", getWidth()/2-55, getHeight()/2+150);
+        }
         g.drawImage(offScreenImage, 0, 0, null);
     } // public void paint(Graphics g) {
     public int fruitX(){
