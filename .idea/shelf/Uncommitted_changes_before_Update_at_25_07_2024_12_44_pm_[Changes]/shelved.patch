@@ -1,0 +1,148 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"ee0a2173-176d-400d-bd49-b46cdcab95b0\" name=\"Changes\" comment=\"Snake can be controlled. fixed flickering, menus are now broken\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Fruit.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Fruit.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Main.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Snake.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Snake.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n    <option name=\"RESET_MODE\" value=\"HARD\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;giraffffffffffe&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">\r\n    <option name=\"selectedUrlAndAccountId\">\r\n      <UrlAndAccount>\r\n        <option name=\"accountId\" value=\"3d4e3119-b12d-4970-bd1a-fa5691f740f4\" />\r\n        <option name=\"url\" value=\"https://github.com/giraffffffffffe/Snake.git\" />\r\n      </UrlAndAccount>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 0\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2fvhMkDouY8YaNAkaprv2FfMfOy\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Application.Main.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;master&quot;,\r\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;H:/CSC223/AnneCareySmithSubmission/intelliJProjectAnne&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"ee0a2173-176d-400d-bd49-b46cdcab95b0\" name=\"Changes\" comment=\"\" />\r\n      <created>1714687415116</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1714687415116</updated>\r\n      <workItem from=\"1714687416213\" duration=\"1394000\" />\r\n      <workItem from=\"1714945900902\" duration=\"2809000\" />\r\n      <workItem from=\"1715221744157\" duration=\"2427000\" />\r\n      <workItem from=\"1715224194492\" duration=\"569000\" />\r\n      <workItem from=\"1715291784185\" duration=\"1819000\" />\r\n      <workItem from=\"1715551112163\" duration=\"2477000\" />\r\n      <workItem from=\"1715822320792\" duration=\"3315000\" />\r\n      <workItem from=\"1715896013329\" duration=\"3276000\" />\r\n      <workItem from=\"1716155111498\" duration=\"2897000\" />\r\n      <workItem from=\"1718238409357\" duration=\"5092000\" />\r\n      <workItem from=\"1718245282514\" duration=\"2542000\" />\r\n      <workItem from=\"1718315486149\" duration=\"2939000\" />\r\n      <workItem from=\"1718853540487\" duration=\"79000\" />\r\n      <workItem from=\"1718920232644\" duration=\"3054000\" />\r\n      <workItem from=\"1719447917569\" duration=\"4688000\" />\r\n      <workItem from=\"1720052931218\" duration=\"6237000\" />\r\n      <workItem from=\"1720129587368\" duration=\"2323000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Started working on GUI and make a Snake class\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1714948714146</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1714948714146</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Window opens and there are menus\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1715224758135</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715224758135</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Made panel non-resizable, added code for some menu items\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1715293679784</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715293679784</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Made Fruit class and worked connecting everything\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1715553825087</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715553825087</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"changed a fruit and started working on the board\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1715829576765</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715829576765</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"added fruit files and continued working on the board. added outer walls to the board\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1715899337436</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1715899337436</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"Tried to fix x and y offset\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1716155906297</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1716155906297</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"Tried to fix x and y offset again\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1716156636327</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1716156636327</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"I think i fixed x and y offset\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1716433793448</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1716433793448</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"added rotated images for the snake.&#10;added print method&#10;added turn method\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1717973093414</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1717973093414</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"worked on turn method\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1718245323502</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1718245323502</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"tried to change redraw method to remove flickering. Didn't work\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1718248686339</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1718248686339</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"removed redaw method as it wasn't going to work.&#10;implemented buffered image. It only flickers some of the time now\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1718318269915</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1718318269915</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00014\" summary=\"It no longer crashes when the fruit is eaten. It doesn't make a new fruit though\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1718922687982</created>\r\n      <option name=\"number\" value=\"00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1718922687982</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00015\" summary=\"started points\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1718923260507</created>\r\n      <option name=\"number\" value=\"00015\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1718923260507</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00016\" summary=\"snake can move. I need a new snake head turning piece\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1719448931033</created>\r\n      <option name=\"number\" value=\"00016\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1719448931033</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00017\" summary=\"I broke everything.&#10;(I tried to make the head nt change direction until it had turned but now you can't control it or eat the fruit. &#10;Also I had to comment out the lines about crashing into yourself because they were making you automatically lose)\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1719458306256</created>\r\n      <option name=\"number\" value=\"00017\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1719458306256</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00018\" summary=\"worked on turn method. Snake can move and eat 1 fruit. cannot be controlled\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720063291602</created>\r\n      <option name=\"number\" value=\"00018\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00018\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1720063291602</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00019\" summary=\"Snake can be controlled. fixed flickering, menus are now broken\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1720130475590</created>\r\n      <option name=\"number\" value=\"00019\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00019\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1720130475590</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"20\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Started working on GUI and make a Snake class\" />\r\n    <MESSAGE value=\"Window opens and there are menus\" />\r\n    <MESSAGE value=\"Made panel non-resizable, added code for some menu items\" />\r\n    <MESSAGE value=\"Made Fruit class and worked connecting everything\" />\r\n    <MESSAGE value=\"changed a fruit and started working on the board\" />\r\n    <MESSAGE value=\"added fruit files and continued working on the board. added outer walls to the board\" />\r\n    <MESSAGE value=\"Tried to fix x and y offset\" />\r\n    <MESSAGE value=\"Tried to fix x and y offset again\" />\r\n    <MESSAGE value=\"I think i fixed x and y offset\" />\r\n    <MESSAGE value=\"added rotated images for the snake.&#10;added print method&#10;added turn method\" />\r\n    <MESSAGE value=\"worked on turn method\" />\r\n    <MESSAGE value=\"tried to change redraw method to remove flickering. Didn't work\" />\r\n    <MESSAGE value=\"removed redaw method as it wasn't going to work.&#10;implemented buffered image. It only flickers some of the time now\" />\r\n    <MESSAGE value=\"It no longer crashes when the fruit is eaten. It doesn't make a new fruit though\" />\r\n    <MESSAGE value=\"started points\" />\r\n    <MESSAGE value=\"snake can move. I need a new snake head turning piece\" />\r\n    <MESSAGE value=\"I broke everything.&#10;(I tried to make the head nt change direction until it had turned but now you can't control it or eat the fruit. &#10;Also I had to comment out the lines about crashing into yourself because they were making you automatically lose)\" />\r\n    <MESSAGE value=\"worked on turn method. Snake can move and eat 1 fruit. cannot be controlled\" />\r\n    <MESSAGE value=\"Snake can be controlled. fixed flickering, menus are now broken\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Snake can be controlled. fixed flickering, menus are now broken\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision b1aaae2960bcb6b26c5954f380a5ceffa7071b5a)
++++ b/.idea/workspace.xml	(date 1721612871542)
+@@ -4,11 +4,8 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="Snake can be controlled. fixed flickering, menus are now broken">
++    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="changed snake back to what it used to be before adding the NextDirection thing. fruit still works. Sometimes when the snake turns on top of the fruit, the fruit doesn't get eaten. Also the snake still splits sometimes.">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Fruit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Fruit.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Snake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Snake.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -49,31 +46,24 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;H:/CSC223/AnneCareySmithSubmission/intelliJProjectAnne&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+-  }
+-}</component>
+-  <component name="SharedIndexes">
+-    <attachedChunks>
+-      <set>
+-        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
+-      </set>
+-    </attachedChunks>
+-  </component>
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "Application.Main.executor": "Run",
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "git-widget-placeholder": "master",
++    "kotlin-language-version-configured": "true",
++    "last_opened_file_path": "H:/CSC335/finalProject/Snake",
++    "node.js.detected.package.eslint": "true",
++    "node.js.detected.package.tslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "nodejs_package_manager_path": "npm",
++    "settings.editor.selected.configurable": "preferences.pluginManager",
++    "vue.rearranger.settings.migration": "true"
++  }
++}]]></component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+@@ -220,45 +210,28 @@
+       <option name="project" value="LOCAL" />
+       <updated>1718923260507</updated>
+     </task>
+-    <task id="LOCAL-00016" summary="snake can move. I need a new snake head turning piece">
+-      <option name="closed" value="true" />
+-      <created>1719448931033</created>
+-      <option name="number" value="00016" />
+-      <option name="presentableId" value="LOCAL-00016" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1719448931033</updated>
+-    </task>
+-    <task id="LOCAL-00017" summary="I broke everything.&#10;(I tried to make the head nt change direction until it had turned but now you can't control it or eat the fruit. &#10;Also I had to comment out the lines about crashing into yourself because they were making you automatically lose)">
+-      <option name="closed" value="true" />
+-      <created>1719458306256</created>
+-      <option name="number" value="00017" />
+-      <option name="presentableId" value="LOCAL-00017" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1719458306256</updated>
+-    </task>
+-    <task id="LOCAL-00018" summary="worked on turn method. Snake can move and eat 1 fruit. cannot be controlled">
+-      <option name="closed" value="true" />
+-      <created>1720063291602</created>
+-      <option name="number" value="00018" />
+-      <option name="presentableId" value="LOCAL-00018" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1720063291602</updated>
+-    </task>
+-    <task id="LOCAL-00019" summary="Snake can be controlled. fixed flickering, menus are now broken">
+-      <option name="closed" value="true" />
+-      <created>1720130475590</created>
+-      <option name="number" value="00019" />
+-      <option name="presentableId" value="LOCAL-00019" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1720130475590</updated>
+-    </task>
+-    <option name="localTasksCounter" value="20" />
++    <option name="localTasksCounter" value="16" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="3" />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
++    <option name="RECENT_FILTERS">
++      <map>
++        <entry key="Branch">
++          <value>
++            <list>
++              <RecentGroup>
++                <option name="FILTER_VALUES">
++                  <option value="master" />
++                </option>
++              </RecentGroup>
++            </list>
++          </value>
++        </entry>
++      </map>
++    </option>
+     <option name="TAB_STATES">
+       <map>
+         <entry key="MAIN">
+@@ -285,10 +258,6 @@
+     <MESSAGE value="removed redaw method as it wasn't going to work.&#10;implemented buffered image. It only flickers some of the time now" />
+     <MESSAGE value="It no longer crashes when the fruit is eaten. It doesn't make a new fruit though" />
+     <MESSAGE value="started points" />
+-    <MESSAGE value="snake can move. I need a new snake head turning piece" />
+-    <MESSAGE value="I broke everything.&#10;(I tried to make the head nt change direction until it had turned but now you can't control it or eat the fruit. &#10;Also I had to comment out the lines about crashing into yourself because they were making you automatically lose)" />
+-    <MESSAGE value="worked on turn method. Snake can move and eat 1 fruit. cannot be controlled" />
+-    <MESSAGE value="Snake can be controlled. fixed flickering, menus are now broken" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Snake can be controlled. fixed flickering, menus are now broken" />
++    <option name="LAST_COMMIT_MESSAGE" value="started points" />
+   </component>
+ </project>
+\ No newline at end of file

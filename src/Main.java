@@ -27,8 +27,8 @@ public class Main extends JFrame implements ActionListener{
     private final Box[][] BOARD = new Box[boardWidth][boardHeight]; // creates a 2D array of boxes
     private int frameRate = 1000; // 1 frames per second
     private boolean justAte = false;
-    private int xOffset; // x offset of the board (for school, 8) (for home, 0)
-    private int yOffset; // y offset of the board (for school, 54) (for home, 49)
+    private int xOffset = 8; // x offset of the board (for school, 8) (for home, 0)
+    private int yOffset = 54; // y offset of the board (for school, 54) (for home, 49)
     private final int INITIAL_SNAKE_LENGTH = 10;
     private final int INITIAL_HEAD_X = boardWidth/2-5;
     private final int INITIAL_HEAD_Y = boardHeight/2;
@@ -146,8 +146,8 @@ public class Main extends JFrame implements ActionListener{
 
         int xNum = this.getWidth()-paneWidth;
         int yNum = this.getHeight()-paneHeight;
-        this.xOffset = 0;
-        this.yOffset = 49;
+        //this.xOffset = 0;
+        //this.yOffset = 49;
         //this.xOffset = xNum-8;
         //this.yOffset = yNum-8;
         this.panel.repaint();
@@ -250,7 +250,7 @@ public class Main extends JFrame implements ActionListener{
         int nextX  = s.getHead().getBoardX(); // gets the x coordinate of the head
         int nextY = s.getHead().getBoardY(); // gets the y coordinate of the head
 
-        if(s.getNextDirection() != s.getHead().getDirection()){
+        if(s.getNextDirection() != s.getHead().getDirection() && s.getNextDirection() != -s.getHead().getDirection()){
             s.setCurrentDirection(s.getNextDirection());
         }
 

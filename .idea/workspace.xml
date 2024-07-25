@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="Tail is fixed">
+    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="Snake can be controlled. fixed flickering, menus are now broken">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_07_2024__13_16__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_07_2024__13_16__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_07_2024__20_06__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_07_2024__20_06__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Box.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Box.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Fruit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Fruit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Snake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Snake.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SnakePart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SnakePart.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,29 +50,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "H:/CSC335/finalProject/Snake",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
-  },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "JAVA"
-    ]
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;H:/CSC223/AnneCareySmithSubmission/intelliJProjectAnne&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -98,6 +92,14 @@
       <workItem from="1715822320792" duration="3315000" />
       <workItem from="1715896013329" duration="3276000" />
       <workItem from="1716155111498" duration="2897000" />
+      <workItem from="1718238409357" duration="5092000" />
+      <workItem from="1718245282514" duration="2542000" />
+      <workItem from="1718315486149" duration="2939000" />
+      <workItem from="1718853540487" duration="79000" />
+      <workItem from="1718920232644" duration="3054000" />
+      <workItem from="1719447917569" duration="4688000" />
+      <workItem from="1720052931218" duration="6237000" />
+      <workItem from="1720129587368" duration="2323000" />
     </task>
     <task id="LOCAL-00001" summary="Started working on GUI and make a Snake class">
       <option name="closed" value="true" />
@@ -171,39 +173,87 @@
       <option name="project" value="LOCAL" />
       <updated>1716433793448</updated>
     </task>
-    <task id="LOCAL-00010" summary="snake can't go backwards">
+    <task id="LOCAL-00010" summary="added rotated images for the snake.&#10;added print method&#10;added turn method">
       <option name="closed" value="true" />
-      <created>1721636197775</created>
+      <created>1717973093414</created>
       <option name="number" value="00010" />
       <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1721636197775</updated>
+      <updated>1717973093414</updated>
     </task>
-    <task id="LOCAL-00011" summary="About to change the way snake works. come back to here if it all breaks">
+    <task id="LOCAL-00011" summary="worked on turn method">
       <option name="closed" value="true" />
-      <created>1721636754191</created>
+      <created>1718245323502</created>
       <option name="number" value="00011" />
       <option name="presentableId" value="LOCAL-00011" />
       <option name="project" value="LOCAL" />
-      <updated>1721636754191</updated>
+      <updated>1718245323502</updated>
     </task>
-    <task id="LOCAL-00012" summary="Snake moves, tail is not lined up when it turns, cannot eat, you can go backwards through yourself. Aside from that it's fine">
+    <task id="LOCAL-00012" summary="tried to change redraw method to remove flickering. Didn't work">
       <option name="closed" value="true" />
-      <created>1721644667564</created>
+      <created>1718248686339</created>
       <option name="number" value="00012" />
       <option name="presentableId" value="LOCAL-00012" />
       <option name="project" value="LOCAL" />
-      <updated>1721644667564</updated>
+      <updated>1718248686339</updated>
     </task>
-    <task id="LOCAL-00013" summary="Tail is fixed">
+    <task id="LOCAL-00013" summary="removed redaw method as it wasn't going to work.&#10;implemented buffered image. It only flickers some of the time now">
       <option name="closed" value="true" />
-      <created>1721799011373</created>
+      <created>1718318269915</created>
       <option name="number" value="00013" />
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
-      <updated>1721799011373</updated>
+      <updated>1718318269915</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="It no longer crashes when the fruit is eaten. It doesn't make a new fruit though">
+      <option name="closed" value="true" />
+      <created>1718922687982</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1718922687982</updated>
+    </task>
+    <task id="LOCAL-00015" summary="started points">
+      <option name="closed" value="true" />
+      <created>1718923260507</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1718923260507</updated>
+    </task>
+    <task id="LOCAL-00016" summary="snake can move. I need a new snake head turning piece">
+      <option name="closed" value="true" />
+      <created>1719448931033</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1719448931033</updated>
+    </task>
+    <task id="LOCAL-00017" summary="I broke everything.&#10;(I tried to make the head nt change direction until it had turned but now you can't control it or eat the fruit. &#10;Also I had to comment out the lines about crashing into yourself because they were making you automatically lose)">
+      <option name="closed" value="true" />
+      <created>1719458306256</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1719458306256</updated>
+    </task>
+    <task id="LOCAL-00018" summary="worked on turn method. Snake can move and eat 1 fruit. cannot be controlled">
+      <option name="closed" value="true" />
+      <created>1720063291602</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1720063291602</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Snake can be controlled. fixed flickering, menus are now broken">
+      <option name="closed" value="true" />
+      <created>1720130475590</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1720130475590</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,10 +280,16 @@
     <MESSAGE value="Tried to fix x and y offset" />
     <MESSAGE value="Tried to fix x and y offset again" />
     <MESSAGE value="I think i fixed x and y offset" />
-    <MESSAGE value="snake can't go backwards" />
-    <MESSAGE value="About to change the way snake works. come back to here if it all breaks" />
-    <MESSAGE value="Snake moves, tail is not lined up when it turns, cannot eat, you can go backwards through yourself. Aside from that it's fine" />
-    <MESSAGE value="Tail is fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tail is fixed" />
+    <MESSAGE value="added rotated images for the snake.&#10;added print method&#10;added turn method" />
+    <MESSAGE value="worked on turn method" />
+    <MESSAGE value="tried to change redraw method to remove flickering. Didn't work" />
+    <MESSAGE value="removed redaw method as it wasn't going to work.&#10;implemented buffered image. It only flickers some of the time now" />
+    <MESSAGE value="It no longer crashes when the fruit is eaten. It doesn't make a new fruit though" />
+    <MESSAGE value="started points" />
+    <MESSAGE value="snake can move. I need a new snake head turning piece" />
+    <MESSAGE value="I broke everything.&#10;(I tried to make the head nt change direction until it had turned but now you can't control it or eat the fruit. &#10;Also I had to comment out the lines about crashing into yourself because they were making you automatically lose)" />
+    <MESSAGE value="worked on turn method. Snake can move and eat 1 fruit. cannot be controlled" />
+    <MESSAGE value="Snake can be controlled. fixed flickering, menus are now broken" />
+    <option name="LAST_COMMIT_MESSAGE" value="Snake can be controlled. fixed flickering, menus are now broken" />
   </component>
 </project>
