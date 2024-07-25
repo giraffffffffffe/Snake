@@ -1,4 +1,10 @@
-
+/**
+ * SnakePart.java
+ *
+ * This class represents a part of the snake. It has a position on the board, a direction, and a reference to the next part of the snake.
+ *
+ *
+ */
 class SnakePart {
     private int boardX; // x coordinate on the board
     private int boardY; // y coordinate on the board
