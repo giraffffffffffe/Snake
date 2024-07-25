@@ -13,11 +13,6 @@ public class Main extends JFrame { //implements ActionListener
     private final int RIGHT = 1; // direction of the snake
     private final int LEFT = -1; // direction of the snake
     private int points = 0; // points the player has
-    //private final String[] MENU_NAMES = {"Help", "Configure", "Actions","points "+points};
-    //private final String[] MENU0_OPTIONS = {"Instructions"}; // options in Help menu
-    //private final String[] MENU1_OPTIONS = {"Keys", "Snake Speed"}; // options in configure menu
-    //private final String[] MENU2_OPTIONS = {"Pause"}; // options in actions menu
-    //private final String[] MENU3_OPTIONS = {}; // options in actions menu
     private final int PIXELS_PER_BOX = 10;
     private boolean paused = false;
     private int turnNumber = 0;
@@ -28,10 +23,9 @@ public class Main extends JFrame { //implements ActionListener
     private final Box[][] BOARD = new Box[boardWidth][boardHeight]; // creates a 2D array of boxes
     private boolean gameRunning = false; // if the game is running
     private int frameRate = 250; // 1 frames per second
-    private boolean justAte = false;
     private int xOffset = 8; // x offset of the board (for school, 8) (for home, 0)
     private int yOffset = 31; // y offset of the board (for school, 54) (for home, 49)
-    private final int INITIAL_SNAKE_LENGTH = 7;
+    private final int INITIAL_SNAKE_LENGTH = 1;
     private final int INITIAL_HEAD_X = boardWidth/2-5;
     private final int INITIAL_HEAD_Y = boardHeight/2;
     private boolean firstKeyPressed = false;
@@ -130,12 +124,6 @@ public class Main extends JFrame { //implements ActionListener
         this.panel.setOpaque(false);
         this.setUndecorated(false);
 
-        //this.menuBar = new JMenuBar(); // makes a new menu bar
-        //this.setJMenuBar(menuBar); // sets the menu bar to the window
-        //createMenu(MENU0_OPTIONS, 0); // creates the menus
-        //createMenu(MENU1_OPTIONS, 1);
-        //createMenu(MENU2_OPTIONS, 2);
-        //createMenu(MENU3_OPTIONS, 3);
         this.myGraphic = new Canvas(); // initialises graphic
         this.panel.add(myGraphic); // adds canvas to panel
 
@@ -146,10 +134,8 @@ public class Main extends JFrame { //implements ActionListener
         this.setLocationRelativeTo(null); // opens the window in the middle of the screen
         this.setVisible(true); // makes the window visible
 
-        int xNum = this.getWidth()-paneWidth;
-        int yNum = this.getHeight()-paneHeight;
-        //this.xOffset = 0;
-        //this.yOffset = 49;
+        //int xNum = this.getWidth()-paneWidth;
+        //int yNum = this.getHeight()-paneHeight;
         //this.xOffset = xNum-8;
         //this.yOffset = yNum-8;
         this.panel.repaint();
@@ -175,15 +161,6 @@ public class Main extends JFrame { //implements ActionListener
     }
 
     public void run() {
-        if(!firstKeyPressed){
-            repaint();
-            return;
-
-        }
-        if(paused){
-            repaint();
-            return;
-        }
         if (gameRunning) {
             turn();
         }
@@ -216,28 +193,23 @@ public class Main extends JFrame { //implements ActionListener
             run();
         }
     }
-    /*private void createMenu(String[] menuOptions, int numMenus) { // creates menus in window
-        JMenu menu = new JMenu(MENU_NAMES[numMenus]); // creates a new menu
-        menuBar.add(menu); // adds the menu to the menu bar
-
-        for (String o : menuOptions){ // for each option in the menu
-            menuItem = new JMenuItem(o); // creates a new menu item
-            switch (o){ // sets the accelerator for the menu item
-                case "Instructions" -> menuItem.setAccelerator(KeyStroke.getKeyStroke('i'));
-                case "Pause" -> menuItem.setAccelerator(KeyStroke.getKeyStroke('p'));
-            }
-            menuItem.addActionListener(this); // adds an action listener to the menu item
-            menu.add(menuItem); // adds the menu item to the menu
-        }
-    }*/
     private void fruitEaten() { // when the snake eats a fruit
         f.setEaten(); // sets the fruit to 'eaten';
+        pt("");
+        pt("");
+        pt("");
+        pt("");
+        pt("");
         s.setJustAte(true); // sets the snake to have just eaten
+        pt("");
+        pt("");
+        pt("");
+        pt("");
+        pt("");
         int x=randomNumber(0, boardWidth -1);
         int y=randomNumber(0, boardHeight -1);
         boolean good  = false;
         while (!good){
-            pt("good: "+good+" x: "+x+" y: "+y);
             if (BOARD[x][y].getSnake() || BOARD[x][y].getWall()){
                 x=randomNumber(0, boardWidth);
                 y=randomNumber(0, boardHeight);
@@ -247,15 +219,14 @@ public class Main extends JFrame { //implements ActionListener
         }
         f = new Fruit(randomNumber(0, 2), x, y); // makes a new fruit
         BOARD[x][y].setFruit(true); // sets the box to have a fruit
-        pt("new fruit x: "+f.getX()+"; y: "+f.getY()); // makes a new fruit
         points = points+10;
     }
     public int randomNumber(int min, int max) { // generates a random number between min and max
         return (int) (Math.random() * (max - min + 1) + min);
     }
     public void turn(){
-        pt("");
-        pt("turn "+turnNumber);
+        //pt("");
+        //pt("turn "+turnNumber);
         turnNumber ++;
         int nextX  = s.getHead().getBoardX(); // gets the x coordinate of the head
         int nextY = s.getHead().getBoardY(); // gets the y coordinate of the head
@@ -265,17 +236,17 @@ public class Main extends JFrame { //implements ActionListener
         }
 
         int headD = s.getCurrentDirection(); // gets the direction of the head
-        pt("head direction: "+headD+"; current x: "+nextX+"; current y: "+nextY);
+        //pt("head direction: "+headD+"; current x: "+nextX+"; current y: "+nextY);
         switch (headD) { // sets next y and next x based on the direction of the head
             case UP -> nextY--; // up
             case DOWN -> nextY++; // down
             case RIGHT -> nextX++; // right
             case LEFT -> nextX--; // left
         }
-        pt("next x: "+nextX+"; next y: "+nextY+" .getSnake: "+BOARD[nextX][nextY].getSnake());
+        //pt("next x: "+nextX+"; next y: "+nextY+" .getSnake: "+BOARD[nextX][nextY].getSnake());
 
         if (BOARD[nextX][nextY].getFruit()) { // if the snake head will be on a fruit
-            pt("fruitEaten(s)");
+            pt("fruitEaten()");
             BOARD[nextX][nextY].setSnake(true); // sets the box to have a snake
             fruitEaten(); // eats the fruit
         } else if (BOARD[nextX][nextY].getWall()){ // if the Snake head is on a wall
@@ -302,8 +273,8 @@ public class Main extends JFrame { //implements ActionListener
 
             for(int i = s.getLength(); i>0; i--){
                 pt("sp: "+sp);
-                pt("justAte: "+justAte);
-                if(!justAte) {
+                pt("justAte: "+s.getJustAte());
+                if(!s.getJustAte()) {
                     sp.decrementLifeSpan();
                     pt("" + sp.getLifeSpan());
                     if (sp.getLifeSpan() == 0) {

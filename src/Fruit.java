@@ -7,7 +7,7 @@ public class Fruit {
     private String fruitType; // type of fruit
     private boolean eaten = false; // if the fruit has been eaten
     public Fruit(int n, int fx, int fy){ // constructor
-        System.out.println("Fruit created!");
+        System.out.println("Fruit created! x: " + fx + " y: " + fy + " type: "+ fruits[n]);
         String fT = fruits[n]; // sets the type of fruit
         this.fruitType = fT;
         this.x = fx;

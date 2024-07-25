@@ -29,7 +29,9 @@ public class Snake {
         this.length--;
     }
     public void setJustAte(boolean j){
+        System.out.println("Just ate set to " + j);
         this.justAte = j;
+        System.out.println(this.justAte);
     } // sets if the snake has just eaten
     public boolean getJustAte(){
         return(this.justAte);
