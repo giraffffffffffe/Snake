@@ -29,7 +29,7 @@ public class Main extends JFrame implements ActionListener{
     private boolean justAte = false;
     private int xOffset = 8; // x offset of the board (for school, 8) (for home, 0)
     private int yOffset = 54; // y offset of the board (for school, 54) (for home, 49)
-    private final int INITIAL_SNAKE_LENGTH = 10;
+    private final int INITIAL_SNAKE_LENGTH = 7;
     private final int INITIAL_HEAD_X = boardWidth/2-5;
     private final int INITIAL_HEAD_Y = boardHeight/2;
     private boolean firstKeyPressed = true;
@@ -163,7 +163,7 @@ public class Main extends JFrame implements ActionListener{
 
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
-                pt("key key key key key ");
+                //pt("key pressed ");
                 key(e);
             }
         });
@@ -262,14 +262,14 @@ public class Main extends JFrame implements ActionListener{
             case RIGHT -> nextX++; // right
             case LEFT -> nextX--; // left
         }
-        pt("next x: "+nextX+"; next y: "+nextY);
+        pt("next x: "+nextX+"; next y: "+nextY+" .getSnake: "+BOARD[nextX][nextY].getSnake());
 
         if (BOARD[nextX][nextY].getFruit()) { // if the snake head will be on a fruit
             pt("fruitEaten(s)");
             fruitEaten(s); // eats the fruit
         } else if (BOARD[nextX][nextY].getWall()){ // if the Snake head is on a wall
             lost(); // ends the game
-        } else if ((BOARD[nextX][nextY].getSnake() && !s.getJustAte()) && (s.getTail().getBoardX() == nextX && s.getTail().getBoardY() == nextY)){ // if the Snake head will be on another SnakePart
+        } else if (BOARD[nextX][nextY].getSnake() && !(s.getTail().getBoardX()== nextX && s.getTail().getBoardY() == nextY)){ // if the Snake head will be on another SnakePart
             pt("touching Snake");
             lost(); // ends the game
         }
@@ -278,7 +278,7 @@ public class Main extends JFrame implements ActionListener{
             pt("");
             SnakePart sp = new SnakePart(nextX, nextY, false, true, headD);
             BOARD[nextX][nextY].setSnake(true);
-            sp.setLifeSpan(s.getLength()+1); // added 1 because I'm about to decrement all snakeparts
+            sp.setLifeSpan(s.getLength()+1); // added 1 because I'm about to decrement all snakeParts
 
             SnakePart oldHead = s.getHead();
             pt("old head: "+oldHead);
