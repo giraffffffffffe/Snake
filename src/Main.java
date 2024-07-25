@@ -25,7 +25,7 @@ public class Main extends JFrame implements ActionListener{
     private int paneWidth = boardWidth*PIXELS_PER_BOX; // initial width of window
     private int paneHeight = boardWidth*PIXELS_PER_BOX; // initial height of window
     private final Box[][] BOARD = new Box[boardWidth][boardHeight]; // creates a 2D array of boxes
-    private int frameRate = 1000; // 1 frames per second
+    private int frameRate = 250; // 1 frames per second
     private boolean justAte = false;
     private int xOffset = 8; // x offset of the board (for school, 8) (for home, 0)
     private int yOffset = 54; // y offset of the board (for school, 54) (for home, 49)
@@ -177,16 +177,17 @@ public class Main extends JFrame implements ActionListener{
         //    firstKeyPressed = false;
         //    turn();
         //}
-        if (e.getKeyCode() == 38){ // key was 'up arrow' key
+        pt(""+ e.getKeyCode());
+        if (e.getKeyCode() == 38 || e.getKeyCode() == 87){ // key was 'up arrow' or 'w' key
             s.setNextDirection(UP);
         }
-        if (e.getKeyCode() == 40){ // key was 'down arrow' key
+        if (e.getKeyCode() == 40 || e.getKeyCode() == 83){ // key was 'down arrow' or 's' key
             s.setNextDirection(DOWN);
         }
-        if (e.getKeyCode() == 39){ // key was 'right arrow' key
+        if (e.getKeyCode() == 39 || e.getKeyCode() == 68){ // key was 'right arrow' or 'd' key
             s.setNextDirection(RIGHT);
         }
-        if (e.getKeyCode() == 37){ // key was 'left arrow' key
+        if (e.getKeyCode() == 37 || e.getKeyCode() == 65){ // key was 'left arrow' or 'a' key
             s.setNextDirection(LEFT);
         }
     }
@@ -221,13 +222,14 @@ public class Main extends JFrame implements ActionListener{
             }
         }
     }
-    private void fruitEaten(Snake s) { // when the snake eats a fruit
+    private void fruitEaten() { // when the snake eats a fruit
         f.setEaten(); // sets the fruit to 'eaten';
         s.setJustAte(true); // sets the snake to have just eaten
-        int x=randomNumber(0, boardWidth);
-        int y=randomNumber(0, boardHeight);
+        int x=randomNumber(0, boardWidth -1);
+        int y=randomNumber(0, boardHeight -1);
         boolean good  = false;
         while (!good){
+            pt("good: "+good+" x: "+x+" y: "+y);
             if (BOARD[x][y].getSnake() || BOARD[x][y].getWall()){
                 x=randomNumber(0, boardWidth);
                 y=randomNumber(0, boardHeight);
@@ -266,7 +268,8 @@ public class Main extends JFrame implements ActionListener{
 
         if (BOARD[nextX][nextY].getFruit()) { // if the snake head will be on a fruit
             pt("fruitEaten(s)");
-            fruitEaten(s); // eats the fruit
+            BOARD[nextX][nextY].setSnake(true); // sets the box to have a snake
+            fruitEaten(); // eats the fruit
         } else if (BOARD[nextX][nextY].getWall()){ // if the Snake head is on a wall
             lost(); // ends the game
         } else if (BOARD[nextX][nextY].getSnake() && !(s.getTail().getBoardX()== nextX && s.getTail().getBoardY() == nextY)){ // if the Snake head will be on another SnakePart
@@ -291,6 +294,7 @@ public class Main extends JFrame implements ActionListener{
 
             for(int i = s.getLength(); i>0; i--){
                 pt("sp: "+sp);
+                pt("justAte: "+justAte);
                 if(!justAte) {
                     sp.decrementLifeSpan();
                     pt("" + sp.getLifeSpan());
@@ -369,7 +373,7 @@ public class Main extends JFrame implements ActionListener{
                         default -> pt("Something went wrong");
                     }
                 } else if (BOARD[i][j].getSnake()){ // if the box is a snake
-                    pt("snake: "+i+" "+j+" BOARD[i][j].getSnake(): "+BOARD[i][j].getSnake());
+                    //pt("snake: "+i+" "+j+" BOARD[i][j].getSnake(): "+BOARD[i][j].getSnake());
                 }
             }
         }
