@@ -34,25 +34,25 @@ class SnakePart {
     public void decrementLifeSpan(){
         this.lifeSpan--;
     }
+    /**
+     * These are methods that return a variable
+     */
     public int getDIRECTION(){ // returns the direction of the SnakePart
         return DIRECTION;
     }
-    /**
-     * These are methods that return a variable or set a variable to a given parameter.
-     */
     public boolean getHead(){
         return head;
     }
     public boolean getTail(){
         return tail;
     }
-    public int getBOARD_X(){ // returns the x coordinate of the SnakePart
+    public int getBOARD_X(){
         return BOARD_X;
     }
-    public int getBOARD_Y(){ // returns the y coordinate of the SnakePart
+    public int getBOARD_Y(){
         return BOARD_Y;
     }
-    public SnakePart getFollower(){ // returns the SnakePart that follows this one
+    public SnakePart getFollower(){
         return follower;
     }
     public int getLifeSpan(){
@@ -61,19 +61,23 @@ class SnakePart {
     public SnakePart getLeader(){
         return leader;
     }
+
+    /**
+     * These are methods that set a variable to a given parameter.
+     */
     public void setLeader(SnakePart l){
         this.leader = l;
     }
     public void setLifeSpan(int l){
         this.lifeSpan = l;
     }
-    public void setHead(boolean head) { // sets the SnakePart to be the head
+    public void setHead(boolean head) {
         this.head = head;
     }
-    public void setFollower(SnakePart follower) { // sets the SnakePart that follows this one
+    public void setFollower(SnakePart follower) {
         this.follower = follower;
     }
-    public void setTail(boolean tail) { // sets whether the SnakePart is the tail
+    public void setTail(boolean tail) {
         this.tail = tail;
     }
 }

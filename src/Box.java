@@ -9,7 +9,25 @@ public class Box {
     private boolean wall = false; // if the box is a wall
 
     /**
-     * These are methods that return a variable or set a variable to a given parameter.
+     * Constructor (Currently empty)
+     */
+    public Box() {
+    }
+    /**
+     * These are methods that return a variable
+     * All variables are about what is inside the box
+     */
+    public boolean getFruit() {
+        return fruit;
+    }
+    public boolean getSnake() {
+        return snake;
+    }
+    public boolean getWall() {
+        return wall;
+    }
+    /**
+     * These are methods that set a variable to a given parameter.
      * All variables are about what is inside the box
      */
     public void setFruit(boolean fruit) {
@@ -20,14 +38,5 @@ public class Box {
     }
     public void setWall(boolean wall) {
         this.wall = wall;
-    }
-    public boolean getFruit() {
-        return fruit;
-    }
-    public boolean getSnake() {
-        return snake;
-    }
-    public boolean getWall() {
-        return wall;
     }
 }

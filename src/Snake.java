@@ -4,8 +4,8 @@
  * The Snake is essentially a linked list of SnakeParts. (A queue)
  */
 public class Snake {
-    private SnakePart head;
-    private SnakePart tail;
+    private SnakePart head; // head of the snake
+    private SnakePart tail; // tail of the snake
     private boolean justAte = false; // if the snake has just eaten
     private boolean alive = true; // if the snake is alive
     private int currentDirection; // -1 = Left; -2 = Down; 1 = Right; 2 = Up
@@ -44,23 +44,8 @@ public class Snake {
         this.head = sp;
     }
     /**
-     * These are methods that return a variable or set a variable to a given parameter.
+     * These are methods that return a variable.
      */
-    public void setCurrentDirection(int d) { // sets the length of the snake
-        this.currentDirection = d;
-    }
-    public void setNextDirection(int d) { // sets the length of the snake
-        this.nextDirection = d;
-    }
-    public void setTail(SnakePart t){
-        this.tail = t;
-    }
-    public void setAlive(boolean a){
-        this.alive = a;
-    }
-    public void setJustAte(boolean j){
-        this.justAte = j;
-    }
     public boolean getJustAte(){
         return(this.justAte);
     }
@@ -81,6 +66,24 @@ public class Snake {
     }
     public int getLength() { // gets the length of the snake
         return this.length;
+    }
+    /**
+     * These are methods that set a variable to a given parameter.
+     */
+    public void setCurrentDirection(int d) { // sets the length of the snake
+        this.currentDirection = d;
+    }
+    public void setNextDirection(int d) { // sets the length of the snake
+        this.nextDirection = d;
+    }
+    public void setTail(SnakePart t){
+        this.tail = t;
+    }
+    public void setAlive(boolean a){
+        this.alive = a;
+    }
+    public void setJustAte(boolean j){
+        this.justAte = j;
     }
 
 }

@@ -20,6 +20,11 @@ public class Fruit {
         this.X = fx;
         this.Y = fy;
     }
+
+    /**
+     * These are methods that return a variable
+     * @return
+     */
     public int getX() { // gets the x coordinates of the fruit
         return X;
     }
