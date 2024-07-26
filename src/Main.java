@@ -12,7 +12,6 @@
  */
 
 import java.awt.image.BufferedImage;
-import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -39,8 +38,8 @@ public class Main extends JFrame {
     private final Box[][] BOARD = new Box[boardWidth][boardHeight]; // creates a 2D array of boxes
     private boolean gameRunning = false; // if the game is running
     private int frameRate = 250; // frames per second (1000 = 1 second)
-    private int xOffset = 8; // x offset of the board (for school, 8) (for home, 0)
-    private int yOffset = 31; // y offset of the board (for school, 54) (for home, 49)
+    private int xOffset = 0; // x offset of the board (for school, 8) (for home, 0)
+    private int yOffset = 29; // y offset of the board (for school, 31) (for home, 49)
     private boolean lost = false; // if the player has lost
     private final int INITIAL_SNAKE_LENGTH = 1; // initial length of the snake -1
     private final int INITIAL_HEAD_X = boardWidth/2-5; // initial x coordinate of the head
@@ -281,10 +280,10 @@ public class Main extends JFrame {
     public void turn(){
         //pt("");
         //pt("turn "+turnNumber);
-        int nextX  = s.getHead().getBoardX(); // gets the x coordinate of the head
-        int nextY = s.getHead().getBoardY(); // gets the y coordinate of the head
+        int nextX  = s.getHead().getBOARD_X(); // gets the x coordinate of the head
+        int nextY = s.getHead().getBOARD_Y(); // gets the y coordinate of the head
 
-        if(s.getNextDirection() != -s.getHead().getDirection()){ // if the next direction is not the opposite of the current direction
+        if(s.getNextDirection() != -s.getHead().getDIRECTION()){ // if the next direction is not the opposite of the current direction
             s.setCurrentDirection(s.getNextDirection());
         }
 
@@ -303,7 +302,7 @@ public class Main extends JFrame {
             fruitEaten(); // eats the fruit
         } else if (BOARD[nextX][nextY].getWall()){ // if the Snake head will be on a wall
             lost(); // ends the game
-        } else if (BOARD[nextX][nextY].getSnake() && !(s.getTail().getBoardX()== nextX && s.getTail().getBoardY() == nextY)){ // if the Snake head will be on another SnakePart
+        } else if (BOARD[nextX][nextY].getSnake() && !(s.getTail().getBOARD_X()== nextX && s.getTail().getBOARD_Y() == nextY)){ // if the Snake head will be on another SnakePart
             pt("touching Snake");
             lost(); // ends the game
         }
@@ -331,7 +330,7 @@ public class Main extends JFrame {
                     sp.decrementLifeSpan();
                     pt("" + sp.getLifeSpan());
                     if (sp.getLifeSpan() == 0) {
-                        BOARD[sp.getBoardX()][sp.getBoardY()].setSnake(false);
+                        BOARD[sp.getBOARD_X()][sp.getBOARD_Y()].setSnake(false);
                         pt("removed sp "+sp+" from board.");
                         SnakePart newTail = sp.getLeader();
                         pt("newTail: " + newTail);
@@ -419,29 +418,29 @@ public class Main extends JFrame {
         }
         //draw Snake
         SnakePart sp = this.s.getHead(); // gets the head of the snake
-        int leaderDirection = sp.getDirection(); // gets the direction of the head
+        int leaderDirection = sp.getDIRECTION(); // gets the direction of the head
         //draws each snakepart
         for (int i = 0; i < s.getLength(); i++) {
-            int x = sp.getBoardX() * PIXELS_PER_BOX + xOffset; // x coordinate of the SnakePart (Pixels)
-            int y = sp.getBoardY() * PIXELS_PER_BOX + yOffset; // y coordinate of the SnakePart (Pixels)
+            int x = sp.getBOARD_X() * PIXELS_PER_BOX + xOffset; // x coordinate of the SnakePart (Pixels)
+            int y = sp.getBOARD_Y() * PIXELS_PER_BOX + yOffset; // y coordinate of the SnakePart (Pixels)
             //pt("length: "+s.getLength()+"; head: "+sp.isHead()+"; tail: "+sp.isTail() + "; Board x: "+sp.getBoardX() + "; Board y: "+sp.getBoardY() +"; x coord: "+x+"; y coord: "+y);
             // figures out which icon to use for the tail based on the direction of the SnakePart in front of it. Draws the tail
             if (sp.getTail()) {
-                switch (sp.getLeader().getDirection()) {
+                switch (sp.getLeader().getDIRECTION()) {
                     case UP -> U_SNAKE_TAIL.paintIcon(this, g2, x, y); // U
                     case DOWN -> D_SNAKE_TAIL.paintIcon(this, g2, x, y); // D
                     case RIGHT -> R_SNAKE_TAIL.paintIcon(this, g2, x, y); // R
                     case LEFT -> L_SNAKE_TAIL.paintIcon(this, g2, x, y); // L
-                    default -> pt("tail direction error. Tail direction: " + sp.getDirection());
+                    default -> pt("tail direction error. Tail direction: " + sp.getDIRECTION());
                 }
             } else if (sp.getHead()) { //draws the head
                 pt("head");
-                switch (sp.getDirection()) {
+                switch (sp.getDIRECTION()) {
                     case UP -> U_SNAKE_HEAD.paintIcon(this, g2, x, y); // U
                     case DOWN -> D_SNAKE_HEAD.paintIcon(this, g2, x, y); // D
                     case RIGHT -> R_SNAKE_HEAD.paintIcon(this, g2, x, y); // R
                     case LEFT -> L_SNAKE_HEAD.paintIcon(this, g2, x, y); // L
-                    default -> pt("head direction error. Head direction: " + sp.getDirection());
+                    default -> pt("head direction error. Head direction: " + sp.getDIRECTION());
                 }
             } else { // Draws the body based on the direction of the current SnakePart and the direction of the SnakePart in front of it
                 //pt("body");
@@ -451,7 +450,7 @@ public class Main extends JFrame {
                 // D [XX][XX][DL][DR]
                 // L [XX][XX][XX][LR]
                 // R [XX][XX][XX][XX]
-                switch (-1 * sp.getDirection()) {
+                switch (-1 * sp.getDIRECTION()) {
                     case UP -> {
                         switch (leaderDirection) { // where the snake came from (if it was going left it means it's coming from the right)
                             case DOWN -> UD.paintIcon(this, g2, x, y); // UD
@@ -484,15 +483,15 @@ public class Main extends JFrame {
                             default -> pt("left body. Last direction: " + leaderDirection);
                         } //  switch (-1 * lastDirection) {
                     } // case -1 -> {
-                    default -> pt("body direction error. Body direction: " + sp.getDirection());
+                    default -> pt("body direction error. Body direction: " + sp.getDIRECTION());
                 } // switch (sp.getDirection()) {
             } // else {
-            leaderDirection = sp.getDirection(); // set the last direction to the current direction
+            leaderDirection = sp.getDIRECTION(); // set the last direction to the current direction
             sp = sp.getFollower(); // move to the next SnakePart
         } // for (int i = 0; i < s.getLength(); i++) {
         g2.setColor(Color.WHITE); // sets the colour to white
         g2.setFont(new Font("Arial", Font.PLAIN, 10));
-        g2.drawString("Points: "+points, 18, 40);
+        g2.drawString("Points: "+points, 18, yOffset+9);
         // for all the following, the number taken away from the x coordinate is half the width of the text. It is to center the text.
         if(paused){ // screen if the game is paused
             g2.setColor(new Color(0,0,0,100));

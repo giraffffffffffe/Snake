@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="Snake grows">
+    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="Added Snake.nextDirection variable. &#10;made the Box.snake variable correct all the time&#10;Made all the methods consistently named">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
@@ -97,7 +98,6 @@
       <workItem from="1719447917569" duration="4688000" />
       <workItem from="1720052931218" duration="6237000" />
       <workItem from="1720129587368" duration="2323000" />
-      <workItem from="1721944427344" duration="3263000" />
     </task>
     <task id="LOCAL-00001" summary="Started working on GUI and make a Snake class">
       <option name="closed" value="true" />
@@ -283,15 +283,7 @@
       <option name="project" value="LOCAL" />
       <updated>1721876163461</updated>
     </task>
-    <task id="LOCAL-00024" summary="Snake grows">
-      <option name="closed" value="true" />
-      <created>1721877618470</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1721877618470</updated>
-    </task>
-    <option name="localTasksCounter" value="25" />
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -332,7 +324,6 @@
     <MESSAGE value="fixed Snake - Snake collision" />
     <MESSAGE value="fixed fruit respawning. added WASD key control" />
     <MESSAGE value="has an opening screen, can be paused, displays points. got rid of menu" />
-    <MESSAGE value="Snake grows" />
-    <option name="LAST_COMMIT_MESSAGE" value="Snake grows" />
+    <option name="LAST_COMMIT_MESSAGE" value="has an opening screen, can be paused, displays points. got rid of menu" />
   </component>
 </project>
