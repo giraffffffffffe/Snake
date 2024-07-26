@@ -236,7 +236,6 @@ public class Main extends JFrame {
      * Method that is called when the snake eats a fruit
      */
     private void fruitEaten() {
-        f.setEaten(); // sets the fruit to 'eaten';
         pt("");
         pt("");
         pt("");

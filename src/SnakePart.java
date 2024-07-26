@@ -1,9 +1,7 @@
 /**
  * SnakePart.java
- *
  * This class represents a part of the snake. It has a position on the board, a direction, and a reference to the next part of the snake.
- *
- *
+ * It also has a lifespan that is decremented each time the snake moves. Once it reaches 0, the snake part is removed.
  */
 class SnakePart {
     private final int BOARD_X; // x coordinate on the board

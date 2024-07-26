@@ -1,26 +1,30 @@
-import java.awt.*;
-
+/**
+ *  The `Fruit` class represents a fruit object with coordinates on a board, a type, and an eaten status.
+ */
 public class Fruit {
     public String[] fruits = {"Apple", "Orange", "Plum",}; // possible types of fruit
-    private int x; // x coordinate of the fruit on the board
-    private int y; // y coordinate of the fruit on the board
+    private final int X; // x coordinate of the fruit on the board
+    private final int Y; // y coordinate of the fruit on the board
     private String fruitType; // type of fruit
-    private boolean eaten = false; // if the fruit has been eaten
+
+    /**
+     * Constructs a new `Fruit` object with the specified type index and coordinates.
+     * @param n
+     * @param fx
+     * @param fy
+     */
     public Fruit(int n, int fx, int fy){ // constructor
         System.out.println("Fruit created! x: " + fx + " y: " + fy + " type: "+ fruits[n]);
         String fT = fruits[n]; // sets the type of fruit
-        this.fruitType = fT;
-        this.x = fx;
-        this.y = fy;
-    }
-    public void setEaten() { // sets the fruit to eaten
-        this.eaten = true;
+        this.fruitType = fT; //
+        this.X = fx;
+        this.Y = fy;
     }
     public int getX() { // gets the x coordinates of the fruit
-        return x;
+        return X;
     }
     public int getY() { // gets the y coordinates of the fruit
-        return y;
+        return Y;
     }
     public String getType() { // gets the type of fruit
         return fruitType;
