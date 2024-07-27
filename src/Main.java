@@ -39,14 +39,17 @@ public class Main extends JFrame {
     private boolean gameRunning = false; // if the game is running
     private int frameRate = 250; // frames per second (1000 = 1 second)
     private int xOffset = 0; // x offset of the board (for school, 8) (for home, 0)
-    private int yOffset = 29; // y offset of the board (for school, 31) (for home, 49)
+    private int yOffset = 29; // y offset of the board (for school, 31) (for home, 29)
     private boolean lost = false; // if the player has lost
     private final int INITIAL_SNAKE_LENGTH = 1; // initial length of the snake -1
     private final int INITIAL_HEAD_X = boardWidth/2-5; // initial x coordinate of the head
     private final int INITIAL_HEAD_Y = boardHeight/2; // initial y coordinate of the head
+    private final int INITIAL_FRUIT_X = boardWidth/2; // initial x coordinate of the fruit
+    private final int INITIAL_FRUIT_Y = boardHeight/2; // initial y coordinate of the fruit
     private boolean firstKeyPressed = false; // if the player has pressed a key (Once they have, the game starts)
     private BufferedImage offScreenImage; // image that is used to draw the graphics
     private boolean wantsToQuit = false; // if the player wants to quit
+    private int highscore = 0; // highscore of the player
     /**
      * Fruit and snake images
      */
@@ -88,7 +91,7 @@ public class Main extends JFrame {
     private final ImageIcon RL = new ImageIcon(RL_FILE);;
     private Canvas myGraphic; // canvas that is used for the graphics
     private JPanel panel = new JPanel(); // initialises JPanel
-    private Fruit f = new Fruit(randomNumber(0,2), boardWidth/2, boardHeight/2); // initialises fruit
+    private Fruit f = new Fruit(randomNumber(0,2), INITIAL_FRUIT_X, INITIAL_FRUIT_Y); // initialises fruit
     public Snake s; // initialises Snake
 
     /**
@@ -114,10 +117,6 @@ public class Main extends JFrame {
                 }
             }
         }
-
-        s = new Snake(); // creates a new Snake
-        s.setCurrentDirection(RIGHT); // sets the current direction of the snake
-        s.setNextDirection(RIGHT); // sets the next direction of the snake
         makeSnake();// creates the initial snake by making snakeParts and adding them to the snake
 
         this.setContentPane(panel); // sets the content pane to the panel
@@ -160,15 +159,17 @@ public class Main extends JFrame {
      * Method that runs the game loop
      */
     private void gameLoop() {
-            while (s.getAlive()) { // while the snake is alive
-                turn();
-            }
-
+        while (1==1) { // while the snake is alive
+            turn();
+        }
     }
     /**
      * Method that creates the snake
      */
     public void makeSnake(){
+        s = new Snake(); // creates a new Snake
+        s.setCurrentDirection(RIGHT); // sets the current direction of the snake
+        s.setNextDirection(RIGHT); // sets the next direction of the snake
         SnakePart leader = null; // initialises leader (the head of the snake has no leader)
         for(int i = 0; i <= INITIAL_SNAKE_LENGTH; i++) {
             boolean t = false; // if the SnakePart is the tail
@@ -222,31 +223,37 @@ public class Main extends JFrame {
             paused = !paused;
             gameRunning = !gameRunning; // sets the game to be running or not
         } if(e.getKeyCode() == 81){ // key was 'q' key
-            gameRunning = !gameRunning; // sets the game to be running or not
+            gameRunning = false; // sets the game to be running or not
             wantsToQuit = true; // sets the player to want to quit
-
         }
-        if(!firstKeyPressed){
+        if(wantsToQuit && e.getKeyCode() == 89){ // if the player wants to quit and presses 'y'
+            System.exit(0); // quits the program
+        }
+        boolean justChangedMind = false; // if the player pressed 'q' before starting the game, and then they press 'n', it will take them back to the welcome screen.
+        if(wantsToQuit && e.getKeyCode() == 78){ // if the player wants to quit and presses 'n'
+            justChangedMind = true; // sets the player to have just changed their mind
+            wantsToQuit = false; // sets the player to not want to quit
+            if(firstKeyPressed && !lost && !paused) { // if the player has started the game, and they haven't lost or paused
+                gameRunning = true; // sets the game to be running
+            }
+        }
+        if(!firstKeyPressed && e.getKeyCode() != 81 && !justChangedMind){ // if the player has not pressed a key yet and the first key they press isn't 'q'
             firstKeyPressed = true;
-            gameRunning = true;
+            gameRunning = true; // start the game
+        }
+        if(e.getKeyCode() == 82){ // if the player has lost and presses 'r'
+            if (lost){ // if the player has lost
+                restart(); // restart the game
+            } else{
+                //wantsToRestart = true; // sets the player to want to restart
+            }
         }
     }
-
     /**
      * Method that is called when the snake eats a fruit
      */
     private void fruitEaten() {
-        pt("");
-        pt("");
-        pt("");
-        pt("");
-        pt("");
         s.setJustAte(true); // sets the snake to have just eaten
-        pt("");
-        pt("");
-        pt("");
-        pt("");
-        pt("");
         int x=randomNumber(0, boardWidth -1);
         int y=randomNumber(0, boardHeight -1);
         boolean good  = false;
@@ -262,7 +269,6 @@ public class Main extends JFrame {
         BOARD[x][y].setFruit(true); // sets the box to have a fruit
         points = points+10;
     }
-
     /**
      * Generates a random number between min and max
      * @param min
@@ -272,7 +278,6 @@ public class Main extends JFrame {
     public int randomNumber(int min, int max) { // generates a random number between min and max
         return (int) (Math.random() * (max - min + 1) + min);
     }
-
     /**
      * Method that is called to refresh the screen (move the snake)
      */
@@ -361,8 +366,18 @@ public class Main extends JFrame {
         s.setAlive(false); // sets the snake to be dead
         lost = true; // sets the player to have lost
         pt("lost");
-        //JOptionPane.showMessageDialog(this, "You lost! You got "+points+" points.");
-        //System.exit(0);
+    }
+    public void restart(){
+        makeSnake();
+        lost = false;
+        if(points > highscore){
+            highscore = points;
+        }
+        points = 0;
+        f = new Fruit(randomNumber(0,2), INITIAL_FRUIT_X, INITIAL_FRUIT_Y);
+        gameRunning = true;
+        paused = false;
+        gameLoop();
     }
 
     /**
@@ -492,15 +507,22 @@ public class Main extends JFrame {
         g2.setFont(new Font("Arial", Font.PLAIN, 10));
         g2.drawString("Points: "+points, 18, yOffset+9);
         // for all the following, the number taken away from the x coordinate is half the width of the text. It is to center the text.
-        if(paused){ // screen if the game is paused
+        if(wantsToQuit){ // screen if the player wants to quit
+            g2.setColor(new Color(0,0,0,100));
+            g2.fillRect(0,0,getWidth(),getHeight());
+            g2.setColor(Color.WHITE);
+            g2.setFont(new Font("Arial", Font.PLAIN, 50));
+            g2.drawString("Quit program?", getWidth()/2-160, getHeight()/4);
+            g2.setFont(new Font("Arial", Font.PLAIN, 25));
+            g2.drawString("Press 'y' to quit or 'n' to stay in the game.", getWidth()/2-228, getHeight()/2);
+        } else if(paused){ // screen if the game is paused
             g2.setColor(new Color(0,0,0,100));
             g2.fillRect(0,0,getWidth(),getHeight());
             g2.setColor(Color.WHITE);
             g2.setFont(new Font("Arial", Font.PLAIN, 50));
             g2.drawString("Paused", getWidth()/2-100, getHeight()/2);
             g2.drawString("press 'p' to unpause", getWidth()/2-224, getHeight()/2+50);
-        }
-        if(!firstKeyPressed){ // screen if the player has started
+        }else if(!firstKeyPressed){ // screen if the player has started
             g2.setColor(new Color(0,0,0,100));
             g2.fillRect(0,0,getWidth(),getHeight());
             g2.setColor(Color.WHITE);
@@ -512,8 +534,7 @@ public class Main extends JFrame {
             g2.drawString("Press 'q' to quit.", getWidth()/2-86, getHeight()/2+100);
             g2.drawString("Press 'p' to pause.", getWidth()/2-96, getHeight()/2+150);
             g2.drawString("Have Fun!", getWidth()/2-55, getHeight()/2+200);
-        }
-        if(lost){ // screen if the player has lost
+        }else if(lost){ // screen if the player has lost
             g2.setColor(new Color(0,0,0,100));
             g2.fillRect(0,0,getWidth(),getHeight());
             g2.setColor(Color.WHITE);
@@ -523,6 +544,7 @@ public class Main extends JFrame {
             g2.drawString("You got "+points+" points.", getWidth()/2-101, getHeight()/2);
             g2.drawString("Press 'q' to quit.", getWidth()/2-86, getHeight()/2+50);
         }
+
         g.drawImage(offScreenImage, 0, 0, null);
     } // public void paint(Graphics g) {
 
