@@ -46,8 +46,8 @@ public class Main extends JFrame {
     private int paneHeight = boardWidth*PIXELS_PER_BOX; // initial height of window
     private final Box[][] BOARD = new Box[boardWidth][boardHeight]; // creates a 2D array of boxes
     private boolean gameRunning = false; // if the game is running
-    private int xOffset = 0; // x offset of the board (for school, 8) (for home, 0)
-    private int yOffset = 29; // y offset of the board (for school, 31) (for home, 29)
+    private int xOffset = 8; // x offset of the board (for school, 8) (for home, 0)
+    private int yOffset = 31; // y offset of the board (for school, 31) (for home, 29)
     private boolean lost = false; // if the player has lost
     private boolean instructions = false; // if the player is on the instructions screen
     private final int GROWTH_RATE = 2; // how much the snake grows when it eats a fruit
@@ -388,7 +388,6 @@ public class Main extends JFrame {
         }
 
         if (s.getAlive() && gameRunning) { // if the snake is alive
-            pt("justAteTurns" + s.getJustAteTurns());
             if(turnNumber == WALL_FREQUENCY){
                 addWall(nextX, nextY);
             }
