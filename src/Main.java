@@ -26,20 +26,22 @@ public class Main extends JFrame {
     public final int[] MODE_FRAME_RATES = {100, 80, 50}; // possible modes of the game
     private int currentMode = 0; // current mode of the game
     private String[] MODE_NAMES = {"Easy", "Medium", "Hard"}; // possible modes of the game
-    private final int MARGIN = 20; // margin in pixels from the edge of the board for the text
+    private final int MARGIN = 30; // margin in pixels from the edge of the board for the text
+    private int frameRate = MODE_FRAME_RATES[currentMode]; // frames per second (1000 = 1 second)
     private int titleY; // initalises y coordinate of the title
     private final int Y_GAP_AFTER_TITLE = 75; // gap between the title and the next line of text
     private final int Y_GAP_BETWEEN_LINES = 50; // gap between each line of text
-    private int frameRate = MODE_FRAME_RATES[currentMode]; // frames per second (1000 = 1 second)
     private final int UP = 2; // direction of the snake
     private final int DOWN = -2; // direction of the snake
     private final int RIGHT = 1; // direction of the snake
     private final int LEFT = -1; // direction of the snake
     private int points = 0; // points the player has
-    private final int PIXELS_PER_BOX = 10; // width and height of each box
+    private int[] highscore = {0,0,0}; // highscore of the player in each mode
+    private boolean justGotHighScore = false; // if the player has just got a highscore
     private boolean paused = false; // if the game is paused
-    private boolean firstTurn = true; // number of turns the game has taken
+    private boolean firstTurn = true; // if it is the first turn (only do super.paint(g) on the first turn to help prevent flickering)
     private int turnNumber = 0; // number of turns the game has taken
+    private final int PIXELS_PER_BOX = 10; // width and height of each box
     private int boardWidth = 50; // length of the board (in boxes)
     private int boardHeight = 50; // height of the board (in boxes)
     private int paneWidth = boardWidth*PIXELS_PER_BOX; // initial width of window
@@ -60,13 +62,11 @@ public class Main extends JFrame {
     private boolean firstKeyPressed = false; // if the player has pressed a key (Once they have, the game starts)
     private BufferedImage offScreenImage; // image that is used to draw the graphics
     /**
-     * the next two variables are there just in case the user accidentally presses 'q' or 'r' and doesn't want to lose their progress.
+     * the next three variables are there just in case the user accidentally presses 'q' or 'r' or 'm' and doesn't want to lose their progress.
      */
     private boolean wantsToQuit = false; // if the player wants to quit
     private boolean wantsToRestart = false; // if the player wants to restart
     private boolean wantsToChangeMode = false; // if the player wants to change the mode
-    private int[] highscore = {0,0,0}; // highscore of the player in each mode
-    private boolean justGotHighScore = false; // if the player has just got a highscore
     /**
      * Fruit and snake images
      */
@@ -466,7 +466,7 @@ public class Main extends JFrame {
         }
     }
 
-    /**
+    /**pt
      * Method that is called to paint the window
      * @param g the specified Graphics window
      */
