@@ -5,7 +5,7 @@ public class Fruit {
     public String[] fruits = {"Apple", "Orange", "Plum",}; // possible types of fruit
     private final int X; // x coordinate of the fruit on the board
     private final int Y; // y coordinate of the fruit on the board
-    private String fruitType; // type of fruit
+    private final String FRUIT_TYPE; // type of fruit
 
     /**
      * Constructs a new `Fruit` object with the specified type index and coordinates.
@@ -14,8 +14,7 @@ public class Fruit {
      * @param fy
      */
     public Fruit(int n, int fx, int fy){ // constructor
-        String fT = fruits[n]; // sets the type of fruit
-        this.fruitType = fT; //
+        this.FRUIT_TYPE = fruits[n]; //
         this.X = fx;
         this.Y = fy;
     }
@@ -31,6 +30,6 @@ public class Fruit {
         return Y;
     }
     public String getType() { // gets the type of fruit
-        return fruitType;
+        return FRUIT_TYPE;
     }
 }

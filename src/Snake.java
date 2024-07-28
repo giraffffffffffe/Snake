@@ -91,8 +91,4 @@ public class Snake {
     public void setAlive(boolean a){
         this.alive = a;
     }
-    public void setJustAteTurns(int j){
-        this.justAteTurns = j;
-    }
-
 }
