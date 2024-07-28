@@ -50,6 +50,7 @@ public class Main extends JFrame {
     private int yOffset = 29; // y offset of the board (for school, 31) (for home, 29)
     private boolean lost = false; // if the player has lost
     private boolean instructions = false; // if the player is on the instructions screen
+    private final int GROWTH_RATE = 2; // how much the snake grows when it eats a fruit
     private final int WALL_FREQUENCY = 20; // how often walls are added
     private final int INITIAL_SNAKE_LENGTH = 1; // initial length of the snake -1
     private final int INITIAL_HEAD_X = boardWidth/2-5; // initial x coordinate of the head
@@ -332,7 +333,7 @@ public class Main extends JFrame {
      * Method that is called when the snake eats a fruit
      */
     private void fruitEaten() {
-        s.setJustAte(true); // sets the snake to have just eaten
+        s.addToJustAteTurns(GROWTH_RATE); // sets the snake to have just eaten
         int x=randomNumber(0, boardWidth -1);
         int y=randomNumber(0, boardHeight -1);
         boolean good  = false;
@@ -387,6 +388,7 @@ public class Main extends JFrame {
         }
 
         if (s.getAlive() && gameRunning) { // if the snake is alive
+            pt("justAteTurns" + s.getJustAteTurns());
             if(turnNumber == WALL_FREQUENCY){
                 addWall(nextX, nextY);
             }
@@ -404,7 +406,7 @@ public class Main extends JFrame {
 
             // for each snakePart, decrement the lifeSpan and if it is 0, remove it from the board
             for(int i = s.getLength(); i>0; i--){
-                if(!s.getJustAte()) {
+                if(s.getJustAteTurns()==0) {
                     sp.decrementLifeSpan();
                     if (sp.getLifeSpan() == 0) {
                         BOARD[sp.getBOARD_X()][sp.getBOARD_Y()].setSnake(false);
@@ -417,7 +419,9 @@ public class Main extends JFrame {
                 }
                 sp = sp.getFollower(); // move on to the next SnakePart
             }
-            s.setJustAte(false); // sets the snake to not have just eaten
+            if(s.getJustAteTurns() > 0) {
+                s.decrementJustAteTurns(); // decreases the number of turns the snake has 'just eaten' for by 1
+            }
             turnNumber ++;
         }
         repaint(); // repaints the window

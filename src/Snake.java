@@ -6,7 +6,7 @@
 public class Snake {
     private SnakePart head; // head of the snake
     private SnakePart tail; // tail of the snake
-    private boolean justAte = false; // if the snake has just eaten
+    private int justAteTurns = 0; // number of turns for which the snake doesn't grow
     private boolean alive = true; // if the snake is alive
     private int currentDirection; // -1 = Left; -2 = Down; 1 = Right; 2 = Up
     private int nextDirection; // -1 = Left; -2 = Down; 1 = Right; 2 = Up
@@ -31,10 +31,13 @@ public class Snake {
         this.length++;
     }
     /**
-     * Decrement length of the snake
+     * these two methods decrease a variable by 1
      */
     public void decrementLength(){
         this.length--;
+    }
+    public void decrementJustAteTurns(){
+        this.justAteTurns--;
     }
     /**
      * Set the head of the snake to the given SnakePart and sets the given snakePart to be a head
@@ -44,10 +47,16 @@ public class Snake {
         this.head = sp;
     }
     /**
+     * Set the tail of the snake to the given SnakePart and sets the given snakePart to be a tail
+     */
+    public void addToJustAteTurns(int i){
+        this.justAteTurns += i;
+    }
+    /**
      * These are methods that return a variable.
      */
-    public boolean getJustAte(){
-        return(this.justAte);
+    public int getJustAteTurns(){
+        return(this.justAteTurns);
     }
     public boolean getAlive(){
         return this.alive;
@@ -82,8 +91,8 @@ public class Snake {
     public void setAlive(boolean a){
         this.alive = a;
     }
-    public void setJustAte(boolean j){
-        this.justAte = j;
+    public void setJustAteTurns(int j){
+        this.justAteTurns = j;
     }
 
 }
