@@ -14,7 +14,6 @@ public class Fruit {
      * @param fy
      */
     public Fruit(int n, int fx, int fy){ // constructor
-        System.out.println("Fruit created! x: " + fx + " y: " + fy + " type: "+ fruits[n]);
         String fT = fruits[n]; // sets the type of fruit
         this.fruitType = fT; //
         this.X = fx;

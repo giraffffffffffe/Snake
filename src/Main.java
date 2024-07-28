@@ -312,7 +312,6 @@ public class Main extends JFrame {
      * Method that adds a wall to the board which makes the game harder as it goes
      */
     private void addWall(int nextX, int nextY){ // adds a wall to the board
-        pt("addWall");
         points++;
         int x = randomNumber(0, boardWidth - 1);
         int y = randomNumber(0, boardHeight - 1);
@@ -323,7 +322,6 @@ public class Main extends JFrame {
                 y = randomNumber(0, boardHeight -1);
             } else {
                 good = true;
-                pt(""+x+" "+y);
             }
         }
         BOARD[x][y].setWall(true);
@@ -379,7 +377,6 @@ public class Main extends JFrame {
             case LEFT -> nextX--;
         }
         if (BOARD[nextX][nextY].getFruit()) { // if the snake head will be on a fruit
-            pt("fruitEaten()");
             BOARD[nextX][nextY].setSnake(true); // sets the box to have a snake
             fruitEaten(); // eats the fruit
         } else if (BOARD[nextX][nextY].getWall()){ // if the Snake head will be on a wall
@@ -441,6 +438,7 @@ public class Main extends JFrame {
     public void restart(){
         pt("restart");
         makeSnake();
+        firstKeyPressed = false;
         frameRate = MODE_FRAME_RATES[currentMode];
         lost = false;
         justGotHighScore = false;
