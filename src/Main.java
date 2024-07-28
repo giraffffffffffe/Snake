@@ -25,6 +25,7 @@ public class Main extends JFrame {
     public final Color DOT_COLOR = new Color(26, 109, 85); //colour that the dots are
     public final int[] MODE_FRAME_RATES = {100, 80, 50}; // possible modes of the game
     private int currentMode = 0; // current mode of the game
+    private String[] MODE_NAMES = {"Easy", "Medium", "Hard"}; // possible modes of the game
     private final int MARGIN = 20; // margin in pixels from the edge of the board for the text
     private int titleY; // initalises y coordinate of the title
     private final int Y_GAP_AFTER_TITLE = 75; // gap between the title and the next line of text
@@ -444,7 +445,6 @@ public class Main extends JFrame {
         justGotHighScore = false;
         points = 0;
         f = new Fruit(randomNumber(0,2), INITIAL_FRUIT_X, INITIAL_FRUIT_Y);
-        gameRunning = true;
         paused = false;
         turnNumber = 0;
         // resets the board
@@ -602,9 +602,9 @@ public class Main extends JFrame {
             lines++;
             g2.drawString("without changing press 'b'.", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
             lines = lines+2;
-            g2.drawString("Press 'e' for easy, 'm' for medium, or 'h'", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
+            g2.drawString("Press 'e' for "+MODE_NAMES[0]+", 'm' for "+MODE_NAMES[1]+", or 'h'", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
             lines++;
-            g2.drawString("for hard.", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
+            g2.drawString("for "+MODE_NAMES[2]+".", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
         }else if(instructions){
             g2.setColor(new Color(0,0,0,100));
             g2.fillRect(0,0,getWidth(),getHeight());
@@ -644,6 +644,10 @@ public class Main extends JFrame {
             g2.setFont(new Font("Arial", Font.PLAIN, 25));
             g2.drawString("Press any key to start.", MARGIN, titleY+Y_GAP_AFTER_TITLE);
             lines++;
+            g2.drawString("You're on difficulty "+MODE_NAMES[currentMode]+".", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
+            lines++;
+            g2.drawString("Press 'm' to change the difficulty.", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
+            lines++;
             g2.drawString("Press 'i' for instructions.", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
             lines++;
             g2.drawString("Have Fun!", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
@@ -663,11 +667,7 @@ public class Main extends JFrame {
                 g2.drawString("Your highscore is "+highscore[currentMode]+".", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
                 lines++;
             }
-            switch(currentMode){
-                case 0 -> g2.drawString("Difficulty: easy", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
-                case 1 -> g2.drawString("Difficulty: medium", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
-                case 2 -> g2.drawString("Difficulty: hard", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
-            }
+            g2.drawString("Difficulty: "+MODE_NAMES[currentMode], MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
             lines = lines + 2;
             g2.drawString("Press 'i' for instructions.", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
             lines++;
