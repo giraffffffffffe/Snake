@@ -2,7 +2,7 @@
  *  The `Fruit` class represents a fruit object with coordinates on a board, a type, and an eaten status.
  */
 public class Fruit {
-    public String[] fruits = {"Apple", "Orange", "Plum",}; // possible types of fruit
+    public String[] fruits = {"Apple", "Orange", "Plum","Kiwifruit"}; // possible types of fruit
     private final int X; // x coordinate of the fruit on the board
     private final int Y; // y coordinate of the fruit on the board
     private final String FRUIT_TYPE; // type of fruit

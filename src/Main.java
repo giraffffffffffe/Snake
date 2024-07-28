@@ -70,6 +70,7 @@ public class Main extends JFrame {
     /**
      * Fruit and snake images
      */
+    private final String KIWIFRUIT_FILE = "kiwifruit.png";
     private final String APPLE_FILE = "apple.png";
     private final String ORANGE_FILE = "orange.png";
     private final String PLUM_FILE = "plum.png";
@@ -87,6 +88,7 @@ public class Main extends JFrame {
     private final String UL_FILE = "ul.png";
     private final String DR_FILE = "dr.png";
     private final String DL_FILE = "dl.png";
+    private final ImageIcon KIWIFRUIT = new ImageIcon(KIWIFRUIT_FILE);
     private final ImageIcon APPLE = new ImageIcon(APPLE_FILE);
     private final ImageIcon ORANGE = new ImageIcon(ORANGE_FILE);
     private final ImageIcon PLUM = new ImageIcon(PLUM_FILE);
@@ -319,7 +321,7 @@ public class Main extends JFrame {
         int y = randomNumber(0, boardHeight - 1);
         boolean good = false;
         while (!good) {
-            if (BOARD[x][y].getSnake() || BOARD[x][y].getWall() || x == nextX || y == nextY) {
+            if (BOARD[x][y].getSnake() || BOARD[x][y].getWall() || BOARD[x][y].getFruit() || x == nextX || y == nextY) {
                 x = randomNumber(0, boardWidth -1);
                 y = randomNumber(0, boardHeight -1);
             } else {
@@ -346,7 +348,12 @@ public class Main extends JFrame {
             }
         }
         BOARD[f.getX()][f.getY()].setFruit(false); // sets the box to not have a fruit
-        f = new Fruit(randomNumber(0, 2), x, y); // makes a new fruit
+        if (currentMode == 2) {
+            f = new Fruit(randomNumber(2,3), x, y); // makes a new plum if it's in hard mode
+        }else{
+            f = new Fruit(randomNumber(0,1), x, y); // makes a new fruit
+
+        }
         BOARD[x][y].setFruit(true); // sets the box to have a fruit
         points = points+10;
     }
@@ -447,7 +454,11 @@ public class Main extends JFrame {
         lost = false;
         justGotHighScore = false;
         points = 0;
-        f = new Fruit(randomNumber(0,2), INITIAL_FRUIT_X, INITIAL_FRUIT_Y);
+        if(currentMode == 2) {
+            f = new Fruit(randomNumber(2, 3), INITIAL_FRUIT_X, INITIAL_FRUIT_Y);
+        }else {
+            f = new Fruit(randomNumber(0, 1), INITIAL_FRUIT_X, INITIAL_FRUIT_Y);
+        }
         paused = false;
         turnNumber = 0;
         // resets the board
@@ -499,6 +510,9 @@ public class Main extends JFrame {
                         }
                         case "Plum" -> {
                             PLUM.paintIcon(this, g2, fruitX(), fruitY());
+                        }
+                        case "Kiwifruit" -> {
+                            KIWIFRUIT.paintIcon(this, g2, fruitX(), fruitY());
                         }
                         default -> pt("Something went wrong");
                     }
@@ -607,7 +621,9 @@ public class Main extends JFrame {
             lines = lines+2;
             g2.drawString("Press 'e' for "+MODE_NAMES[0]+", 'm' for "+MODE_NAMES[1]+", or 'h'", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
             lines++;
-            g2.drawString("for "+MODE_NAMES[2]+".", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
+            g2.drawString("for "+MODE_NAMES[2]+". (Look closely, "+MODE_NAMES[2]+" mode has", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
+            lines++;
+            g2.drawString("low contrast fruit!)", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
         }else if(instructions){
             g2.setColor(new Color(0,0,0,100));
             g2.fillRect(0,0,getWidth(),getHeight());
