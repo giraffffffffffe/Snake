@@ -25,10 +25,10 @@ public class Main extends JFrame {
     public final Color DOT_COLOR = new Color(26, 109, 85); //colour that the dots are
     public final int[] MODE_FRAME_RATES = {100, 80, 50}; // possible modes of the game
     private int currentMode = 0; // current mode of the game
-    private String[] MODE_NAMES = {"Easy", "Medium", "Hard"}; // possible modes of the game
-    private final int MARGIN = 30; // margin in pixels from the edge of the board for the text
+    private final String[] MODE_NAMES = {"Easy", "Medium", "Hard"}; // possible modes of the game
     private int frameRate = MODE_FRAME_RATES[currentMode]; // frames per second (1000 = 1 second)
-    private int titleY; // initalises y coordinate of the title
+    private final int MARGIN = 30; // margin in pixels from the edge of the board for the text
+    private int titleY; // initializes y coordinate of the title
     private final int Y_GAP_AFTER_TITLE = 75; // gap between the title and the next line of text
     private final int Y_GAP_BETWEEN_LINES = 50; // gap between each line of text
     private final int UP = 2; // direction of the snake
@@ -103,7 +103,7 @@ public class Main extends JFrame {
     private final ImageIcon UL = new ImageIcon(UL_FILE);
     private final ImageIcon DR = new ImageIcon(DR_FILE);
     private final ImageIcon DL = new ImageIcon(DL_FILE);
-    private final ImageIcon RL = new ImageIcon(RL_FILE);;
+    private final ImageIcon RL = new ImageIcon(RL_FILE);
     private Canvas myGraphic; // canvas that is used for the graphics
     private JPanel panel = new JPanel(); // initialises JPanel
     private Fruit f = new Fruit(randomNumber(0,2), INITIAL_FRUIT_X, INITIAL_FRUIT_Y); // initialises fruit
@@ -161,7 +161,7 @@ public class Main extends JFrame {
         pt("pane W H      "+paneWidth+" "+paneHeight);
         pt("menu bar W H  "+this.menuBar.getWidth()+" "+this.menuBar.getHeight());
         pt("panel x y     "+this.panel.getX()+"   "+this.panel.getY());
-        pt("xoffst Yoffst "+this.xOffset+"   "+this.yOffset);
+        pt("xOffset yOffset "+this.xOffset+"   "+this.yOffset);
             */
         addKeyListener(new KeyAdapter() { // adds a key listener
             public void keyPressed(KeyEvent e) { // when a key is pressed
@@ -663,13 +663,12 @@ public class Main extends JFrame {
             g2.setFont(new Font("Arial", Font.PLAIN, 25));
             if(justGotHighScore){
                 g2.drawString("You got a highscore of "+ points+"!", MARGIN, titleY+Y_GAP_AFTER_TITLE);
-                lines++;
             } else {
                 g2.drawString("You got "+points+" points!", MARGIN, titleY+Y_GAP_AFTER_TITLE);
                 lines++;
                 g2.drawString("Your highscore is "+highscore[currentMode]+".", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
-                lines++;
             }
+            lines++;
             g2.drawString("Difficulty: "+MODE_NAMES[currentMode], MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
             lines = lines + 2;
             g2.drawString("Press 'i' for instructions.", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
