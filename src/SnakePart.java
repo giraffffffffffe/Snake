@@ -21,7 +21,6 @@ class SnakePart {
      * @param d
      */
     public SnakePart(int x, int y, boolean tail, boolean head, int d){ // constructor
-        System.out.println("new SnakePart " + this);
         this.BOARD_X = x;
         this.BOARD_Y = y;
         this.tail = tail;

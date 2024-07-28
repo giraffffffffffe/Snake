@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="Added more comments">
+    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="worked on restart and quit">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_07_2024,_13_16_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_07_2024__13_16__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SnakePart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SnakePart.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -306,7 +310,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722036212651</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="worked on restart and quit">
+      <option name="closed" value="true" />
+      <created>1722040175014</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1722040175014</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -324,7 +336,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Started working on GUI and make a Snake class" />
     <MESSAGE value="Window opens and there are menus" />
     <MESSAGE value="Made panel non-resizable, added code for some menu items" />
     <MESSAGE value="Made Fruit class and worked connecting everything" />
@@ -349,6 +360,7 @@
     <MESSAGE value="has an opening screen, can be paused, displays points. got rid of menu" />
     <MESSAGE value="Added snakePart comments and made some variables final" />
     <MESSAGE value="Added more comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added more comments" />
+    <MESSAGE value="worked on restart and quit" />
+    <option name="LAST_COMMIT_MESSAGE" value="worked on restart and quit" />
   </component>
 </project>
