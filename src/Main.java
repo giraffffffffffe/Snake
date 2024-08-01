@@ -352,15 +352,15 @@ public class Main extends JFrame {
      */
     private void fruitEaten() {
         s.addToJustAteTurns(GROWTH_RATE); // sets the snake to have just eaten
-        int x=randomNumber(0, BOARD_WIDTH -1);
-        int y=randomNumber(0, BOARD_HEIGHT -1);
-        boolean good  = false;
-        while (!good){
+        int x=randomNumber(0, BOARD_WIDTH -1); // generates a random x coordinate
+        int y=randomNumber(0, BOARD_HEIGHT -1); // generates a random y coordinate
+        boolean goodPosition  = false; // if the fruit is in a good spot
+        while (!goodPosition){
             if (BOARD[x][y].getSnake() || BOARD[x][y].getWall()){
-                x=randomNumber(0, BOARD_WIDTH -1);
-                y=randomNumber(0, BOARD_HEIGHT -1);
+                x=randomNumber(0, BOARD_WIDTH -1); // generates a random x coordinate
+                y=randomNumber(0, BOARD_HEIGHT -1); // generates a random y coordinate
             } else {
-                good = true;
+                goodPosition = true;
             }
         }
         BOARD[f.getX()][f.getY()].setFruit(false); // sets the box to not have a fruit
@@ -715,6 +715,6 @@ public class Main extends JFrame {
      * @return the y coordinate of the fruit in pixels
      */
     public int fruitY(){
-        return f.getY()*PIXELS_PER_BOX+ Y_OFFSET -1; // returns the y coordinate of the fruit (pixels)
+        return f.getY()*PIXELS_PER_BOX+ Y_OFFSET; // returns the y coordinate of the fruit (pixels)
     } // returns the y coordinate of the fruit
 }

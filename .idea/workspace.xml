@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Snake:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="added kiwifruit and plum for hard mode. &#10;wall can no longer spawn on fruit.">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_07_2024,_20_06_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_07_2024_1_46_pm_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_07_2024_1_46_pm__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_07_2024__20_06__Changes_.xml" beforeDir="false" />
+    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="edited block comments&#10;added a highscore update when mode is changed.&#10;Got rid of some warnings">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Snake_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Box.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Box.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Fruit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Fruit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Snake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Snake.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SnakePart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SnakePart.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,24 +54,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;H:/CSC223/AnneCareySmithSubmission/intelliJProjectAnne&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "H:/CSC223/AnneCareySmithSubmission/intelliJProjectAnne",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -106,7 +108,7 @@
       <workItem from="1720052931218" duration="6237000" />
       <workItem from="1720129587368" duration="2323000" />
       <workItem from="1721944427344" duration="3263000" />
-      <workItem from="1722471904272" duration="2190000" />
+      <workItem from="1722471904272" duration="5635000" />
     </task>
     <task id="LOCAL-00001" summary="Started working on GUI and make a Snake class">
       <option name="closed" value="true" />
@@ -316,7 +318,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722206819853</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="edited block comments&#10;added a highscore update when mode is changed.&#10;Got rid of some warnings">
+      <option name="closed" value="true" />
+      <created>1722475135569</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1722475135569</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -334,7 +344,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Started working on GUI and make a Snake class" />
     <MESSAGE value="Window opens and there are menus" />
     <MESSAGE value="Made panel non-resizable, added code for some menu items" />
     <MESSAGE value="Made Fruit class and worked connecting everything" />
@@ -359,6 +368,7 @@
     <MESSAGE value="has an opening screen, can be paused, displays points. got rid of menu" />
     <MESSAGE value="Snake grows" />
     <MESSAGE value="added kiwifruit and plum for hard mode. &#10;wall can no longer spawn on fruit." />
-    <option name="LAST_COMMIT_MESSAGE" value="added kiwifruit and plum for hard mode. &#10;wall can no longer spawn on fruit." />
+    <MESSAGE value="edited block comments&#10;added a highscore update when mode is changed.&#10;Got rid of some warnings" />
+    <option name="LAST_COMMIT_MESSAGE" value="edited block comments&#10;added a highscore update when mode is changed.&#10;Got rid of some warnings" />
   </component>
 </project>
