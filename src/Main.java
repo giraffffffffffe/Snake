@@ -335,13 +335,13 @@ public class Main extends JFrame {
         points++;
         int x = randomNumber(0, BOARD_WIDTH - 1);
         int y = randomNumber(0, BOARD_HEIGHT - 1);
-        boolean good = false;
-        while (!good) {
+        boolean goodPosition = false;
+        while (!goodPosition) {
             if (BOARD[x][y].getSnake() || BOARD[x][y].getWall() || BOARD[x][y].getFruit() || x == nextX || y == nextY) {
                 x = randomNumber(0, BOARD_WIDTH -1);
                 y = randomNumber(0, BOARD_HEIGHT -1);
             } else {
-                good = true;
+                goodPosition = true;
             }
         }
         BOARD[x][y].setWall(true);

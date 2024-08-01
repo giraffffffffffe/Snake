@@ -9,11 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="edited block comments&#10;added a highscore update when mode is changed.&#10;Got rid of some warnings">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Snake_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+    <list default="true" id="ee0a2173-176d-400d-bd49-b46cdcab95b0" name="Changes" comment="changed 'good' variable to 'goodPosition'">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +105,7 @@
       <workItem from="1720052931218" duration="6237000" />
       <workItem from="1720129587368" duration="2323000" />
       <workItem from="1721944427344" duration="3263000" />
-      <workItem from="1722471904272" duration="5635000" />
+      <workItem from="1722471904272" duration="7537000" />
     </task>
     <task id="LOCAL-00001" summary="Started working on GUI and make a Snake class">
       <option name="closed" value="true" />
@@ -326,7 +323,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722475135569</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="changed 'good' variable to 'goodPosition'">
+      <option name="closed" value="true" />
+      <created>1722479284979</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1722479284979</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -344,7 +349,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Window opens and there are menus" />
     <MESSAGE value="Made panel non-resizable, added code for some menu items" />
     <MESSAGE value="Made Fruit class and worked connecting everything" />
     <MESSAGE value="changed a fruit and started working on the board" />
@@ -369,6 +373,7 @@
     <MESSAGE value="Snake grows" />
     <MESSAGE value="added kiwifruit and plum for hard mode. &#10;wall can no longer spawn on fruit." />
     <MESSAGE value="edited block comments&#10;added a highscore update when mode is changed.&#10;Got rid of some warnings" />
-    <option name="LAST_COMMIT_MESSAGE" value="edited block comments&#10;added a highscore update when mode is changed.&#10;Got rid of some warnings" />
+    <MESSAGE value="changed 'good' variable to 'goodPosition'" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed 'good' variable to 'goodPosition'" />
   </component>
 </project>
