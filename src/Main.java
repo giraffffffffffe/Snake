@@ -27,6 +27,7 @@ public class Main extends JFrame {
     private int currentMode = 0; // current mode of the game
     private final String[] MODE_NAMES = {"Easy", "Medium", "Hard"}; // possible modes of the game
     private int frameRate = MODE_FRAME_RATES[currentMode]; // frames per second (1000 = 1 second)
+    private boolean gameLoopFlag = true; // if the game loop is running
     private final int MARGIN = 30; // margin in pixels from the edge of the board for the text
     private int titleY; // initializes y coordinate of the title
     private final int Y_GAP_AFTER_TITLE = 75; // gap between the title and the next line of text
@@ -36,29 +37,27 @@ public class Main extends JFrame {
     private final int RIGHT = 1; // direction of the snake
     private final int LEFT = -1; // direction of the snake
     private int points = 0; // points the player has
-    private int[] highscore = {0,0,0}; // highscore of the player in each mode
-    private boolean justGotHighScore = false; // if the player has just got a highscore
+    private int[] highScore = {0,0,0}; // highScore of the player in each mode
+    private boolean justGotHighScore = false; // if the player has just got a high score
     private boolean paused = false; // if the game is paused
     private boolean firstTurn = true; // if it is the first turn (only do super.paint(g) on the first turn to help prevent flickering)
     private int turnNumber = 0; // number of turns the game has taken
     private final int PIXELS_PER_BOX = 10; // width and height of each box
-    private int boardWidth = 50; // length of the board (in boxes)
-    private int boardHeight = 50; // height of the board (in boxes)
-    private int paneWidth = boardWidth*PIXELS_PER_BOX; // initial width of window
-    private int paneHeight = boardWidth*PIXELS_PER_BOX; // initial height of window
-    private final Box[][] BOARD = new Box[boardWidth][boardHeight]; // creates a 2D array of boxes
+    private final int BOARD_WIDTH = 50; // length of the board (in boxes)
+    private final int BOARD_HEIGHT = 50; // height of the board (in boxes)
+    private final Box[][] BOARD = new Box[BOARD_WIDTH][BOARD_HEIGHT]; // creates a 2D array of boxes
     private boolean gameRunning = false; // if the game is running
-    private int xOffset = 8; // x offset of the board (for school, 8) (for home, 0)
-    private int yOffset = 31; // y offset of the board (for school, 31) (for home, 29)
+    private final int X_OFFSET = 8; // x offset of the board (for school, 8) (for home, 0)
+    private final int Y_OFFSET = 31; // y offset of the board (for school, 31) (for home, 29)
     private boolean lost = false; // if the player has lost
     private boolean instructions = false; // if the player is on the instructions screen
     private final int GROWTH_RATE = 2; // how much the snake grows when it eats a fruit
     private final int WALL_FREQUENCY = 20; // how often walls are added
     private final int INITIAL_SNAKE_LENGTH = 1; // initial length of the snake -1
-    private final int INITIAL_HEAD_X = boardWidth/2-5; // initial x coordinate of the head
-    private final int INITIAL_HEAD_Y = boardHeight/2; // initial y coordinate of the head
-    private final int INITIAL_FRUIT_X = boardWidth/2; // initial x coordinate of the fruit
-    private final int INITIAL_FRUIT_Y = boardHeight/2; // initial y coordinate of the fruit
+    private final int INITIAL_HEAD_X = BOARD_WIDTH /2-5; // initial x coordinate of the head
+    private final int INITIAL_HEAD_Y = BOARD_HEIGHT/2; // initial y coordinate of the head
+    private final int INITIAL_FRUIT_X = BOARD_WIDTH /2; // initial x coordinate of the fruit
+    private final int INITIAL_FRUIT_Y = BOARD_HEIGHT/2; // initial y coordinate of the fruit
     private boolean firstKeyPressed = false; // if the player has pressed a key (Once they have, the game starts)
     private BufferedImage offScreenImage; // image that is used to draw the graphics
     /**
@@ -106,14 +105,14 @@ public class Main extends JFrame {
     private final ImageIcon DR = new ImageIcon(DR_FILE);
     private final ImageIcon DL = new ImageIcon(DL_FILE);
     private final ImageIcon RL = new ImageIcon(RL_FILE);
-    private Canvas myGraphic; // canvas that is used for the graphics
-    private JPanel panel = new JPanel(); // initialises JPanel
+    private final Canvas myGraphic; // canvas that is used for the graphics
+    private final JPanel panel = new JPanel(); // initialises JPanel
     private Fruit f = new Fruit(randomNumber(0,2), INITIAL_FRUIT_X, INITIAL_FRUIT_Y); // initialises fruit
     public Snake s; // initialises Snake
 
     /**
      * Main method that starts the program
-     * @param args
+     * @param args command line arguments
      */
     public static void main(String[] args) {
         Main m = new Main();
@@ -123,10 +122,10 @@ public class Main extends JFrame {
      * Constructor for Main which runs initially
      */
     public Main(){
-        for(int i = 0; i <boardWidth; i++){ // for each box in the board
-            for(int j = 0; j < boardHeight; j++){
+        for(int i = 0; i < BOARD_WIDTH; i++){ // for each box in the board
+            for(int j = 0; j < BOARD_HEIGHT; j++){
                 BOARD[i][j] = new Box(); // creates a new box
-                if (i == 0 || i == boardWidth-1 || j == 0 || j == boardHeight-1){ // if the box is on the edge
+                if (i == 0 || i == BOARD_WIDTH -1 || j == 0 || j == BOARD_HEIGHT-1){ // if the box is on the edge
                     BOARD[i][j].setWall(true); // sets the box to be a wall
                 }
                 if (i == INITIAL_FRUIT_X && j == INITIAL_FRUIT_Y){ // if the box is in the middle (the start location of the fruit)
@@ -138,9 +137,13 @@ public class Main extends JFrame {
 
         this.setContentPane(panel); // sets the content pane to the panel
         this.setTitle("Snake!"); // sets title of Window to "Snake!"
-        this.getContentPane().setPreferredSize(new Dimension(paneWidth,paneHeight)); // sets the size of the window
+        // initial width of window
+        int paneWidth = BOARD_WIDTH * PIXELS_PER_BOX;
+        // initial height of window
+        int paneHeight = BOARD_WIDTH * PIXELS_PER_BOX;
+        this.getContentPane().setPreferredSize(new Dimension(paneWidth, paneHeight)); // sets the size of the window
         this.setResizable(false); // stops the user from resizing the window
-        this.panel.setPreferredSize(new Dimension(paneWidth,paneHeight));
+        this.panel.setPreferredSize(new Dimension(paneWidth, paneHeight));
         this.panel.setOpaque(false); // makes the panel transparent
         this.setUndecorated(false);  // adds the title bar
 
@@ -176,7 +179,7 @@ public class Main extends JFrame {
      * Method that runs the game loop
      */
     private void gameLoop() {
-        while (true) { // while the snake is alive
+        while (gameLoopFlag) {
             turn();
             try {
                 Thread.sleep((long) (frameRate));
@@ -214,7 +217,7 @@ public class Main extends JFrame {
     }
     /**
      * Prints a string to the console
-     * @param s
+     * @param s the string to print to the console
      */
     public void pt(String s){
         System.out.println(s);
@@ -222,11 +225,12 @@ public class Main extends JFrame {
 
     /**
      * Method that is called when a key is pressed
-     * @param e
+     * @param e the key event
      */
     public void key(KeyEvent e){
         if(wantsToQuit ){ // if the player wants to quit and presses 'y'
             if (e.getKeyCode() == 89) { // key was 'y' key
+                gameLoopFlag = false;
                 System.exit(0); // quits the program
             } else if (e.getKeyCode() == 78) {
                 wantsToQuit = false; // sets the player to not want to quit
@@ -246,16 +250,28 @@ public class Main extends JFrame {
             }
         } else if(wantsToChangeMode){
             if(e.getKeyCode() == 69){ // if the player presses 'e'
+                if(points> highScore[currentMode]){ // if the player has a new high score
+                    highScore[currentMode] = points; // sets the high score to the points they got that round
+                    justGotHighScore = true;
+                }
                 currentMode = 0; // sets the mode to the first mode
                 wantsToChangeMode = false;
                 firstKeyPressed = true; // so that it doesn't go back to the welcome screen
                 restart(); // restarts the game
             } else if(e.getKeyCode() == 77){ // if the player presses 'm'
+                if(points> highScore[currentMode]){ // if the player has a new high score
+                    highScore[currentMode] = points; // sets the high score to the points they got that round
+                    justGotHighScore = true;
+                }
                 currentMode = 1; // sets the mode to the second mode
                 wantsToChangeMode = false;
                 firstKeyPressed = true;
                 restart(); // restarts the game
             } else if(e.getKeyCode() == 72){ // if the player presses 'h'
+                if(points> highScore[currentMode]){ // if the player has a new high score
+                    highScore[currentMode] = points; // sets the high score to the points they got that round
+                    justGotHighScore = true;
+                }
                 currentMode = 2; // sets the mode to the third mode
                 wantsToChangeMode = false;
                 firstKeyPressed = true;
@@ -317,13 +333,13 @@ public class Main extends JFrame {
      */
     private void addWall(int nextX, int nextY){ // adds a wall to the board
         points++;
-        int x = randomNumber(0, boardWidth - 1);
-        int y = randomNumber(0, boardHeight - 1);
+        int x = randomNumber(0, BOARD_WIDTH - 1);
+        int y = randomNumber(0, BOARD_HEIGHT - 1);
         boolean good = false;
         while (!good) {
             if (BOARD[x][y].getSnake() || BOARD[x][y].getWall() || BOARD[x][y].getFruit() || x == nextX || y == nextY) {
-                x = randomNumber(0, boardWidth -1);
-                y = randomNumber(0, boardHeight -1);
+                x = randomNumber(0, BOARD_WIDTH -1);
+                y = randomNumber(0, BOARD_HEIGHT -1);
             } else {
                 good = true;
             }
@@ -336,13 +352,13 @@ public class Main extends JFrame {
      */
     private void fruitEaten() {
         s.addToJustAteTurns(GROWTH_RATE); // sets the snake to have just eaten
-        int x=randomNumber(0, boardWidth -1);
-        int y=randomNumber(0, boardHeight -1);
+        int x=randomNumber(0, BOARD_WIDTH -1);
+        int y=randomNumber(0, BOARD_HEIGHT -1);
         boolean good  = false;
         while (!good){
             if (BOARD[x][y].getSnake() || BOARD[x][y].getWall()){
-                x=randomNumber(0, boardWidth -1);
-                y=randomNumber(0, boardHeight -1);
+                x=randomNumber(0, BOARD_WIDTH -1);
+                y=randomNumber(0, BOARD_HEIGHT -1);
             } else {
                 good = true;
             }
@@ -359,9 +375,9 @@ public class Main extends JFrame {
     }
     /**
      * Generates a random number between min and max
-     * @param min
-     * @param max
-     * @return
+     * @param min minimum number
+     * @param max maximum number
+     * @return a random number between min and max
      */
     public int randomNumber(int min, int max) { // generates a random number between min and max
         return (int) (Math.random() * (max - min + 1) + min);
@@ -440,8 +456,8 @@ public class Main extends JFrame {
     public void lost(){
         gameRunning = false; // sets the game to not be running
         s.setAlive(false); // sets the snake to be dead
-        if(points>highscore[currentMode]){ // if the player has a new highscore
-            highscore[currentMode] = points; // sets the highscore to the points they got that round
+        if(points> highScore[currentMode]){ // if the player has a new high score
+            highScore[currentMode] = points; // sets the high score to the points they got that round
             justGotHighScore = true;
         }
         lost = true; // sets the player to have lost
@@ -462,12 +478,12 @@ public class Main extends JFrame {
         paused = false;
         turnNumber = 0;
         // resets the board
-        for(int i = 0; i <boardWidth; i++){ // for each box in the board
-            for(int j = 0; j < boardHeight; j++){
+        for(int i = 0; i < BOARD_WIDTH; i++){ // for each box in the board
+            for(int j = 0; j < BOARD_HEIGHT; j++){
                 BOARD[i][j].setWall(false); // sets the box to not be a wall
                 BOARD[i][j].setSnake(false);
                 BOARD[i][j].setFruit(false);
-                if (i == 0 || i == boardWidth-1 || j == 0 || j == boardHeight-1){ // if the box is on the edge
+                if (i == 0 || i == BOARD_WIDTH -1 || j == 0 || j == BOARD_HEIGHT-1){ // if the box is on the edge
                     BOARD[i][j].setWall(true); // sets the box to be a wall
                 }
                 if (i == INITIAL_FRUIT_X && j == INITIAL_FRUIT_Y){ // if the box is in the middle (the start location of the fruit)
@@ -492,31 +508,22 @@ public class Main extends JFrame {
         }
         Graphics2D g2 = (Graphics2D) offScreenImage.getGraphics();
         g2.setColor(BACKGROUND_COLOR);
-        g2.fillRect(xOffset, yOffset, getWidth(), getHeight());
-        for (int i = 0; i < boardWidth; i++) { // for each box in the board
-            for (int j = 0; j < boardHeight; j++) {
+        g2.fillRect(X_OFFSET, Y_OFFSET, getWidth(), getHeight());
+        for (int i = 0; i < BOARD_WIDTH; i++) { // for each box in the board
+            for (int j = 0; j < BOARD_HEIGHT; j++) {
                 g2.setColor(DOT_COLOR); // sets the colour to dark green
-                g2.fillRect(i * PIXELS_PER_BOX + xOffset + 3, j * PIXELS_PER_BOX + yOffset + 3, 4, 4); // draws a dot
+                g2.fillRect(i * PIXELS_PER_BOX + X_OFFSET + 3, j * PIXELS_PER_BOX + Y_OFFSET + 3, 4, 4); // draws a dot
                 if (BOARD[i][j].getWall()) { // if the box is a wall
                     g2.setColor(WALL_COLOR); // sets the colour to brown
-                    g2.fillRect(i * PIXELS_PER_BOX + xOffset, j * PIXELS_PER_BOX + yOffset, PIXELS_PER_BOX, PIXELS_PER_BOX); // draws the box
+                    g2.fillRect(i * PIXELS_PER_BOX + X_OFFSET, j * PIXELS_PER_BOX + Y_OFFSET, PIXELS_PER_BOX, PIXELS_PER_BOX); // draws the box
                 } else if (BOARD[i][j].getFruit()) { // if the box is the fruit
                     switch (f.getType()) { // draws the fruit based on the type
-                        case "Apple" -> {
-                            APPLE.paintIcon(this, g2, fruitX(), fruitY());
-                        }
-                        case "Orange" -> {
-                            ORANGE.paintIcon(this, g2, fruitX(), fruitY());
-                        }
-                        case "Plum" -> {
-                            PLUM.paintIcon(this, g2, fruitX(), fruitY());
-                        }
-                        case "Kiwifruit" -> {
-                            KIWIFRUIT.paintIcon(this, g2, fruitX(), fruitY());
-                        }
+                        case "Apple" -> APPLE.paintIcon(this, g2, fruitX(), fruitY());
+                        case "Orange" -> ORANGE.paintIcon(this, g2, fruitX(), fruitY());
+                        case "Plum" -> PLUM.paintIcon(this, g2, fruitX(), fruitY());
+                        case "Kiwifruit" -> KIWIFRUIT.paintIcon(this, g2, fruitX(), fruitY());
                         default -> pt("Something went wrong");
                     }
-                } else if (BOARD[i][j].getSnake()) { // if the box is a snake
                 }
             }
         }
@@ -525,8 +532,8 @@ public class Main extends JFrame {
         int leaderDirection = sp.getDIRECTION(); // gets the direction of the head
         //draws each snakePart
         for (int i = 0; i < s.getLength(); i++) {
-            int x = sp.getBOARD_X() * PIXELS_PER_BOX + xOffset; // x coordinate of the SnakePart (Pixels)
-            int y = sp.getBOARD_Y() * PIXELS_PER_BOX + yOffset; // y coordinate of the SnakePart (Pixels)
+            int x = sp.getBOARD_X() * PIXELS_PER_BOX + X_OFFSET; // x coordinate of the SnakePart (Pixels)
+            int y = sp.getBOARD_Y() * PIXELS_PER_BOX + Y_OFFSET; // y coordinate of the SnakePart (Pixels)
             // figures out which icon to use for the tail based on the direction of the SnakePart in front of it. Draws the tail
             if (sp.getTail()) {
                 switch (sp.getLeader().getDIRECTION()) {
@@ -589,7 +596,7 @@ public class Main extends JFrame {
         g2.setFont(new Font("Arial", Font.PLAIN, 10));
         titleY = getHeight()/4; // y coordinate of the title
 
-        g2.drawString("Points: " + points, MARGIN, yOffset + 8);
+        g2.drawString("Points: " + points, MARGIN, Y_OFFSET + 8);
         // for all the following, the number taken away from the x coordinate is half the width of the text. It is to center the text.
         int lines = 0; // number of lines of text, this is a multiplier so that the text lines are not on top of each other
         if (wantsToQuit) { // screen if the player wants to quit
@@ -678,11 +685,11 @@ public class Main extends JFrame {
             g2.drawString("You lost!", MARGIN, titleY);
             g2.setFont(new Font("Arial", Font.PLAIN, 25));
             if(justGotHighScore){
-                g2.drawString("You got a highscore of "+ points+"!", MARGIN, titleY+Y_GAP_AFTER_TITLE);
+                g2.drawString("You got a high score of "+ points+"!", MARGIN, titleY+Y_GAP_AFTER_TITLE);
             } else {
                 g2.drawString("You got "+points+" points!", MARGIN, titleY+Y_GAP_AFTER_TITLE);
                 lines++;
-                g2.drawString("Your highscore is "+highscore[currentMode]+".", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
+                g2.drawString("Your high score is "+ highScore[currentMode]+".", MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
             }
             lines++;
             g2.drawString("Difficulty: "+MODE_NAMES[currentMode], MARGIN, titleY+Y_GAP_AFTER_TITLE+Y_GAP_BETWEEN_LINES*lines);
@@ -698,16 +705,16 @@ public class Main extends JFrame {
 
     /**
      * Method that is called when the fruit needs to be tested.
-     * @return
+     * @return the x coordinate of the fruit in pixels
      */
     public int fruitX(){
-        return f.getX()*PIXELS_PER_BOX+xOffset; // returns the x coordinate of the fruit (pixels)
+        return f.getX()*PIXELS_PER_BOX+ X_OFFSET; // returns the x coordinate of the fruit (pixels)
     } // returns the x coordinate of the fruit
     /**
      * Method that is called when the fruit needs to be tested.
-     * @return
+     * @return the y coordinate of the fruit in pixels
      */
     public int fruitY(){
-        return f.getY()*PIXELS_PER_BOX+yOffset-1; // returns the y coordinate of the fruit (pixels)
+        return f.getY()*PIXELS_PER_BOX+ Y_OFFSET -1; // returns the y coordinate of the fruit (pixels)
     } // returns the y coordinate of the fruit
 }

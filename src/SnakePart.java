@@ -3,7 +3,7 @@
  * This class represents a part of the snake. It has a position on the board, a direction, and a reference to the next part of the snake.
  * It also has a lifespan that is decremented each time the snake moves. Once it reaches 0, the snake part is removed.
  */
-class SnakePart {
+public class SnakePart {
     private final int BOARD_X; // x coordinate on the board
     private final int BOARD_Y; // y coordinate on the board
     private boolean head; // if the SnakePart is the head
@@ -14,11 +14,11 @@ class SnakePart {
     private  int lifeSpan;
     /**
      * Creates a new SnakePart with the given position, tail status, head status, and direction.
-     * @param x
-     * @param y
-     * @param tail
-     * @param head
-     * @param d
+     * @param x x coordinate on the board
+     * @param y y coordinate on the board
+     * @param tail if the SnakePart is the tail
+     * @param head if the SnakePart is the head
+     * @param d direction of the SnakePart
      */
     public SnakePart(int x, int y, boolean tail, boolean head, int d){ // constructor
         this.BOARD_X = x;

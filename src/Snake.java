@@ -19,7 +19,7 @@ public class Snake {
     }
     /**
      * Add to snake
-     * @param sp
+     * @param sp SnakePart to add to the snake
      */
     public void addToSnake(SnakePart sp){
         if (sp.getHead()){
@@ -46,8 +46,10 @@ public class Snake {
         sp.setHead(true);
         this.head = sp;
     }
+
     /**
-     * Set the tail of the snake to the given SnakePart and sets the given snakePart to be a tail
+     * increases the amount of time the snake doesn't grow for by i
+     * @param i an int that is added to the variable justAteTurns
      */
     public void addToJustAteTurns(int i){
         this.justAteTurns += i;

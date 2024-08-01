@@ -9,9 +9,9 @@ public class Fruit {
 
     /**
      * Constructs a new `Fruit` object with the specified type index and coordinates.
-     * @param n
-     * @param fx
-     * @param fy
+     * @param n index of the fruit type
+     * @param fx x coordinate of the fruit
+     * @param fy y coordinate of the fruit
      */
     public Fruit(int n, int fx, int fy){ // constructor
         this.FRUIT_TYPE = fruits[n]; //
@@ -21,7 +21,7 @@ public class Fruit {
 
     /**
      * These are methods that return a variable
-     * @return
+
      */
     public int getX() { // gets the x coordinates of the fruit
         return X;
