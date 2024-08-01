@@ -28,7 +28,7 @@ public class Main extends JFrame {
     private final String[] MODE_NAMES = {"Easy", "Medium", "Hard"}; // possible modes of the game
     private int frameRate = MODE_FRAME_RATES[currentMode]; // frames per second (1000 = 1 second)
     private boolean gameLoopFlag = true; // if the game loop is running
-    private final int MARGIN = 30; // margin in pixels from the edge of the board for the text
+    private final int MARGIN = 130; // margin in pixels from the edge of the board for the text
     private int titleY; // initializes y coordinate of the title
     private final int Y_GAP_AFTER_TITLE = 75; // gap between the title and the next line of text
     private final int Y_GAP_BETWEEN_LINES = 50; // gap between each line of text
@@ -47,8 +47,8 @@ public class Main extends JFrame {
     private final int BOARD_HEIGHT = 50; // height of the board (in boxes)
     private final Box[][] BOARD = new Box[BOARD_WIDTH][BOARD_HEIGHT]; // creates a 2D array of boxes
     private boolean gameRunning = false; // if the game is running
-    private final int X_OFFSET = 8; // x offset of the board (for school, 8) (for home, 0)
-    private final int Y_OFFSET = 31; // y offset of the board (for school, 31) (for home, 29)
+    private final int X_OFFSET = 100; // x offset of the board (for school, 8) (for home, 0)
+    private final int Y_OFFSET = 100; // y offset of the board (for school, 31) (for home, 29)
     private boolean lost = false; // if the player has lost
     private boolean instructions = false; // if the player is on the instructions screen
     private final int GROWTH_RATE = 2; // how much the snake grows when it eats a fruit
@@ -138,9 +138,9 @@ public class Main extends JFrame {
         this.setContentPane(panel); // sets the content pane to the panel
         this.setTitle("Snake!"); // sets title of Window to "Snake!"
         // initial width of window
-        int paneWidth = BOARD_WIDTH * PIXELS_PER_BOX;
+        int paneWidth = BOARD_WIDTH * PIXELS_PER_BOX+2*X_OFFSET;
         // initial height of window
-        int paneHeight = BOARD_WIDTH * PIXELS_PER_BOX;
+        int paneHeight = BOARD_HEIGHT * PIXELS_PER_BOX+ 2*Y_OFFSET;
         this.getContentPane().setPreferredSize(new Dimension(paneWidth, paneHeight)); // sets the size of the window
         this.setResizable(false); // stops the user from resizing the window
         this.panel.setPreferredSize(new Dimension(paneWidth, paneHeight));
@@ -508,7 +508,7 @@ public class Main extends JFrame {
         }
         Graphics2D g2 = (Graphics2D) offScreenImage.getGraphics();
         g2.setColor(BACKGROUND_COLOR);
-        g2.fillRect(X_OFFSET, Y_OFFSET, getWidth(), getHeight());
+        g2.fillRect(0, 0, getWidth(), getHeight());
         for (int i = 0; i < BOARD_WIDTH; i++) { // for each box in the board
             for (int j = 0; j < BOARD_HEIGHT; j++) {
                 g2.setColor(DOT_COLOR); // sets the colour to dark green
